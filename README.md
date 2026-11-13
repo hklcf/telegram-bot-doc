@@ -8,6 +8,11 @@ Telegram Bot 官方文檔（<https://core.telegram.org/bots>）嘅**離線 markd
 - **零依賴**抓取器：Telegram 每頁都提供機器可讀嘅 markdown（`<page>.md`），唔使爬 HTML。
 - **自動更新**：GitHub Actions 每日跑抓取器，有變更就自動開 PR。
 
+> ⚠️ **Unofficial mirror.** 本 repo 嘅 `docs/` 係 <https://core.telegram.org/bots> 嘅**原樣鏡像**，
+> 版權屬 Telegram FZ-LLC，唔受本 repo 嘅 MIT license 涵蓋（見 [docs/LICENSE](docs/LICENSE)）。
+> 一切以官方版本為準。
+
+
 ## 用法
 
 ### 安裝成 opencode skill
