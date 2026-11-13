@@ -7,7 +7,9 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-  pull_request:
+# 冇 pull_request trigger：PR 由 GITHUB_TOKEN 開，觸發嘅 workflow 需要人手批准
+# (action_required)，bot 每日開嘅 PR 就會帶住一個永遠等唔到嘅 check。
+# push 到 main 已經覆蓋咗驗證。
 
 permissions:
   contents: write
@@ -50,8 +52,8 @@ jobs:
             Review the diff for new/changed Bot API methods and types.
 
   verify:
-    # push / PR：確認 docs/ 同官網同步，唔同步就 fail
-    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    # push：確認 docs/ 同官網同步，唔同步就 fail
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
