@@ -470,6 +470,3 @@ ____________
 
 And that's about all we've got for now.
 If you've got any questions, please check out our [**Bot FAQ »**](./faq.md)
-
-<!-- PR-CREATION-TEST-MARKER -->
-
