@@ -1,3 +1,6 @@
-# docs/ is a byte-exact mirror: never rewrite line endings, or the mirror check
-# in CI will report false diffs.
+# Everything is normalised to LF in the repository and in checkouts on every
+# platform, so a Windows contributor cannot introduce CRLF churn.
+* text=auto eol=lf
+
+# docs/ is a byte-exact mirror of core.telegram.org - never touch the bytes.
 docs/** -text

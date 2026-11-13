@@ -37,11 +37,14 @@ npm run update
 ### 直接睇文檔
 
 ```
-docs/api.md                     Bot API 總覽 + 全部 method
+docs/api.md                     Bot API 總覽 + 完整 method/type reference
 docs/api/methods/sendmessage.md 單一 method 嘅參數表
 docs/api/types/message.md       單一 type 嘅欄位表
 docs/README.md                   全部頁面索引
 ```
+
+`docs/api.md` 會由抓取器補上 Telegram `.md` 匯出缺少嘅每個 method / type 標題，
+所以各頁嘅 `Canonical location` 連結跳得返，兼且可以用一個檔案 grep 晒成個 API。
 
 ## 結構
 

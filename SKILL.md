@@ -1,6 +1,6 @@
 ---
 name: telegram-bot
-description: Telegram Bot 官方文檔的離線 markdown 副本（source: https://core.telegram.org/bots）。包含完整 Bot API（每個 method / type 都有獨立檔案）、Bot features 詳細指南、Mini Apps / Web Apps、Inline mode、Payments / Telegram Stars、Webhooks、Games、Telegram Passport、Stickers、FAQ 同 API changelog。當用戶要寫或除錯 Telegram bot、查 Bot API endpoint / 參數 / 物件欄位、設定 webhook、處理 update、寫 inline query、做支付或訂閱、建立 Mini App、查 Bot API 版本變更時使用。Keywords: Telegram, Bot API, bot, botfather, sendMessage, getUpdates, setWebhook, Update, Message, InlineKeyboardMarkup, inline query, Mini App, Web App, Telegram Stars, TON, passport, webhook, MTProto bot.
+description: Telegram Bot 官方文檔的離線 markdown 副本（來源 https://core.telegram.org/bots）。包含完整 Bot API（每個 method / type 都有獨立檔案，另有單一檔案嘅完整 API reference）、Bot features 詳細指南、Mini Apps / Web Apps、Inline mode、Payments / Telegram Stars、Webhooks、Games、Telegram Passport、Stickers、FAQ 同 API changelog。當用戶要寫或除錯 Telegram bot、查 Bot API endpoint / 參數 / 物件欄位、設定 webhook、處理 update、寫 inline query、做支付或訂閱、建立 Mini App、查 Bot API 版本變更時使用。Keywords — Telegram, Bot API, bot, botfather, sendMessage, getUpdates, setWebhook, Update, Message, InlineKeyboardMarkup, inline query, Mini App, Web App, Telegram Stars, TON, passport, webhook, MTProto bot.
 ---
 
 # Telegram Bot 官方文檔（離線副本）
@@ -14,9 +14,9 @@ description: Telegram Bot 官方文檔的離線 markdown 副本（source: https:
 
 | 你想知 | 開呢個檔 |
 |---|---|
-| Bot API 總覽 + 全部 method 一覽 | `docs/api.md` |
-| 某個 method 嘅參數表 | `docs/api/methods/<method>.md`（如 `sendmessage.md`、`getupdates.md`、`setwebhook.md`） |
-| 某個 type 嘅欄位表 | `docs/api/types/<type>.md`（如 `message.md`、`update.md`、`inlinekeyboardmarkup.md`） |
+| **一次過睇晒成個 API**（每個 method / type 都有標題、參數表、欄位表） | `docs/api.md` — 開頭係官方總覽（authorizing、making requests、getting updates…），之後係生成嘅完整 reference |
+| 某個 method 嘅參數表（細啲、淨係嗰個） | `docs/api/methods/<method>.md`（如 `sendmessage.md`、`getupdates.md`、`setwebhook.md`） |
+| 某個 type 嘅欄位表（細啲、淨係嗰個） | `docs/api/types/<type>.md`（如 `message.md`、`update.md`、`inlinekeyboardmarkup.md`） |
 | 全部 type 一覽 | `docs/api/types.md` |
 | 訊息格式（bold/italic/code/link/blockquote…） | `docs/api/formatting.md` |
 | Rich message（區塊、表格、幻燈片） | `docs/api/rich-messages.md` |
@@ -38,7 +38,7 @@ description: Telegram Bot 官方文檔的離線 markdown 副本（source: https:
 唔記得 exact 名就 `rg -i "sendmessage" docs/api/types/` 咁樣 grep。
 
 **3. 每個 method / type 頁頂部**都有一行 `> Part of the [Telegram Bot API](../../api.md). Canonical location: [...]`，
-方便跳返總覽頁。
+跳返 `docs/api.md` 就係嗰個 method / type 嘅完整段落。
 
 ## 常用重點
 
@@ -68,6 +68,11 @@ GitHub Actions 每朝自動跑，唔同就開 PR。
 ## 注意
 
 - `docs/` 內嘅內容係 Telegram 官方文檔嘅**原樣副本**（英文），版權屬 Telegram。
+- `docs/api.md` = 官方嘅精簡總覽 + 抓取器生成嘅完整 method/type reference。
+  生成部分係因為 Telegram 嘅 `.md` 匯出冇每個 method 嘅標題，令各頁嘅
+  `Canonical location` 連結跳唔到 —— 補返之後就跳得返。
 - 少量頁面（`features.md`、`webapps.md` 等）仍然帶 raw HTML 嘅圖片 / 影片 block，
   內容冇問題但唔好當成 markdown 表格去解析。
+- 有幾條官方自己嘅頁內跳轉連結係 stale（HTML 版有嗰個 section，但 `.md` 匯出冇），
+  見到 broken anchor 唔好當成內容缺失。
 - 本 skill 只覆蓋 **Bot API（HTTP）**。想寫 MTProto / TDLib client 要另外查 `core.telegram.org/api`。
