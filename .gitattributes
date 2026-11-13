@@ -1,0 +1,3 @@
+# docs/ is a byte-exact mirror: never rewrite line endings, or the mirror check
+# in CI will report false diffs.
+docs/** -text

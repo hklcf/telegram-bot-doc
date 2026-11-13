@@ -1,0 +1,21 @@
+{
+  "name": "telegram-bot-doc",
+  "version": "1.0.0",
+  "description": "Telegram Bot official documentation mirrored as an AI agent skill, auto-updated from core.telegram.org",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "update": "node scripts/update.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "bot-api",
+    "skill",
+    "documentation",
+    "opencode"
+  ]
+}

@@ -1,0 +1,11 @@
+# KeyboardButtonRequestManagedBot
+
+> Part of the [Telegram Bot API](../../api.md). Canonical location: [KeyboardButtonRequestManagedBot](../../api.md#keyboardbuttonrequestmanagedbot).
+
+This object defines the parameters for the creation of a managed bot. Information about the created bot will be shared with the bot using the update *managed_bot* and a [Message](./message.md) with the field *managed_bot_created*.
+
+|Field|Type|Description|
+|-----------|
+|request_id|Integer|Signed 32-bit identifier of the request. Must be unique within the message.|
+|suggested_name|String|*Optional*. Suggested name for the bot|
+|suggested_username|String|*Optional*. Suggested username for the bot. The username must end with "bot". If the user creating the bot has a Telegram Premium subscription, then the username can also end with "agent", "ai", "app", "game", or "gay"; in this case, the username will be assigned to the bot as a secondary username, and a regular username ending with "bot" will be assigned to the bot automatically.|

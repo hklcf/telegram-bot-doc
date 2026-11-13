@@ -1,0 +1,76 @@
+name: Update docs
+
+on:
+  schedule:
+    # 每日 04:17 UTC —— 錯開整點，避免撞正流量高峰
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: update-docs
+  cancel-in-progress: false
+
+jobs:
+  update:
+    # 只有定时或手動觸發先會更新；push/PR 時由 verify job 負責檢查
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Mirror docs
+        run: node scripts/update.mjs
+
+      - name: Open PR if anything changed
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: chore/update-docs
+          delete-branch: true
+          commit-message: "docs: sync Telegram Bot API documentation"
+          title: "docs: sync Telegram Bot API documentation"
+          labels: documentation
+          body: |
+            Automated mirror of the official Telegram Bot docs:
+            https://core.telegram.org/bots
+
+            - Source: <https://core.telegram.org/bots>
+            - Page count and fetch time: `docs/SOURCE.json`
+
+            Review the diff for new/changed Bot API methods and types.
+
+  verify:
+    # push / PR：確認 docs/ 同官網同步，唔同步就 fail
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Re-mirror docs
+        run: node scripts/update.mjs
+
+      - name: Check docs/ is in sync
+        run: |
+          # SOURCE.json 帶抓取時間戳，本身一定會變，唔算過期
+          # 用 status 而唔係 diff，因為新加嘅頁面係 untracked，diff 睇唔到
+          changes="$(git status --porcelain -- . ':(exclude)docs/SOURCE.json')"
+          if [ -n "$changes" ]; then
+            echo "::error::docs/ is out of date with core.telegram.org - run 'npm run update' and commit"
+            echo "$changes"
+            exit 1
+          fi
+          echo "docs/ is in sync"

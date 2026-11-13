@@ -1,0 +1,363 @@
+# Bot API types
+
+> All Bot API methods are listed in the [Bot API index](../api.md).
+
+## Getting updates
+
+- [Update](./types/update.md): an incoming update.
+- [WebhookInfo](./types/webhookinfo.md): Describes the current status of a webhook.
+
+## Available types
+
+- [User](./types/user.md): a Telegram user or bot.
+- [Chat](./types/chat.md): a chat.
+- [ChatFullInfo](./types/chatfullinfo.md): This object contains full information about a chat.
+- [Message](./types/message.md): a message.
+- [MessageId](./types/messageid.md): a unique message identifier.
+- [InaccessibleMessage](./types/inaccessiblemessage.md): This object describes a message that was deleted or is otherwise inaccessible to the bot.
+- [MaybeInaccessibleMessage](./types/maybeinaccessiblemessage.md): This object describes a message that can be inaccessible to the bot.
+- [MessageEntity](./types/messageentity.md): one special entity in a text message.
+- [TextQuote](./types/textquote.md): This object contains information about the quoted part of a message that is replied to by the given message.
+- [ExternalReplyInfo](./types/externalreplyinfo.md): This object contains information about a message that is being replied to, which may come from another chat or forum topic.
+- [ReplyParameters](./types/replyparameters.md): Describes reply parameters for the message that is being sent.
+- [EphemeralMessageParameters](./types/ephemeralmessageparameters.md): 
+- [MessageOrigin](./types/messageorigin.md): This object describes the origin of a message.
+- [MessageOriginUser](./types/messageoriginuser.md): The message was originally sent by a known user.
+- [MessageOriginHiddenUser](./types/messageoriginhiddenuser.md): The message was originally sent by an unknown user.
+- [MessageOriginChat](./types/messageoriginchat.md): The message was originally sent on behalf of a chat to a group chat.
+- [MessageOriginChannel](./types/messageoriginchannel.md): The message was originally sent to a channel chat.
+- [PhotoSize](./types/photosize.md): one size of a photo or a file / sticker thumbnail.
+- [Animation](./types/animation.md): an animation file (GIF or H.264/MPEG-4 AVC video without sound).
+- [Audio](./types/audio.md): an audio file to be treated as music by the Telegram clients.
+- [Document](./types/document.md): a general file (as opposed to photos, voice messages and audio files).
+- [LivePhoto](./types/livephoto.md): a live photo.
+- [Story](./types/story.md): a story.
+- [VideoQuality](./types/videoquality.md): a video file of a specific quality.
+- [Video](./types/video.md): a video file.
+- [VideoNote](./types/videonote.md): a video message.
+- [Voice](./types/voice.md): a voice note.
+- [Widget](./types/widget.md): This object describes an HTML widget.
+- [PaidMediaInfo](./types/paidmediainfo.md): Describes the paid media added to a message.
+- [PaidMedia](./types/paidmedia.md): This object describes paid media.
+- [PaidMediaLivePhoto](./types/paidmedialivephoto.md): The paid media is a live photo.
+- [PaidMediaPhoto](./types/paidmediaphoto.md): The paid media is a photo.
+- [PaidMediaPreview](./types/paidmediapreview.md): The paid media isn't available before the payment.
+- [PaidMediaVideo](./types/paidmediavideo.md): The paid media is a video.
+- [Contact](./types/contact.md): a phone contact.
+- [Dice](./types/dice.md): an animated emoji that displays a random value.
+- [Link](./types/link.md): Represents an HTTP link.
+- [PollMedia](./types/pollmedia.md): At most **one** of the optional fields can be present in any given object.
+- [InputPollMedia](./types/inputpollmedia.md): the content of a poll description or a quiz explanation to be sent.
+- [InputPollOptionMedia](./types/inputpolloptionmedia.md): the content of a poll option to be sent.
+- [PollOption](./types/polloption.md): This object contains information about one answer option in a poll.
+- [InputPollOption](./types/inputpolloption.md): This object contains information about one answer option in a poll to be sent.
+- [PollAnswer](./types/pollanswer.md): an answer of a user in a non-anonymous poll.
+- [Poll](./types/poll.md): This object contains information about a poll.
+- [ChecklistTask](./types/checklisttask.md): Describes a task in a checklist.
+- [Checklist](./types/checklist.md): Describes a checklist.
+- [InputChecklistTask](./types/inputchecklisttask.md): Describes a task to add to a checklist.
+- [InputChecklist](./types/inputchecklist.md): Describes a checklist to create.
+- [Location](./types/location.md): a point on the map.
+- [Venue](./types/venue.md): a venue.
+- [WebAppData](./types/webappdata.md): Describes data sent from a Web App to the bot.
+- [ProximityAlertTriggered](./types/proximityalerttriggered.md): the content of a service message, sent whenever a user in the chat triggers a proximity alert set by another user.
+- [MessageAutoDeleteTimerChanged](./types/messageautodeletetimerchanged.md): a service message about a change in auto-delete timer settings.
+- [ManagedBotCreated](./types/managedbotcreated.md): This object contains information about the bot that was created to be managed by the current bot.
+- [ManagedBotUpdated](./types/managedbotupdated.md): This object contains information about the creation, token update, or owner update of a bot that is managed by the current bot.
+- [BotSubscriptionUpdated](./types/botsubscriptionupdated.md): This object contains information about changes to a user payment subscription toward the current bot.
+- [MessageGenerationStopped](./types/messagegenerationstopped.md): This object describes an update about a user stopping message generation.
+- [PollOptionAdded](./types/polloptionadded.md): Describes a service message about an option added to a poll.
+- [PollOptionDeleted](./types/polloptiondeleted.md): Describes a service message about an option deleted from a poll.
+- [ChatBoostAdded](./types/chatboostadded.md): a service message about a user boosting a chat.
+- [BackgroundFill](./types/backgroundfill.md): This object describes the way a background is filled based on the selected colors.
+- [BackgroundFillSolid](./types/backgroundfillsolid.md): The background is filled using the selected color.
+- [BackgroundFillGradient](./types/backgroundfillgradient.md): The background is a gradient fill.
+- [BackgroundFillFreeformGradient](./types/backgroundfillfreeformgradient.md): The background is a freeform gradient that rotates after every message in the chat.
+- [BackgroundType](./types/backgroundtype.md): This object describes the type of a background.
+- [BackgroundTypeFill](./types/backgroundtypefill.md): The background is automatically filled based on the selected colors.
+- [BackgroundTypeWallpaper](./types/backgroundtypewallpaper.md): The background is a wallpaper in the JPEG format.
+- [BackgroundTypePattern](./types/backgroundtypepattern.md): The background is a .PNG or .TGV (gzipped subset of SVG with MIME type "application/x-tgwallpattern") pattern to be combined with the background fill chosen by the user.
+- [BackgroundTypeChatTheme](./types/backgroundtypechattheme.md): The background is taken directly from a built-in chat theme.
+- [ChatBackground](./types/chatbackground.md): a chat background.
+- [ChecklistTasksDone](./types/checklisttasksdone.md): Describes a service message about checklist tasks marked as done or not done.
+- [ChecklistTasksAdded](./types/checklisttasksadded.md): Describes a service message about tasks added to a checklist.
+- [CommunityChatAdded](./types/communitychatadded.md): Describes a service message about a chat or a bot being added to a community.
+- [CommunityChatJoined](./types/communitychatjoined.md): Describes a service message about a chat being joined by a user from a community.
+- [CommunityChatRemoved](./types/communitychatremoved.md): Describes a service message about a chat or a bot being removed from a community.
+- [ForumTopicCreated](./types/forumtopiccreated.md): a service message about a new forum topic created in the chat.
+- [ForumTopicClosed](./types/forumtopicclosed.md): a service message about a forum topic closed in the chat.
+- [ForumTopicEdited](./types/forumtopicedited.md): a service message about an edited forum topic.
+- [ForumTopicReopened](./types/forumtopicreopened.md): a service message about a forum topic reopened in the chat.
+- [GeneralForumTopicHidden](./types/generalforumtopichidden.md): a service message about General forum topic hidden in the chat.
+- [GeneralForumTopicUnhidden](./types/generalforumtopicunhidden.md): a service message about General forum topic unhidden in the chat.
+- [SharedUser](./types/shareduser.md): This object contains information about a user that was shared with the bot using a KeyboardButtonRequestUsers button.
+- [UsersShared](./types/usersshared.md): This object contains information about the users whose identifiers were shared with the bot using a KeyboardButtonRequestUsers button.
+- [ChatShared](./types/chatshared.md): This object contains information about a chat that was shared with the bot using a KeyboardButtonRequestChat button.
+- [WriteAccessAllowed](./types/writeaccessallowed.md): a service message about a user allowing a bot to write messages after adding it to the attachment menu, launching a Web App from a link, or accepting an explicit request from a Web App sent by the method requestWriteAccess.
+- [VideoChatScheduled](./types/videochatscheduled.md): a service message about a video chat scheduled in the chat.
+- [VideoChatStarted](./types/videochatstarted.md): a service message about a video chat started in the chat.
+- [VideoChatEnded](./types/videochatended.md): a service message about a video chat ended in the chat.
+- [VideoChatParticipantsInvited](./types/videochatparticipantsinvited.md): a service message about new members invited to a video chat.
+- [PaidMessagePriceChanged](./types/paidmessagepricechanged.md): Describes a service message about a change in the price of paid messages within a chat.
+- [DirectMessagePriceChanged](./types/directmessagepricechanged.md): Describes a service message about a change in the price of direct messages sent to a channel chat.
+- [SuggestedPostApproved](./types/suggestedpostapproved.md): Describes a service message about the approval of a suggested post.
+- [SuggestedPostApprovalFailed](./types/suggestedpostapprovalfailed.md): Describes a service message about the failed approval of a suggested post.
+- [SuggestedPostDeclined](./types/suggestedpostdeclined.md): Describes a service message about the rejection of a suggested post.
+- [SuggestedPostPaid](./types/suggestedpostpaid.md): Describes a service message about a successful payment for a suggested post.
+- [SuggestedPostRefunded](./types/suggestedpostrefunded.md): Describes a service message about a payment refund for a suggested post.
+- [PaidMessagesWaived](./types/paidmessageswaived.md): Describes a service message about the sender of the message using a link of the other user, which allows sending messages to the user without paying Telegram Stars.
+- [TonWalletTransfer](./types/tonwallettransfer.md): Describes a service message about a transfer with a TON wallet.
+- [GiveawayCreated](./types/giveawaycreated.md): a service message about the creation of a scheduled giveaway.
+- [Giveaway](./types/giveaway.md): a message about a scheduled giveaway.
+- [GiveawayWinners](./types/giveawaywinners.md): a message about the completion of a giveaway with public winners.
+- [GiveawayCompleted](./types/giveawaycompleted.md): a service message about the completion of a giveaway without public winners.
+- [LinkPreviewOptions](./types/linkpreviewoptions.md): Describes the options used for link preview generation.
+- [SuggestedPostPrice](./types/suggestedpostprice.md): Describes the price of a suggested post.
+- [SuggestedPostInfo](./types/suggestedpostinfo.md): Contains information about a suggested post.
+- [SuggestedPostParameters](./types/suggestedpostparameters.md): Contains parameters of a post that is being suggested by the bot.
+- [DirectMessagesTopic](./types/directmessagestopic.md): Describes a topic of a direct messages chat.
+- [UserProfilePhotos](./types/userprofilephotos.md): This object represent a user's profile pictures.
+- [UserProfileAudios](./types/userprofileaudios.md): the audios displayed on a user's profile.
+- [File](./types/file.md): a file ready to be downloaded.
+- [WebAppInfo](./types/webappinfo.md): Describes a Web App.
+- [ReplyKeyboardMarkup](./types/replykeyboardmarkup.md): a custom keyboard with reply options (see Introduction to bots for details and examples).
+- [KeyboardButton](./types/keyboardbutton.md): one button of the reply keyboard.
+- [KeyboardButtonRequestUsers](./types/keyboardbuttonrequestusers.md): This object defines the criteria used to request suitable users.
+- [KeyboardButtonRequestChat](./types/keyboardbuttonrequestchat.md): This object defines the criteria used to request a suitable chat.
+- [KeyboardButtonRequestManagedBot](./types/keyboardbuttonrequestmanagedbot.md): This object defines the parameters for the creation of a managed bot.
+- [KeyboardButtonPollType](./types/keyboardbuttonpolltype.md): type of a poll, which is allowed to be created and sent when the corresponding button is pressed.
+- [ReplyKeyboardRemove](./types/replykeyboardremove.md): Upon receiving a message with this object, Telegram clients will remove the current custom keyboard and display the default letter-keyboard.
+- [InlineKeyboardMarkup](./types/inlinekeyboardmarkup.md): an inline keyboard that appears right next to the message it belongs to.
+- [InlineKeyboardButton](./types/inlinekeyboardbutton.md): one button of an inline keyboard.
+- [LoginUrl](./types/loginurl.md): a parameter of the inline keyboard button used to automatically authorize a user.
+- [SwitchInlineQueryChosenChat](./types/switchinlinequerychosenchat.md): an inline button that switches the current user to inline mode in a chosen chat, with an optional default inline query.
+- [CopyTextButton](./types/copytextbutton.md): an inline keyboard button that copies specified text to the clipboard.
+- [DisabledButton](./types/disabledbutton.md): a disabled button which does nothing.
+- [CallbackQuery](./types/callbackquery.md): an incoming callback query from a callback button in an inline keyboard.
+- [WidgetQueryType](./types/widgetquerytype.md): This object describes the type of a query from a widget.
+- [WidgetQueryTypeData](./types/widgetquerytypedata.md): The query contains data for the bot.
+- [WidgetQueryTypeSignData](./types/widgetquerytypesigndata.md): The query contains data signed by a TON wallet of the user who sent the query.
+- [WidgetQueryTypeSentTransaction](./types/widgetquerytypesenttransaction.md): The query notifies the bot about a transaction sent from a TON wallet of the user who sent the query.
+- [WidgetQueryWallet](./types/widgetquerywallet.md): This object describes a TON wallet of the user, which is used in a query from a widget.
+- [WidgetQuery](./types/widgetquery.md): an incoming query from a widget in a message sent by the bot or via the bot.
+- [SharedWidgetQuery](./types/sharedwidgetquery.md): an incoming query from a forwarded message with a shared widget created by the bot.
+- [ForceReply](./types/forcereply.md): Upon receiving a message with this object, Telegram clients will display a reply interface to the user (act as if the user has selected the bot's message and tapped 'Reply').
+- [Community](./types/community.md): Represents a community (a group of chats).
+- [ChatPhoto](./types/chatphoto.md): a chat photo.
+- [ChatInviteLink](./types/chatinvitelink.md): Represents an invite link for a chat.
+- [ChatAdministratorRights](./types/chatadministratorrights.md): Represents the rights of an administrator in a chat.
+- [ChatMemberUpdated](./types/chatmemberupdated.md): changes in the status of a chat member.
+- [ChatMember](./types/chatmember.md): This object contains information about one member of a chat.
+- [ChatMemberOwner](./types/chatmemberowner.md): Represents a chat member that owns the chat and has all administrator privileges.
+- [ChatMemberAdministrator](./types/chatmemberadministrator.md): Represents a chat member that has some additional privileges.
+- [ChatMemberMember](./types/chatmembermember.md): Represents a chat member that has no additional privileges or restrictions.
+- [ChatMemberRestricted](./types/chatmemberrestricted.md): Represents a chat member that is under certain restrictions in the chat.
+- [ChatMemberLeft](./types/chatmemberleft.md): Represents a chat member that isn't currently a member of the chat, but may join it themselves.
+- [ChatMemberBanned](./types/chatmemberbanned.md): Represents a chat member that was banned in the chat and can't return to the chat or view chat messages.
+- [ChatJoinRequest](./types/chatjoinrequest.md): Represents a join request sent to a chat.
+- [ChatPermissions](./types/chatpermissions.md): Describes actions that a non-administrator user is allowed to take in a chat.
+- [Birthdate](./types/birthdate.md): Describes the birthdate of a user.
+- [BusinessIntro](./types/businessintro.md): Contains information about the start page settings of a Telegram Business account.
+- [BusinessLocation](./types/businesslocation.md): Contains information about the location of a Telegram Business account.
+- [BusinessOpeningHoursInterval](./types/businessopeninghoursinterval.md): Describes an interval of time during which a business is open.
+- [BusinessOpeningHours](./types/businessopeninghours.md): Describes the opening hours of a business.
+- [UserRating](./types/userrating.md): This object describes the rating of a user based on their Telegram Star spendings.
+- [AreaPosition](./types/areaposition.md): Describes the position of a rectangle area on a story media or a TON wallet card.
+- [TonNft](./types/tonnft.md): an NFT in the TON blockchain.
+- [TonNftAttribute](./types/tonnftattribute.md): an attribute of an NFT in the TON blockchain.
+- [TonWalletCardSticker](./types/tonwalletcardsticker.md): This object describes a sticker on a TON wallet card.
+- [TonWalletCard](./types/tonwalletcard.md): This object describes a TON wallet card, which is shown on the profile page of a user to everyone.
+- [EmojiType](./types/emojitype.md): This object describes an emoji.
+- [EmojiTypeEmoji](./types/emojitypeemoji.md): A regular emoji.
+- [EmojiTypeCustomEmoji](./types/emojitypecustomemoji.md): A custom emoji.
+- [ChatShareTheme](./types/chatsharetheme.md): This object describes the theme of the screen for sharing a link to a user or a chat.
+- [ChatShareThemeEmoji](./types/chatsharethemeemoji.md): The theme with emoji placed on a background.
+- [ChatShareThemeUniqueGift](./types/chatsharethemeuniquegift.md): The theme based on a unique gift owned by the user or the chat.
+- [ChatShareThemeBackdrops](./types/chatsharethemebackdrops.md): This object contains a list of backdrops, which can be used as the background of a theme of the screen for sharing a link to a user or a chat.
+- [ChatShareThemeBackdrop](./types/chatsharethemebackdrop.md): This object describes a backdrop, which can be used as the background of a theme of the screen for sharing a link to a user or a chat.
+- [LocationAddress](./types/locationaddress.md): Describes the physical address of a location.
+- [StoryAreaType](./types/storyareatype.md): Describes the type of a clickable area on a story.
+- [StoryAreaTypeLocation](./types/storyareatypelocation.md): Describes a story area pointing to a location.
+- [StoryAreaTypeSuggestedReaction](./types/storyareatypesuggestedreaction.md): Describes a story area pointing to a suggested reaction.
+- [StoryAreaTypeLink](./types/storyareatypelink.md): Describes a story area pointing to an HTTP or tg:// link.
+- [StoryAreaTypeWeather](./types/storyareatypeweather.md): Describes a story area containing weather information.
+- [StoryAreaTypeUniqueGift](./types/storyareatypeuniquegift.md): Describes a story area pointing to a unique gift.
+- [StoryArea](./types/storyarea.md): Describes a clickable area on a story media.
+- [ChatLocation](./types/chatlocation.md): Represents a location to which a chat is connected.
+- [ReactionType](./types/reactiontype.md): This object describes the type of a reaction.
+- [ReactionTypeEmoji](./types/reactiontypeemoji.md): The reaction is based on an emoji.
+- [ReactionTypeCustomEmoji](./types/reactiontypecustomemoji.md): The reaction is based on a custom emoji.
+- [ReactionTypePaid](./types/reactiontypepaid.md): The reaction is paid.
+- [ReactionCount](./types/reactioncount.md): Represents a reaction added to a message along with the number of times it was added.
+- [MessageReactionUpdated](./types/messagereactionupdated.md): a change of a reaction on a message performed by a user.
+- [MessageReactionCountUpdated](./types/messagereactioncountupdated.md): reaction changes on a message with anonymous reactions.
+- [ForumTopic](./types/forumtopic.md): a forum topic.
+- [GiftBackground](./types/giftbackground.md): This object describes the background of a gift.
+- [Gift](./types/gift.md): a gift that can be sent by the bot.
+- [Gifts](./types/gifts.md): This object represent a list of gifts.
+- [UniqueGiftModel](./types/uniquegiftmodel.md): This object describes the model of a unique gift.
+- [UniqueGiftSymbol](./types/uniquegiftsymbol.md): This object describes the symbol shown on the pattern of a unique gift.
+- [UniqueGiftBackdropColors](./types/uniquegiftbackdropcolors.md): This object describes the colors of the backdrop of a unique gift.
+- [UniqueGiftBackdrop](./types/uniquegiftbackdrop.md): This object describes the backdrop of a unique gift.
+- [UniqueGiftColors](./types/uniquegiftcolors.md): This object contains information about the color scheme for a user's name, message replies and link previews based on a unique gift.
+- [UniqueGift](./types/uniquegift.md): This object describes a unique gift that was upgraded from a regular gift.
+- [GiftInfo](./types/giftinfo.md): Describes a service message about a regular gift that was sent or received.
+- [UniqueGiftInfo](./types/uniquegiftinfo.md): Describes a service message about a unique gift that was sent or received.
+- [OwnedGift](./types/ownedgift.md): This object describes a gift received and owned by a user or a chat.
+- [OwnedGiftRegular](./types/ownedgiftregular.md): Describes a regular gift owned by a user or a chat.
+- [OwnedGiftUnique](./types/ownedgiftunique.md): Describes a unique gift received and owned by a user or a chat.
+- [OwnedGifts](./types/ownedgifts.md): Contains the list of gifts received and owned by a user or a chat.
+- [BotAccessSettings](./types/botaccesssettings.md): This object describes the access settings of a bot.
+- [AcceptedGiftTypes](./types/acceptedgifttypes.md): This object describes the types of gifts that can be gifted to a user or a chat.
+- [StarAmount](./types/staramount.md): Describes an amount of Telegram Stars.
+- [BotCommand](./types/botcommand.md): a bot command.
+- [BotCommandScope](./types/botcommandscope.md): the scope to which bot commands are applied.
+- [BotCommandScopeDefault](./types/botcommandscopedefault.md): Represents the default scope of bot commands.
+- [BotCommandScopeAllPrivateChats](./types/botcommandscopeallprivatechats.md): Represents the scope of bot commands, covering all private chats.
+- [BotCommandScopeAllGroupChats](./types/botcommandscopeallgroupchats.md): Represents the scope of bot commands, covering all group and supergroup chats.
+- [BotCommandScopeAllChatAdministrators](./types/botcommandscopeallchatadministrators.md): Represents the scope of bot commands, covering all group and supergroup chat administrators.
+- [BotCommandScopeChat](./types/botcommandscopechat.md): Represents the scope of bot commands, covering a specific chat.
+- [BotCommandScopeChatAdministrators](./types/botcommandscopechatadministrators.md): Represents the scope of bot commands, covering all administrators of a specific group or supergroup chat.
+- [BotCommandScopeChatMember](./types/botcommandscopechatmember.md): Represents the scope of bot commands, covering a specific member of a group or supergroup chat.
+- [BotName](./types/botname.md): the bot's name.
+- [BotDescription](./types/botdescription.md): the bot's description.
+- [BotShortDescription](./types/botshortdescription.md): the bot's short description.
+- [MenuButton](./types/menubutton.md): This object describes the bot's menu button in a private chat.
+- [MenuButtonCommands](./types/menubuttoncommands.md): Represents a menu button, which opens the bot's list of commands.
+- [MenuButtonWebApp](./types/menubuttonwebapp.md): Represents a menu button, which launches a Web App.
+- [MenuButtonDefault](./types/menubuttondefault.md): Describes that no specific value for the menu button was set.
+- [ChatBoostSource](./types/chatboostsource.md): This object describes the source of a chat boost.
+- [ChatBoostSourcePremium](./types/chatboostsourcepremium.md): The boost was obtained by subscribing to Telegram Premium or by gifting a Telegram Premium subscription to another user.
+- [ChatBoostSourceGiftCode](./types/chatboostsourcegiftcode.md): The boost was obtained by the creation of Telegram Premium gift codes to boost a chat.
+- [ChatBoostSourceGiveaway](./types/chatboostsourcegiveaway.md): The boost was obtained by the creation of a Telegram Premium or a Telegram Star giveaway.
+- [ChatBoost](./types/chatboost.md): This object contains information about a chat boost.
+- [ChatBoostUpdated](./types/chatboostupdated.md): a boost added to a chat or changed.
+- [ChatBoostRemoved](./types/chatboostremoved.md): a boost removed from a chat.
+- [ChatOwnerLeft](./types/chatownerleft.md): Describes a service message about the chat owner leaving the chat.
+- [ChatOwnerChanged](./types/chatownerchanged.md): Describes a service message about an ownership change in the chat.
+- [UserChatBoosts](./types/userchatboosts.md): a list of boosts added to a chat by a user.
+- [BusinessBotRights](./types/businessbotrights.md): Represents the rights of a business bot.
+- [BusinessConnection](./types/businessconnection.md): Describes the connection of the bot with a business account.
+- [BusinessMessagesDeleted](./types/businessmessagesdeleted.md): This object is received when messages are deleted from a connected business account.
+- [SentWebAppMessage](./types/sentwebappmessage.md): Describes an inline message sent by a Web App on behalf of a user.
+- [SentGuestMessage](./types/sentguestmessage.md): Describes an inline message sent by a guest bot.
+- [PreparedInlineMessage](./types/preparedinlinemessage.md): Describes an inline message to be sent by a user of a Mini App.
+- [PreparedKeyboardButton](./types/preparedkeyboardbutton.md): Describes a keyboard button to be used by a user of a Mini App.
+- [ResponseParameters](./types/responseparameters.md): Describes why a request was unsuccessful.
+- [InputMedia](./types/inputmedia.md): the content of a media message to be sent.
+- [InputMediaAnimation](./types/inputmediaanimation.md): Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound) to be sent.
+- [InputMediaAudio](./types/inputmediaaudio.md): Represents an audio file to be treated as music to be sent.
+- [InputMediaDocument](./types/inputmediadocument.md): Represents a general file to be sent.
+- [InputMediaLink](./types/inputmedialink.md): Represents an HTTP link to be sent.
+- [InputMediaLivePhoto](./types/inputmedialivephoto.md): Represents a live photo to be sent.
+- [InputMediaLocation](./types/inputmedialocation.md): Represents a location to be sent.
+- [InputMediaPhoto](./types/inputmediaphoto.md): Represents a photo to be sent.
+- [InputMediaSticker](./types/inputmediasticker.md): Represents a sticker file to be sent.
+- [InputMediaVenue](./types/inputmediavenue.md): Represents a venue to be sent.
+- [InputMediaVideo](./types/inputmediavideo.md): Represents a video to be sent.
+- [InputMediaVoiceNote](./types/inputmediavoicenote.md): Represents a voice message file to be sent.
+- [InputFile](./types/inputfile.md): the contents of a file to be uploaded.
+- [InputPaidMedia](./types/inputpaidmedia.md): This object describes the paid media to be sent.
+- [InputPaidMediaLivePhoto](./types/inputpaidmedialivephoto.md): The paid media to send is a live photo.
+- [InputPaidMediaPhoto](./types/inputpaidmediaphoto.md): The paid media to send is a photo.
+- [InputPaidMediaVideo](./types/inputpaidmediavideo.md): The paid media to send is a video.
+- [InputProfilePhoto](./types/inputprofilephoto.md): This object describes a profile photo to set.
+- [InputProfilePhotoStatic](./types/inputprofilephotostatic.md): A static profile photo in the .JPG format.
+- [InputProfilePhotoAnimated](./types/inputprofilephotoanimated.md): An animated profile photo in the MPEG4 format.
+- [InputStoryContent](./types/inputstorycontent.md): This object describes the content of a story to post.
+- [InputStoryContentPhoto](./types/inputstorycontentphoto.md): Describes a photo to post as a story.
+- [InputStoryContentVideo](./types/inputstorycontentvideo.md): Describes a video to post as a story.
+
+## Stickers
+
+- [Sticker](./types/sticker.md): a sticker.
+- [StickerSet](./types/stickerset.md): a sticker set.
+- [MaskPosition](./types/maskposition.md): This object describes the position on faces where a mask should be placed by default.
+- [InputSticker](./types/inputsticker.md): This object describes a sticker to be added to a sticker set.
+
+## Inline mode
+
+- [InlineQuery](./types/inlinequery.md): an incoming inline query.
+- [InlineQueryResultsButton](./types/inlinequeryresultsbutton.md): a button to be shown above inline query results.
+- [InlineQueryResult](./types/inlinequeryresult.md): one result of an inline query.
+- [InlineQueryResultArticle](./types/inlinequeryresultarticle.md): Represents a link to an article or web page.
+- [InlineQueryResultPhoto](./types/inlinequeryresultphoto.md): Represents a link to a photo.
+- [InlineQueryResultGif](./types/inlinequeryresultgif.md): Represents a link to an animated GIF file.
+- [InlineQueryResultMpeg4Gif](./types/inlinequeryresultmpeg4gif.md): Represents a link to a video animation (H.264/MPEG-4 AVC video without sound).
+- [InlineQueryResultVideo](./types/inlinequeryresultvideo.md): Represents a link to a page containing an embedded video player or a video file.
+- [InlineQueryResultAudio](./types/inlinequeryresultaudio.md): Represents a link to an MP3 audio file.
+- [InlineQueryResultVoice](./types/inlinequeryresultvoice.md): Represents a link to a voice recording in an .OGG container encoded with OPUS.
+- [InlineQueryResultDocument](./types/inlinequeryresultdocument.md): Represents a link to a file.
+- [InlineQueryResultLocation](./types/inlinequeryresultlocation.md): Represents a location on a map.
+- [InlineQueryResultVenue](./types/inlinequeryresultvenue.md): Represents a venue.
+- [InlineQueryResultContact](./types/inlinequeryresultcontact.md): Represents a contact with a phone number.
+- [InlineQueryResultGame](./types/inlinequeryresultgame.md): Represents a Game.
+- [InlineQueryResultCachedPhoto](./types/inlinequeryresultcachedphoto.md): Represents a link to a photo stored on the Telegram servers.
+- [InlineQueryResultCachedGif](./types/inlinequeryresultcachedgif.md): Represents a link to an animated GIF file stored on the Telegram servers.
+- [InlineQueryResultCachedMpeg4Gif](./types/inlinequeryresultcachedmpeg4gif.md): Represents a link to a video animation (H.264/MPEG-4 AVC video without sound) stored on the Telegram servers.
+- [InlineQueryResultCachedSticker](./types/inlinequeryresultcachedsticker.md): Represents a link to a sticker stored on the Telegram servers.
+- [InlineQueryResultCachedDocument](./types/inlinequeryresultcacheddocument.md): Represents a link to a file stored on the Telegram servers.
+- [InlineQueryResultCachedVideo](./types/inlinequeryresultcachedvideo.md): Represents a link to a video file stored on the Telegram servers.
+- [InlineQueryResultCachedVoice](./types/inlinequeryresultcachedvoice.md): Represents a link to a voice message stored on the Telegram servers.
+- [InlineQueryResultCachedAudio](./types/inlinequeryresultcachedaudio.md): Represents a link to an MP3 audio file stored on the Telegram servers.
+- [InputMessageContent](./types/inputmessagecontent.md): the content of a message to be sent as a result of an inline query.
+- [InputTextMessageContent](./types/inputtextmessagecontent.md): Represents the content of a text message to be sent as the result of an inline query.
+- [InputRichMessageContent](./types/inputrichmessagecontent.md): Represents the content of a rich message to be sent as the result of an inline query.
+- [InputLocationMessageContent](./types/inputlocationmessagecontent.md): Represents the content of a location message to be sent as the result of an inline query.
+- [InputVenueMessageContent](./types/inputvenuemessagecontent.md): Represents the content of a venue message to be sent as the result of an inline query.
+- [InputContactMessageContent](./types/inputcontactmessagecontent.md): Represents the content of a contact message to be sent as the result of an inline query.
+- [InputInvoiceMessageContent](./types/inputinvoicemessagecontent.md): Represents the content of an invoice message to be sent as the result of an inline query.
+- [InputWidgetMessageContent](./types/inputwidgetmessagecontent.md): Represents the content of a message with an HTML widget to be sent as the result of an inline query.
+- [InputSharedWidgetMessageContent](./types/inputsharedwidgetmessagecontent.md): Represents the content of a message with a shared widget to be sent as the result of an inline query.
+- [ChosenInlineResult](./types/choseninlineresult.md): Represents a result of an inline query that was chosen by the user and sent to their chat partner.
+
+## Payments
+
+- [LabeledPrice](./types/labeledprice.md): a portion of the price for goods or services.
+- [Invoice](./types/invoice.md): This object contains basic information about an invoice.
+- [ShippingAddress](./types/shippingaddress.md): a shipping address.
+- [OrderInfo](./types/orderinfo.md): information about an order.
+- [ShippingOption](./types/shippingoption.md): one shipping option.
+- [SuccessfulPayment](./types/successfulpayment.md): This object contains basic information about a successful payment.
+- [RefundedPayment](./types/refundedpayment.md): This object contains basic information about a refunded payment.
+- [ShippingQuery](./types/shippingquery.md): This object contains information about an incoming shipping query.
+- [PreCheckoutQuery](./types/precheckoutquery.md): This object contains information about an incoming pre-checkout query.
+- [PaidMediaPurchased](./types/paidmediapurchased.md): This object contains information about a paid media purchase.
+- [RevenueWithdrawalState](./types/revenuewithdrawalstate.md): This object describes the state of a revenue withdrawal operation.
+- [RevenueWithdrawalStatePending](./types/revenuewithdrawalstatepending.md): The withdrawal is in progress.
+- [RevenueWithdrawalStateSucceeded](./types/revenuewithdrawalstatesucceeded.md): The withdrawal succeeded.
+- [RevenueWithdrawalStateFailed](./types/revenuewithdrawalstatefailed.md): The withdrawal failed and the transaction was refunded.
+- [AffiliateInfo](./types/affiliateinfo.md): Contains information about the affiliate that received a commission via this transaction.
+- [TransactionPartner](./types/transactionpartner.md): This object describes the source of a transaction, or its recipient for outgoing transactions.
+- [TransactionPartnerUser](./types/transactionpartneruser.md): Describes a transaction with a user.
+- [TransactionPartnerChat](./types/transactionpartnerchat.md): Describes a transaction with a chat.
+- [TransactionPartnerAffiliateProgram](./types/transactionpartneraffiliateprogram.md): Describes the affiliate program that issued the affiliate commission received via this transaction.
+- [TransactionPartnerFragment](./types/transactionpartnerfragment.md): Describes a withdrawal transaction with Fragment.
+- [TransactionPartnerTelegramAds](./types/transactionpartnertelegramads.md): Describes a withdrawal transaction to the Telegram Ads platform.
+- [TransactionPartnerTelegramApi](./types/transactionpartnertelegramapi.md): Describes a transaction with payment for paid broadcasting.
+- [TransactionPartnerOther](./types/transactionpartnerother.md): Describes a transaction with an unknown source or recipient.
+- [StarTransaction](./types/startransaction.md): Describes a Telegram Star transaction.
+- [StarTransactions](./types/startransactions.md): Contains a list of Telegram Star transactions.
+
+## Telegram Passport
+
+- [PassportData](./types/passportdata.md): Describes Telegram Passport data shared with the bot by the user.
+- [PassportFile](./types/passportfile.md): a file uploaded to Telegram Passport.
+- [EncryptedPassportElement](./types/encryptedpassportelement.md): Describes documents or other Telegram Passport elements shared with the bot by the user.
+- [EncryptedCredentials](./types/encryptedcredentials.md): Describes data required for decrypting and authenticating EncryptedPassportElement.
+- [PassportElementError](./types/passportelementerror.md): an error in the Telegram Passport element which was submitted that should be resolved by the user.
+- [PassportElementErrorDataField](./types/passportelementerrordatafield.md): Represents an issue in one of the data fields that was provided by the user.
+- [PassportElementErrorFrontSide](./types/passportelementerrorfrontside.md): Represents an issue with the front side of a document.
+- [PassportElementErrorReverseSide](./types/passportelementerrorreverseside.md): Represents an issue with the reverse side of a document.
+- [PassportElementErrorSelfie](./types/passportelementerrorselfie.md): Represents an issue with the selfie with a document.
+- [PassportElementErrorFile](./types/passportelementerrorfile.md): Represents an issue with a document scan.
+- [PassportElementErrorFiles](./types/passportelementerrorfiles.md): Represents an issue with a list of scans.
+- [PassportElementErrorTranslationFile](./types/passportelementerrortranslationfile.md): Represents an issue with one of the files that constitute the translation of a document.
+- [PassportElementErrorTranslationFiles](./types/passportelementerrortranslationfiles.md): Represents an issue with the translated version of a document.
+- [PassportElementErrorUnspecified](./types/passportelementerrorunspecified.md): Represents an issue in an unspecified place.
+
+## Games
+
+- [Game](./types/game.md): a game.
+- [CallbackGame](./types/callbackgame.md): A placeholder, currently holds no information.
+- [GameHighScore](./types/gamehighscore.md): one row of the high scores table for a game.

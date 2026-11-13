@@ -1,0 +1,11 @@
+# BotCommand
+
+> Part of the [Telegram Bot API](../../api.md). Canonical location: [BotCommand](../../api.md#botcommand).
+
+This object represents a bot command.
+
+|Field|Type|Description|
+|-----------|
+|command|String|Text of the command; 1-32 characters. Can contain only lowercase English letters, digits and underscores.|
+|description|String|Description of the command; 1-256 characters|
+|is_ephemeral|Boolean|*Optional*. *True*, if the command sends an ephemeral message, which can be seen only by the sender of the message and the bot|
