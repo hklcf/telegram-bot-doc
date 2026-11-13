@@ -73,6 +73,39 @@ Bot API（HTTP）為主：
 
 ## 授權
 
-- 本 repo 嘅程式碼：`MIT`（見 [LICENSE](LICENSE)）
-- `docs/` 入面嘅文檔內容：**版權屬 Telegram**。呢度只係作教育／離線查閱用途嘅鏡像，
-  一切以 <https://core.telegram.org/bots> 官方版本為準。
+| 部分 | 授權 |
+|---|---|
+| `scripts/`、`.github/`、`SKILL.md`、`README.md`、`package.json` | **MIT**（見 [LICENSE](LICENSE)，範圍有註明） |
+| `docs/`（645 頁官方文檔鏡像） | **唔授權** — 版權屬 Telegram FZ-LLC，見 [docs/LICENSE](docs/LICENSE) |
+
+點解唔可以全 repo 都 MIT：MIT 係聲明「我係版權擁有人並授權」。你對 `docs/` 唔係版權擁有人，
+所以嗰個授權對佢無效。所以做法係 **MIT 標明範圍 + `docs/` 另放 Telegram 聲明**。
+
+### Telegram 條款
+
+睇過官方條款，呢個 skill 嘅用途冇問題：
+
+- [Bot Developer Terms §8](https://telegram.org/tos/bot-developers)：
+  "Telegram retains ownership over the code and functionality of the Telegram apps, its code,
+  trademarks, servers, architecture, protocols and APIs." → 文檔版權屬 Telegram（所以上面咁授權）。
+- [Content Licensing and AI Scraping Terms](https://telegram.org/tos/content-licensing)：
+  禁止嘅係攞**用戶生成內容**（chat / channel / post）去 train / fine-tune / benchmark / deploy AI。
+  官方**開發者文檔**唔屬用戶內容，而且 Telegram 故意提供機器可讀版本（每頁都寫住
+  "Machine-readable version of this page: /bots.md"）—— 攞官方 API reference 嚟寫 bot，
+  就係文檔本身嘅預定用途。
+- `core.telegram.org` **冇 robots.txt**（404），即係冇機器可讀嘅抓取限制。
+
+### Publishing options（公開 repo 嘅取捨）
+
+`docs/` 係 Telegram 版權內容原樣再發佈，雖然實務上好多 community mirror 都咁做（好少被 takedown），
+但 Telegram 有權要求移除。三個做法：
+
+| 做法 | 優點 | 缺點 |
+|---|---|---|
+| **A. `docs/` 照 commit**（現時設定） | 用戶 clone 完即刻用 | 公開再發佈 645 頁版權內容，有 takedown 風險 |
+| **B. `docs/` 唔 commit**，`.gitignore` 掉，改用 GitHub Release / Actions artifact 派發 | 公開 repo 只有你自己寫嘅 code（乾淨 MIT），風險最低 | 用戶要多行 `npm run update` 先有文檔 |
+| **C. A + B 混合**：public repo 只留 code，docs 由 Actions 發 release asset | 平衡 | 多一份 CI 配置 |
+
+**建議：如果呢個 repo 主要係俾你自己用、想喺 GitHub 保持乾淨 → 揀 B。**
+如果要俾人 `git clone` 完即刻用 → 揀 A，但要接受 takedown 風險。
+

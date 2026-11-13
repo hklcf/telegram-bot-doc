@@ -44,6 +44,32 @@ const isPage = (p) =>
 
 const mdUrl = (page) => `${ORIGIN}${page}.md`;
 
+const DOCS_LICENSE = `The files in this directory are an unofficial, verbatim mirror of the Telegram Bot
+documentation published at ${ORIGIN}/bots
+
+    Copyright © Telegram FZ-LLC / Telegram Messenger Inc. All rights reserved.
+
+These files are NOT covered by the MIT license of this repository. They are
+included so that AI coding assistants can consult the official Bot API
+reference offline, and for no other purpose. No license to them is granted
+here by the maintainers of this repository, who do not hold the copyright.
+
+The authoritative version of this content, and the only version that carries
+Telegram's own terms, is:
+
+    ${ORIGIN}/bots
+
+Telegram's Terms of Service for Bot Platform Developers
+(https://telegram.org/tos/bot-developers) state that "Telegram retains
+ownership over the code and functionality of the Telegram apps, its code,
+trademarks, servers, architecture, protocols and APIs".
+
+If you want to redistribute this material, read the "Publishing options"
+section of the repository README first -- the maintainers' recommendation is to
+not commit \`docs/\` to a public repository at all, and to let the automated
+sync produce it locally or as a release artifact instead.
+`;
+
 /** '/bots/api#sendmessage' -> { path: '/bots/api', anchor: '#sendmessage' } */
 function splitTarget(raw) {
   const t = raw.trim();
@@ -234,6 +260,10 @@ await writeFile(
   ) + "\n",
   "utf8",
 );
+
+// The mirrored content is Telegram's copyright; it is not covered by this
+// repo's MIT license. Written here so a full rebuild of docs/ keeps it.
+await writeFile(join(OUT, "LICENSE"), DOCS_LICENSE, "utf8");
 
 // --- sanity check ---------------------------------------------------------------
 

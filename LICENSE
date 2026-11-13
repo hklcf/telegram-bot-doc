@@ -22,7 +22,14 @@ SOFTWARE.
 
 ---
 
-NOTE: The files under `docs/` are a verbatim mirror of the Telegram Bot
-documentation published at https://core.telegram.org/bots and remain the
-copyright of Telegram FZ-LLC / Telegram Messenger Inc. They are included here
-for offline reference and are not covered by the MIT license above.
+## Scope of this license
+
+This license covers the source code of this repository only:
+
+- `scripts/`
+- `.github/`
+- `SKILL.md`, `README.md`, `package.json`, `LICENSE`, `.gitattributes`, `.gitignore`
+
+It does **not** cover the files under `docs/`. Those files are a verbatim mirror
+of the official Telegram Bot documentation and remain the copyright of
+Telegram FZ-LLC / Telegram Messenger Inc. See [docs/LICENSE](docs/LICENSE).
