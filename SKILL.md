@@ -6,7 +6,7 @@ description: Telegram Bot 官方文檔的離線 markdown 副本（source: https:
 # Telegram Bot 官方文檔（離線副本）
 
 本 skill 內含 [core.telegram.org/bots](https://core.telegram.org/bots) 官方文檔的完整 markdown 副本，
-每日由 GitHub Action 自動同步（見 `docs/SOURCE.json` 的 `fetchedAt`）。
+每日由 GitHub Action 自動同步（頁數見 `docs/SOURCE.json`，最後同步時間見 Git 提交紀錄）。
 
 ## 怎樣用
 

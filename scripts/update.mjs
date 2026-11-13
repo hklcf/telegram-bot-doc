@@ -263,13 +263,12 @@ const indexMd = [
 // README.md, not INDEX.md: 'docs/index.md' is already the mirror of /bots.
 await writeFile(join(OUT, "README.md"), indexMd, "utf8");
 
+// No timestamp here on purpose: a timestamp would make every daily sync look
+// like a change and the bot would open a PR every single day. The fetch time
+// is printed to stdout (CI job summary) and lives in git history.
 await writeFile(
   join(OUT, "SOURCE.json"),
-  JSON.stringify(
-    { origin: ORIGIN, fetchedAt: new Date().toISOString(), pages: index.length },
-    null,
-    2,
-  ) + "\n",
+  JSON.stringify({ origin: ORIGIN, pages: index.length }, null, 2) + "\n",
   "utf8",
 );
 
@@ -327,3 +326,4 @@ for (const row of index) {
 if (broken) throw new Error(`${broken} broken relative links`);
 
 console.log(`wrote ${index.length} pages to docs/`);
+console.log(`fetched at ${new Date().toISOString()}`);
