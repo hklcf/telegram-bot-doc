@@ -10,7 +10,7 @@ description: Telegram Bot 官方文檔的離線 markdown 副本（source: https:
 
 ## 怎樣用
 
-**1. 先睇索引。** `docs/INDEX.md` 係自動生成嘅全頁索引（~645 頁），按目錄分組：
+**1. 先睇索引。** `docs/README.md` 係自動生成嘅全頁索引（~645 頁），按目錄分組：
 
 | 你想知 | 開呢個檔 |
 |---|---|
@@ -62,7 +62,7 @@ npm run update        # 重新抓取 core.telegram.org，覆寫 docs/
 ```
 
 抓取器 `scripts/update.mjs` 會跟住連結 crawl 晒 `/bots/**`（連 API 每個 method / type 頁），
-自動做相對路徑重寫、斷鏈檢查同 `docs/INDEX.md` 生成。
+自動做相對路徑重寫、斷鏈檢查同 `docs/README.md` 生成。
 GitHub Actions 每朝自動跑，唔同就開 PR。
 
 ## 注意

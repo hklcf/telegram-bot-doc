@@ -32,7 +32,7 @@ git clone https://github.com/<your-user>/telegram-bot-doc \
 npm run update
 ```
 
-會重新抓取 `core.telegram.org`、重寫 `docs/`、檢查所有相對連結仲生成 `docs/INDEX.md`。
+會重新抓取 `core.telegram.org`、重寫 `docs/`、檢查所有相對連結仲生成 `docs/README.md`。
 
 ### 直接睇文檔
 
@@ -40,7 +40,7 @@ npm run update
 docs/api.md                     Bot API 總覽 + 全部 method
 docs/api/methods/sendmessage.md 單一 method 嘅參數表
 docs/api/types/message.md       單一 type 嘅欄位表
-docs/INDEX.md                   全部頁面索引
+docs/README.md                   全部頁面索引
 ```
 
 ## 結構
@@ -48,7 +48,7 @@ docs/INDEX.md                   全部頁面索引
 ```
 SKILL.md              skill 入口（給 AI 睇嘅使用指南）
 docs/                 官方文檔副本（自動生成，唔好手改）
-  INDEX.md            自動生成嘅全頁索引
+  README.md                    自動生成嘅全頁索引
   SOURCE.json         抓取時間 / 頁數
 scripts/update.mjs    抓取 + 重寫 + 檢查
 .github/workflows/    自動更新 workflow
