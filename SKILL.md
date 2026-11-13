@@ -1,6 +1,6 @@
 ---
 name: telegram-bot
-description: Telegram Bot 官方文檔的離線 markdown 副本（來源 https://core.telegram.org/bots）。包含完整 Bot API（每個 method / type 都有獨立檔案，另有單一檔案嘅完整 API reference）、Bot features 詳細指南、Mini Apps / Web Apps、Inline mode、Payments / Telegram Stars、Webhooks、Games、Telegram Passport、Stickers、FAQ 同 API changelog。當用戶要寫或除錯 Telegram bot、查 Bot API endpoint / 參數 / 物件欄位、設定 webhook、處理 update、寫 inline query、做支付或訂閱、建立 Mini App、查 Bot API 版本變更時使用。Keywords — Telegram, Bot API, bot, botfather, sendMessage, getUpdates, setWebhook, Update, Message, InlineKeyboardMarkup, inline query, Mini App, Web App, Telegram Stars, TON, passport, webhook, MTProto bot.
+description: Telegram Bot 官方文檔的離線 markdown 副本（來源 https://core.telegram.org/bots）。包含完整 Bot API（每個 method / type 都有獨立檔案，另有單一檔案嘅完整 API reference）、Bot features 詳細指南、Mini Apps / Web Apps、Inline mode、Payments / Telegram Stars、Webhooks、Games、Telegram Passport、Stickers、FAQ 同 API changelog。當用戶要寫或除錯 Telegram bot、查 Bot API endpoint / 參數 / 物件欄位、設定 webhook、處理 update、寫 inline query、做支付或訂閱、建立 Mini App、查 Bot API 版本變更時使用。Keywords — Telegram, Bot API, bot, botfather, sendMessage, getUpdates, setWebhook, Update, Message, InlineKeyboardMarkup, inline query, Mini App, Web App, Telegram Stars, TON, passport, webhook.
 ---
 
 # Telegram Bot 官方文檔（離線副本）
@@ -37,7 +37,11 @@ description: Telegram Bot 官方文檔的離線 markdown 副本（來源 https:/
 `InlineKeyboardMarkup` → `docs/api/types/inlinekeyboardmarkup.md`。
 唔記得 exact 名就 `rg -i "sendmessage" docs/api/types/` 咁樣 grep。
 
-**3. 每個 method / type 頁頂部**都有一行 `> Part of the [Telegram Bot API](../../api.md). Canonical location: [...]`，
+**3. 大檔案唔好成個讀。** `docs/api.md` 有 577 KB、`docs/features.md` 有 88 KB、
+`docs/api-changelog.md` 有 185 KB —— 用 `rg` 定位，再用 `Read` 讀返嗰幾行。
+要睇 method 參數表就直接讀 `docs/api/methods/<method>.md`（每個都係細檔）。
+
+**4. 每個 method / type 頁頂部**都有一行 `> Part of the [Telegram Bot API](../../api.md). Canonical location: [...]`，
 跳返 `docs/api.md` 就係嗰個 method / type 嘅完整段落。
 
 ## 常用重點

@@ -86,6 +86,8 @@ Bot API（HTTP）為主：
 | `scripts/`、`.github/`、`SKILL.md`、`README.md`、`package.json` | **MIT**（見 [LICENSE](LICENSE)，範圍有註明） |
 | `docs/`（645 頁官方文檔鏡像） | **唔授權** — 版權屬 Telegram FZ-LLC，見 [docs/LICENSE](docs/LICENSE) |
 
+（`docs/api.md` 尾段係生成嘅完整 reference，原因同授權範圍見 [docs/LICENSE](docs/LICENSE)）
+
 點解唔可以全 repo 都 MIT：MIT 係聲明「我係版權擁有人並授權」。你對 `docs/` 唔係版權擁有人，
 所以嗰個授權對佢無效。所以做法係 **MIT 標明範圍 + `docs/` 另放 Telegram 聲明**。
 

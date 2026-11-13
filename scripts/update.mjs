@@ -45,7 +45,7 @@ const isPage = (p) =>
 
 const mdUrl = (page) => `${ORIGIN}${page}.md`;
 
-const DOCS_LICENSE = `The files in this directory are an unofficial, verbatim mirror of the Telegram Bot
+const DOCS_LICENSE = `The files in this directory are an unofficial mirror of the Telegram Bot
 documentation published at ${ORIGIN}/bots
 
     Copyright © Telegram FZ-LLC / Telegram Messenger Inc. All rights reserved.
@@ -64,6 +64,13 @@ Telegram's Terms of Service for Bot Platform Developers
 (https://telegram.org/tos/bot-developers) state that "Telegram retains
 ownership over the code and functionality of the Telegram apps, its code,
 trademarks, servers, architecture, protocols and APIs".
+
+One exception to "mirror": api.md has a "Complete API reference" section
+appended by scripts/update.mjs. Telegram's own markdown export of that page is
+a condensed summary with no per-method headings, which broke the
+"Canonical location" links on every method and type page. The appended
+section reproduces the pages in this directory, unmodified, under the headings
+the links expect.
 
 If you want to redistribute this material, read the "Publishing options"
 section of the repository README first -- the maintainers' recommendation is to
