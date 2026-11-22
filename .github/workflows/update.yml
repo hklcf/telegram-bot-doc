@@ -8,8 +8,7 @@ on:
   push:
     branches: [main]
 # 冇 pull_request trigger：PR 由 GITHUB_TOKEN 開，觸發嘅 workflow 需要人手批准
-# (action_required)，bot 每日開嘅 PR 就會帶住一個永遠等唔到嘅 check。
-# push 到 main 已經覆蓋咗驗證。
+# (action_required)。呢個 job 自己即刻 squash merge，唔使等人手 accept。
 
 permissions:
   contents: write
@@ -35,6 +34,7 @@ jobs:
         run: node scripts/update.mjs | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Open PR if anything changed
+        id: pr
         uses: peter-evans/create-pull-request@v7
         with:
           branch: chore/update-docs
@@ -49,7 +49,20 @@ jobs:
             - Source: <https://core.telegram.org/bots>
             - Page count: see `docs/SOURCE.json`
 
-            Review the diff for new/changed Bot API methods and types.
+            Auto-merged by this workflow. The diff below is the review record.
+
+      - name: Squash-merge and delete branch
+        if: steps.pr.outputs.pull-request-number != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ steps.pr.outputs.pull-request-number }}
+        run: |
+          # Mergeability can be briefly "unknown" just after the PR is opened.
+          for i in 1 2 3 4 5; do
+            gh pr merge "$PR" --squash --delete-branch && exit 0
+            sleep 5
+          done
+          exit 1
 
   verify:
     # push：確認 docs/ 同官網同步，唔同步就 fail

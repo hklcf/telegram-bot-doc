@@ -6,7 +6,7 @@ Telegram Bot 官方文檔（<https://core.telegram.org/bots>）嘅**離線 markd
 - **645+ 頁**官方文檔：`Bot API` 每個 method 同每個 type 都有獨立檔案，
   另有 features / Mini Apps / payments / webhooks / passport / stickers / FAQ / changelog。
 - **零依賴**抓取器：Telegram 每頁都提供機器可讀嘅 markdown（`<page>.md`），唔使爬 HTML。
-- **自動更新**：GitHub Actions 每日跑抓取器，有變更就自動開 PR。
+- **自動更新**：GitHub Actions 每日跑抓取器，有變更就開 PR、自動 squash merge 落 `main` 並刪分支，唔使人手 accept。
 
 > ⚠️ **Unofficial mirror.** 本 repo 嘅 `docs/` 係 <https://core.telegram.org/bots> 嘅**原樣鏡像**，
 > 版權屬 Telegram FZ-LLC，唔受本 repo 嘅 MIT license 涵蓋（見 [docs/LICENSE](docs/LICENSE)）。
@@ -63,11 +63,11 @@ scripts/update.mjs    抓取 + 重寫 + 檢查
 
 | 觸發 | 行為 |
 |---|---|
-| 每日 cron（04:17 UTC） | 抓取 → 有變更就開 PR（`chore/update-docs`） |
-| 手動 | Actions 頁面按 **Run workflow** |
+| 每日 cron（04:17 UTC） | 抓取 → 開 PR（`chore/update-docs`）→ squash merge + 刪分支 |
+| 手動 | Actions 頁面按 **Run workflow**（同一流程，即時合併） |
 | 本地 | `npm run update` |
 
-PR 會列出每個檔案嘅改動，方便 review 官方文檔有咩新變化。
+PR 合併後仍然可以喺 GitHub 睇返 diff，當係官方文檔有咩新變化嘅紀錄。
 
 ## 覆蓋範圍
 
