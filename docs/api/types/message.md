@@ -91,7 +91,7 @@ This object represents a message.
 |unique_gift|[UniqueGiftInfo](./uniquegiftinfo.md)|*Optional*. Service message: a unique gift was sent or received|
 |gift_upgrade_sent|[GiftInfo](./giftinfo.md)|*Optional*. Service message: upgrade of a gift was purchased after the gift was sent|
 |connected_website|String|*Optional*. The domain name of the website on which the user has logged in. [More about Telegram Login »](../../widgets/login.md)|
-|write_access_allowed|[WriteAccessAllowed](./writeaccessallowed.md)|*Optional*. Service message: the user allowed the bot to write messages after adding it to the attachment or side menu, launching a Web App from a link, or accepting an explicit request from a Web App sent by the method [requestWriteAccess](../../webapps.md#initializing-mini-apps)|
+|write_access_allowed|[WriteAccessAllowed](./writeaccessallowed.md)|*Optional*. Service message: the user allowed the bot to write messages after adding it to the attachment or side menu, launching a Web App from a link, or accepting an explicit request from a Web App sent by the method [requestWriteAccess](../../webapps.md#initializing-mini-apps), or the user was invited to the private chat with the bot by the owner of the bot|
 |passport_data|[PassportData](./passportdata.md)|*Optional*. Telegram Passport data|
 |proximity_alert_triggered|[ProximityAlertTriggered](./proximityalerttriggered.md)|*Optional*. Service message: a user in the chat triggered another user's proximity alert while sharing Live Location|
 |boost_added|[ChatBoostAdded](./chatboostadded.md)|*Optional*. Service message: user boosted the chat|

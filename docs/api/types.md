@@ -9,6 +9,7 @@
 
 ## Available types
 
+- [BotFullInfo](./types/botfullinfo.md): This object contains full information about the bot itself.
 - [User](./types/user.md): a Telegram user or bot.
 - [Chat](./types/chat.md): a chat.
 - [ChatFullInfo](./types/chatfullinfo.md): This object contains full information about a chat.
@@ -93,7 +94,7 @@
 - [SharedUser](./types/shareduser.md): This object contains information about a user that was shared with the bot using a KeyboardButtonRequestUsers button.
 - [UsersShared](./types/usersshared.md): This object contains information about the users whose identifiers were shared with the bot using a KeyboardButtonRequestUsers button.
 - [ChatShared](./types/chatshared.md): This object contains information about a chat that was shared with the bot using a KeyboardButtonRequestChat button.
-- [WriteAccessAllowed](./types/writeaccessallowed.md): a service message about a user allowing a bot to write messages after adding it to the attachment menu, launching a Web App from a link, or accepting an explicit request from a Web App sent by the method requestWriteAccess.
+- [WriteAccessAllowed](./types/writeaccessallowed.md): a service message about a user allowing a bot to write messages after adding it to the attachment menu, launching a Web App from a link, or accepting an explicit request from a Web App sent by the method requestWriteAccess, or about a user being invited to the private chat with the bot by the owner of the bot.
 - [VideoChatScheduled](./types/videochatscheduled.md): a service message about a video chat scheduled in the chat.
 - [VideoChatStarted](./types/videochatstarted.md): a service message about a video chat started in the chat.
 - [VideoChatEnded](./types/videochatended.md): a service message about a video chat ended in the chat.
@@ -133,7 +134,7 @@
 - [SwitchInlineQueryChosenChat](./types/switchinlinequerychosenchat.md): an inline button that switches the current user to inline mode in a chosen chat, with an optional default inline query.
 - [CopyTextButton](./types/copytextbutton.md): an inline keyboard button that copies specified text to the clipboard.
 - [DisabledButton](./types/disabledbutton.md): a disabled button which does nothing.
-- [CallbackQuery](./types/callbackquery.md): an incoming callback query from a callback button in an inline keyboard.
+- [CallbackQuery](./types/callbackquery.md): an incoming callback query from a callback button in an inline keyboard or in a rich message.
 - [WidgetQueryType](./types/widgetquerytype.md): This object describes the type of a query from a widget.
 - [WidgetQueryTypeData](./types/widgetquerytypedata.md): The query contains data for the bot.
 - [WidgetQueryTypeSignData](./types/widgetquerytypesigndata.md): The query contains data signed by a TON wallet of the user who sent the query.

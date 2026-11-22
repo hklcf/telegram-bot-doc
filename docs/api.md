@@ -295,7 +295,7 @@ Each message broadcasted over the free amount of 30 messages per second incurs a
 - [hideGeneralForumTopic](./api/methods/hidegeneralforumtopic.md): hide the 'General' topic in a forum supergroup chat.
 - [unhideGeneralForumTopic](./api/methods/unhidegeneralforumtopic.md): unhide the 'General' topic in a forum supergroup chat.
 - [unpinAllGeneralForumTopicMessages](./api/methods/unpinallgeneralforumtopicmessages.md): clear the list of pinned messages in a General forum topic.
-- [answerCallbackQuery](./api/methods/answercallbackquery.md): send answers to callback queries sent from inline keyboards.
+- [answerCallbackQuery](./api/methods/answercallbackquery.md): send answers to callback queries sent from inline keyboards or rich messages.
 - [answerWidgetQuery](./api/methods/answerwidgetquery.md): send an answer to a query from a widget.
 - [answerGuestQuery](./api/methods/answerguestquery.md): reply to a received guest message.
 - [getUserChatBoosts](./api/methods/getuserchatboosts.md): get the list of boosts added to a chat by a user.
@@ -304,6 +304,7 @@ Each message broadcasted over the free amount of 30 messages per second incurs a
 - [replaceManagedBotToken](./api/methods/replacemanagedbottoken.md): revoke the current token of a managed bot and generate a new one.
 - [getManagedBotAccessSettings](./api/methods/getmanagedbotaccesssettings.md): get the access settings of a managed bot.
 - [setManagedBotAccessSettings](./api/methods/setmanagedbotaccesssettings.md): change the access settings of a managed bot.
+- [setMySettings](./api/methods/setmysettings.md): change settings of the bot.
 - [setMyCommands](./api/methods/setmycommands.md): change the list of the bot's commands.
 - [deleteMyCommands](./api/methods/deletemycommands.md): delete the list of the bot's commands for the given scope and user language.
 - [getMyCommands](./api/methods/getmycommands.md): get the current list of the bot's commands for the given scope and user language.
@@ -416,7 +417,7 @@ Rich message methods, types and formatting rules are documented at [Rich message
 The following methods and objects allow your bot to work in [inline mode](./inline.md).
 Please see our [Introduction to Inline bots](./inline.md) for more details.
 
-To enable this option, send the `/setinline` command to [@BotFather](https://t.me/botfather) and provide the placeholder text that the user will see in the input field after typing your bot's name.
+To enable this option, send the `/setinline` command to [@BotFather](https://t.me/botfather) and provide the placeholder text that the user will see in the input field after typing your bot's name, or use the parameters *supports_inline_queries* and *inline_query_placeholder* of the method [setMySettings](./api/methods/setmysettings.md).
 
 Types of this section are listed at [Bot API types](./api/types.md#inline-mode).
 
@@ -651,7 +652,7 @@ Use this method to send audio files, if you want Telegram clients to display the
 
 #### getMe
 
-A simple method for testing your bot's authentication token. Requires no parameters. Returns basic information about the bot in form of a [User](./api/types/user.md) object.
+A simple method for testing your bot's authentication token. Requires no parameters. Returns information about the bot in form of a [BotFullInfo](./api/types/botfullinfo.md) object.
 
 #### logOut
 
@@ -1631,7 +1632,7 @@ Use this method to clear the list of pinned messages in a General forum topic. T
 
 #### answerCallbackQuery
 
-Use this method to send answers to callback queries sent from [inline keyboards](./features.md#inline-keyboards). The answer will be displayed to the user as a notification at the top of the chat screen or as an alert. On success, *True* is returned.
+Use this method to send answers to callback queries sent from [inline keyboards](./features.md#inline-keyboards) or [rich messages](./api/types/richmessage.md). The answer will be displayed to the user as a notification at the top of the chat screen or as an alert. On success, *True* is returned.
 
 > Alternatively, the user can be redirected to the specified Game URL. For this option to work, you must first create a game for your bot via [@BotFather](https://t.me/botfather) and accept the terms. Otherwise, you may use links like `t.me/your_bot?start=XXXX` that open your bot with a parameter.
 
@@ -1713,6 +1714,28 @@ Use this method to change the access settings of a managed bot. Returns *True* o
 |user_id|Integer|Yes|User identifier of the managed bot whose access settings will be changed|
 |is_access_restricted|Boolean|Yes|Pass *True* if only selected users can access the bot. The bot's owner can always access it.|
 |added_user_ids|Array of Integer|Optional|A JSON-serialized list of up to 10 identifiers of users who will have access to the bot in addition to its owner. Ignored if *is_access_restricted* is *False*.|
+
+#### setMySettings
+
+Use this method to change settings of the bot. Settings that aren't specified remain unchanged. Returns *True* on success.
+
+|Parameter|Type|Required|Description|
+|-----------|
+|supports_inline_queries|Boolean|Optional|Pass *True* to enable [inline mode](./api.md#inline-mode) for the bot or *False* to disable it|
+|inline_query_placeholder|String|Optional|New placeholder for inline queries, which is shown in the input field after the bot's username. Pass an empty string to use the default placeholder.|
+|needs_inline_query_location|Boolean|Optional|Pass *True* to request the location of the user with every inline query to the bot or *False* to stop requesting it|
+|inline_feedback_share_denominator|Integer|Optional|Denominator of the share of [chosen inline results](./api/types/choseninlineresult.md) received by the bot; the bot receives 1 out of *inline_feedback_share_denominator* chosen results. Must be one of 1, 10, 100, or 1000. Pass 0 to stop receiving chosen inline results.|
+|can_join_groups|Boolean|Optional|Pass *True* to allow adding the bot to groups or *False* to disallow it|
+|can_read_all_group_messages|Boolean|Optional|Pass *True* to disable [privacy mode](./features.md#privacy-mode) for the bot or *False* to enable it|
+|can_connect_to_business|Boolean|Optional|Pass *True* to allow connecting the bot to user accounts to manage them or *False* to disallow it|
+|can_manage_bots|Boolean|Optional|Pass *True* to allow creating other bots that will be controlled by the bot or *False* to disallow it|
+|supports_guest_queries|Boolean|Optional|Pass *True* to allow guest queries to the bot from chats it isn't a member of or *False* to disallow them|
+|supports_join_request_queries|Boolean|Optional|Pass *True* to allow assigning the bot to process join request queries or *False* to disallow it|
+|has_topics_enabled|Boolean|Optional|Pass *True* to enable forum topic mode in private chats with the bot or *False* to disable it|
+|allows_users_to_create_topics|Boolean|Optional|Pass *True* to allow users to create and delete topics in private chats with the bot or *False* to disallow it|
+|has_topic_sidebar|Boolean|Optional|Pass *True* to show topics in private chats with the bot in a sidebar or *False* to stop showing them in a sidebar|
+|can_communicate_with_bots|Boolean|Optional|Pass *True* to allow the bot to communicate with other bots in groups, private chats, and through business accounts or *False* to disallow it|
+|callback_query_mode|String|Optional|Mode in which the bot receives [callback queries](./api/types/callbackquery.md) from buttons in messages sent by the bot. Must be one of "default" (the field *message* is always used and contains an [InaccessibleMessage](./api/types/inaccessiblemessage.md) if the message is inaccessible to the bot), "auto" (the field *inline_message_id* is used instead of the field *message* if the message is inaccessible to the bot; the field *message* can still contain an inaccessible message if the message has just been deleted), or "inline" (the field *inline_message_id* is always used instead of the field *message*).|
 
 #### setMyCommands
 
@@ -2856,7 +2879,7 @@ At most **one** of the optional fields can be present in any given update.
 |message_reaction|[MessageReactionUpdated](./api/types/messagereactionupdated.md)|*Optional*. A reaction to a message was changed by a user. The bot must be an administrator in the chat and must explicitly specify `"message_reaction"` in the list of *allowed_updates* to receive these updates. The update isn't received for reactions set by bots.|
 |message_reaction_count|[MessageReactionCountUpdated](./api/types/messagereactioncountupdated.md)|*Optional*. Reactions to a message with anonymous reactions were changed. The bot must be an administrator in the chat and must explicitly specify `"message_reaction_count"` in the list of *allowed_updates* to receive these updates. The updates are grouped and can be sent with delay up to a few minutes.|
 |inline_query|[InlineQuery](./api/types/inlinequery.md)|*Optional*. New incoming [inline](./api.md#inline-mode) query|
-|chosen_inline_result|[ChosenInlineResult](./api/types/choseninlineresult.md)|*Optional*. The result of an [inline](./api.md#inline-mode) query that was chosen by a user and sent to their chat partner. Please see our documentation on the [feedback collecting](./inline.md#collecting-feedback) for details on how to enable these updates for your bot.|
+|chosen_inline_result|[ChosenInlineResult](./api/types/choseninlineresult.md)|*Optional*. The result of an [inline](./api.md#inline-mode) query that was chosen by a user and sent to their chat partner. Please see our documentation on the [feedback collecting](./inline.md#collecting-feedback) for details on how to enable these updates for your bot. The updates can also be enabled using the parameter *inline_feedback_share_denominator* of the method [setMySettings](./api/methods/setmysettings.md).|
 |callback_query|[CallbackQuery](./api/types/callbackquery.md)|*Optional*. New incoming callback query|
 |widget_query|[WidgetQuery](./api/types/widgetquery.md)|*Optional*. New incoming query from a widget in a message sent by the bot or via the bot|
 |shared_widget_query|[SharedWidgetQuery](./api/types/sharedwidgetquery.md)|*Optional*. New incoming query from a forwarded message with a shared widget|
@@ -2890,6 +2913,31 @@ Describes the current status of a webhook.
 |max_connections|Integer|*Optional*. The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery|
 |allowed_updates|Array of String|*Optional*. A list of update types the bot is subscribed to. Defaults to all update types except *chat_member*, *message_reaction*, and *message_reaction_count*.|
 
+#### BotFullInfo
+
+This object contains full information about the bot itself.
+
+|Field|Type|Description|
+|-----------|
+|id|Integer|Unique identifier for this bot. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier.|
+|is_bot|True|Always *True*|
+|first_name|String|Bot's first name|
+|username|String|*Optional*. Bot's username|
+|active_usernames|Array of String|*Optional*. If non-empty, the list of all [active usernames](https://telegram.org/blog/topics-in-groups-collectible-usernames#collectible-usernames) of the bot|
+|can_join_groups|Boolean|*True*, if the bot can be added to groups|
+|can_read_all_group_messages|Boolean|*True*, if [privacy mode](./features.md#privacy-mode) is disabled for the bot|
+|supports_guest_queries|Boolean|*True*, if the bot supports guest queries from chats it is not a member of|
+|supports_inline_queries|Boolean|*True*, if the bot supports inline queries|
+|inline_query_placeholder|String|*Optional*. Placeholder for inline queries, which is shown in the input field after the bot's username; omitted if the default placeholder is used|
+|needs_inline_query_location|Boolean|*True*, if the bot requests the location of the user with every inline query|
+|can_connect_to_business|Boolean|*True*, if the bot can be connected to a user account to manage it|
+|has_main_web_app|Boolean|*True*, if the bot has a main Web App|
+|has_topics_enabled|Boolean|*True*, if the bot has forum topic mode enabled in private chats|
+|allows_users_to_create_topics|Boolean|*True*, if the bot allows users to create and delete topics in private chats|
+|has_topic_sidebar|Boolean|*True*, if topics in private chats with the bot are shown in a sidebar|
+|can_manage_bots|Boolean|*True*, if other bots can be created to be controlled by the bot|
+|supports_join_request_queries|Boolean|*True*, if the bot supports join request queries and can be assigned to process them|
+
 #### User
 
 This object represents a Telegram user or bot.
@@ -2904,16 +2952,6 @@ This object represents a Telegram user or bot.
 |language_code|String|*Optional*. [IETF language tag](https://en.wikipedia.org/wiki/IETF_language_tag) of the user's language|
 |is_premium|True|*Optional*. *True*, if this user is a Telegram Premium user|
 |added_to_attachment_menu|True|*Optional*. *True*, if this user added the bot to the attachment menu|
-|can_join_groups|Boolean|*Optional*. *True*, if the bot can be invited to groups. Returned only in [getMe](./api/methods/getme.md).|
-|can_read_all_group_messages|Boolean|*Optional*. *True*, if [privacy mode](./features.md#privacy-mode) is disabled for the bot. Returned only in [getMe](./api/methods/getme.md).|
-|supports_guest_queries|Boolean|*Optional*. *True*, if the bot supports guest queries from chats it is not a member of. Returned only in [getMe](./api/methods/getme.md).|
-|supports_inline_queries|Boolean|*Optional*. *True*, if the bot supports inline queries. Returned only in [getMe](./api/methods/getme.md).|
-|can_connect_to_business|Boolean|*Optional*. *True*, if the bot can be connected to a user account to manage it. Returned only in [getMe](./api/methods/getme.md).|
-|has_main_web_app|Boolean|*Optional*. *True*, if the bot has a main Web App. Returned only in [getMe](./api/methods/getme.md).|
-|has_topics_enabled|Boolean|*Optional*. *True*, if the bot has forum topic mode enabled in private chats. Returned only in [getMe](./api/methods/getme.md).|
-|allows_users_to_create_topics|Boolean|*Optional*. *True*, if the bot allows users to create and delete topics in private chats. Returned only in [getMe](./api/methods/getme.md).|
-|can_manage_bots|Boolean|*Optional*. *True*, if other bots can be created to be controlled by the bot. Returned only in [getMe](./api/methods/getme.md).|
-|supports_join_request_queries|Boolean|*Optional*. *True*, if the bot supports join request queries and can be assigned to process them. Returned only in [getMe](./api/methods/getme.md).|
 
 #### Chat
 
@@ -3083,7 +3121,7 @@ This object represents a message.
 |unique_gift|[UniqueGiftInfo](./api/types/uniquegiftinfo.md)|*Optional*. Service message: a unique gift was sent or received|
 |gift_upgrade_sent|[GiftInfo](./api/types/giftinfo.md)|*Optional*. Service message: upgrade of a gift was purchased after the gift was sent|
 |connected_website|String|*Optional*. The domain name of the website on which the user has logged in. [More about Telegram Login »](./widgets/login.md)|
-|write_access_allowed|[WriteAccessAllowed](./api/types/writeaccessallowed.md)|*Optional*. Service message: the user allowed the bot to write messages after adding it to the attachment or side menu, launching a Web App from a link, or accepting an explicit request from a Web App sent by the method [requestWriteAccess](./webapps.md#initializing-mini-apps)|
+|write_access_allowed|[WriteAccessAllowed](./api/types/writeaccessallowed.md)|*Optional*. Service message: the user allowed the bot to write messages after adding it to the attachment or side menu, launching a Web App from a link, or accepting an explicit request from a Web App sent by the method [requestWriteAccess](./webapps.md#initializing-mini-apps), or the user was invited to the private chat with the bot by the owner of the bot|
 |passport_data|[PassportData](./api/types/passportdata.md)|*Optional*. Telegram Passport data|
 |proximity_alert_triggered|[ProximityAlertTriggered](./api/types/proximityalerttriggered.md)|*Optional*. Service message: a user in the chat triggered another user's proximity alert while sharing Live Location|
 |boost_added|[ChatBoostAdded](./api/types/chatboostadded.md)|*Optional*. Service message: user boosted the chat|
@@ -4010,13 +4048,14 @@ This object contains information about a chat that was shared with the bot using
 
 #### WriteAccessAllowed
 
-This object represents a service message about a user allowing a bot to write messages after adding it to the attachment menu, launching a Web App from a link, or accepting an explicit request from a Web App sent by the method [requestWriteAccess](./webapps.md#initializing-mini-apps).
+This object represents a service message about a user allowing a bot to write messages after adding it to the attachment menu, launching a Web App from a link, or accepting an explicit request from a Web App sent by the method [requestWriteAccess](./webapps.md#initializing-mini-apps), or about a user being invited to the private chat with the bot by the owner of the bot.
 
 |Field|Type|Description|
 |-----------|
 |from_request|Boolean|*Optional*. *True*, if the access was granted after the user accepted an explicit request from a Web App sent by the method [requestWriteAccess](./webapps.md#initializing-mini-apps)|
 |web_app_name|String|*Optional*. Name of the Web App, if the access was granted when the Web App was launched from a link|
 |from_attachment_menu|Boolean|*Optional*. *True*, if the access was granted when the bot was added to the attachment or side menu|
+|inviter|[User](./api/types/user.md)|*Optional*. The owner of the bot, if the access was granted when the owner invited the user to the private chat with the bot. Bot owners can invite up to 10 users at once by pressing the link `https://t.me/botinvite/<bot_username>`.|
 
 #### VideoChatScheduled
 
@@ -4295,7 +4334,7 @@ This object represents one button of the reply keyboard. At most one of the fiel
 |style|String|*Optional*. Style of the button. Must be one of "danger" (red), "success" (green) or "primary" (blue). If omitted, then an app-specific style is used.|
 |request_users|[KeyboardButtonRequestUsers](./api/types/keyboardbuttonrequestusers.md)|*Optional*. If specified, pressing the button will open a list of suitable users. Identifiers of selected users will be sent to the bot in a "users_shared" service message. Available in private chats only.|
 |request_chat|[KeyboardButtonRequestChat](./api/types/keyboardbuttonrequestchat.md)|*Optional*. If specified, pressing the button will open a list of suitable chats. Tapping on a chat will send its identifier to the bot in a "chat_shared" service message. Available in private chats only.|
-|request_managed_bot|[KeyboardButtonRequestManagedBot](./api/types/keyboardbuttonrequestmanagedbot.md)|*Optional*. If specified, pressing the button will ask the user to create and share a bot that will be managed by the current bot. Available for bots that enabled management of other bots in the [@BotFather](https://t.me/BotFather) Mini App. Available in private chats only.|
+|request_managed_bot|[KeyboardButtonRequestManagedBot](./api/types/keyboardbuttonrequestmanagedbot.md)|*Optional*. If specified, pressing the button will ask the user to create and share a bot that will be managed by the current bot. Available for bots that enabled management of other bots in the [@BotFather](https://t.me/BotFather) Mini App or using the parameter *can_manage_bots* of the method [setMySettings](./api/methods/setmysettings.md). Available in private chats only.|
 |request_contact|Boolean|*Optional*. If *True*, the user's phone number will be sent as a contact when the button is pressed. Available in private chats only.|
 |request_location|Boolean|*Optional*. If *True*, the user's current location will be sent when the button is pressed. Available in private chats only.|
 |request_poll|[KeyboardButtonPollType](./api/types/keyboardbuttonpolltype.md)|*Optional*. If specified, the user will be asked to create a poll and send it to the bot when the button is pressed. Available in private chats only.|
@@ -4443,14 +4482,14 @@ This object represents a disabled button which does nothing. Currently holds no 
 
 #### CallbackQuery
 
-This object represents an incoming callback query from a callback button in an [inline keyboard](./features.md#inline-keyboards). If the button that originated the query was attached to a message sent by the bot, the field *message* will be present. If the button was attached to a message sent via the bot (in [inline mode](./api.md#inline-mode)), the field *inline_message_id* will be present. Exactly one of the fields *data* or *game_short_name* will be present.
+This object represents an incoming callback query from a callback button in an [inline keyboard](./features.md#inline-keyboards) or in a [rich message](./api/types/richmessage.md). If the button that originated the query belongs to a message sent by the bot, the field *message* will be present, unless the field *inline_message_id* is used instead as specified by the parameter *callback_query_mode* of the method [setMySettings](./api/methods/setmysettings.md). If the button belongs to a message sent via the bot (in [inline mode](./api.md#inline-mode)), the field *inline_message_id* will be present. Exactly one of the fields *data* or *game_short_name* will be present.
 
 |Field|Type|Description|
 |-----------|
 |id|String|Unique identifier for this query|
 |from|[User](./api/types/user.md)|Sender|
 |message|[MaybeInaccessibleMessage](./api/types/maybeinaccessiblemessage.md)|*Optional*. Message sent by the bot with the callback button that originated the query|
-|inline_message_id|String|*Optional*. Identifier of the message sent via the bot in inline mode, that originated the query|
+|inline_message_id|String|*Optional*. Identifier of the message sent via the bot in inline mode, that originated the query. Can also be present for messages sent by the bot, depending on the parameter *callback_query_mode* of the method [setMySettings](./api/methods/setmysettings.md).|
 |chat_instance|String|Global identifier, uniquely corresponding to the chat to which the message with the callback button was sent. Useful for high scores in [games](./api.md#games).|
 |data|String|*Optional*. Data associated with the callback button. Be aware that the message originated the query can contain no callback buttons with this data.|
 |game_short_name|String|*Optional*. Short name of a [Game](./api/types/game.md) to be returned, serves as the unique identifier for the game|
@@ -6017,7 +6056,7 @@ This object represents an incoming inline query. When the user sends an empty qu
 |query|String|Text of the query (up to 256 characters)|
 |offset|String|Offset of the results to be returned, can be controlled by the bot|
 |chat_type|String|*Optional*. Type of the chat from which the inline query was sent. Can be either "sender" for a private chat with the inline query sender, "private", "group", "supergroup", or "channel". The chat type should be always known for requests sent from official clients and most third-party clients, unless the request was sent from a secret chat.|
-|location|[Location](./api/types/location.md)|*Optional*. Sender location, only for bots that request user location|
+|location|[Location](./api/types/location.md)|*Optional*. Sender location, only for bots that enabled user location requests via [@BotFather](https://t.me/botfather) or using the parameter *needs_inline_query_location* of the method [setMySettings](./api/methods/setmysettings.md)|
 
 #### InlineQueryResultsButton
 
@@ -6560,11 +6599,11 @@ Represents a [result](./api/types/inlinequeryresult.md) of an inline query that 
 |-----------|
 |result_id|String|The unique identifier for the result that was chosen|
 |from|[User](./api/types/user.md)|The user that chose the result|
-|location|[Location](./api/types/location.md)|*Optional*. Sender location, only for bots that require user location|
+|location|[Location](./api/types/location.md)|*Optional*. Sender location, only for bots that enabled user location requests via [@BotFather](https://t.me/botfather) or using the parameter *needs_inline_query_location* of the method [setMySettings](./api/methods/setmysettings.md)|
 |inline_message_id|String|*Optional*. Identifier of the sent inline message. Available only if there is an [inline keyboard](./api/types/inlinekeyboardmarkup.md) attached to the message. Will be also received in [callback queries](./api/types/callbackquery.md) and can be used to [edit](./api.md#updating-messages) the message.|
 |query|String|The query that was used to obtain the result|
 
-**Note:** It is necessary to enable [inline feedback](./inline.md#collecting-feedback) via [@BotFather](https://t.me/botfather) in order to receive these objects in updates.
+**Note:** It is necessary to enable [inline feedback](./inline.md#collecting-feedback) via [@BotFather](https://t.me/botfather) or using the parameter *inline_feedback_share_denominator* of the method [setMySettings](./api/methods/setmysettings.md) in order to receive these objects in updates.
 
 #### LabeledPrice
 
@@ -7146,7 +7185,7 @@ A block quotation, corresponding to the HTML tag `<blockquote>` with custom attr
 |Field|Type|Description|
 |-----------|
 |type|String|Type of the block, always "expandable_blockquote"|
-|text|[RichText](./api/types/richtext.md)|Content of the block|
+|blocks|Array of [InputRichBlock](./api/types/inputrichblock.md)|Content of the block|
 |credit|[RichText](./api/types/richtext.md)|*Optional*. Credit of the block|
 
 #### InputRichBlockFooter
@@ -7458,7 +7497,7 @@ A block quotation, corresponding to the HTML tag `<blockquote>` with custom attr
 |Field|Type|Description|
 |-----------|
 |type|String|Type of the block, always "expandable_blockquote"|
-|text|[RichText](./api/types/richtext.md)|Content of the block|
+|blocks|Array of [RichBlock](./api/types/richblock.md)|Content of the block|
 |credit|[RichText](./api/types/richtext.md)|*Optional*. Credit of the block|
 
 #### RichBlockFooter
