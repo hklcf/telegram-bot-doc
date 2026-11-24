@@ -2,7 +2,7 @@
 
 > Part of the [Telegram Bot API](../../api.md). Canonical location: [sendVideo](../../api.md#sendvideo).
 
-Use this method to send video files, Telegram clients support MPEG4 videos (other formats may be sent as [Document](../types/document.md)). On success, the sent [Message](../types/message.md) is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
+Use this method to send video files; Telegram clients support MPEG4 videos (other formats may be sent as [Document](../types/document.md)). On success, the sent [Message](../types/message.md) is returned. Bots can currently send video files of up to 50 MB in size; this limit may be changed in the future.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -15,7 +15,7 @@ Use this method to send video files, Telegram clients support MPEG4 videos (othe
 |duration|Integer|Optional|Duration of sent video in seconds|
 |width|Integer|Optional|Video width|
 |height|Integer|Optional|Video height|
-|thumbnail|[InputFile](../types/inputfile.md) or String|Optional|Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://&lt;file_attach_name&gt;" if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. [More information on Sending Files »](../../api.md#sending-files)|
+|thumbnail|[InputFile](../types/inputfile.md) or String|Optional|Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can only be uploaded as a new file, so you can pass "attach://&lt;file_attach_name&gt;" if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. [More information on Sending Files »](../../api.md#sending-files)|
 |cover|[InputFile](../types/inputfile.md) or String|Optional|Cover for the video in the message. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://&lt;file_attach_name&gt;" to upload a new one using multipart/form-data under &lt;file_attach_name&gt; name. [More information on Sending Files »](../../api.md#sending-files)|
 |start_timestamp|Integer|Optional|Start timestamp for the video in the message|
 |caption|String|Optional|Video caption (may also be used when resending videos by *file_id*), 0-1024 characters after entities parsing|

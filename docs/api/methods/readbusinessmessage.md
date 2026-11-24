@@ -2,7 +2,7 @@
 
 > Part of the [Telegram Bot API](../../api.md). Canonical location: [readBusinessMessage](../../api.md#readbusinessmessage).
 
-Marks incoming message as read on behalf of a business account. Requires the *can_read_messages* business bot right. Returns *True* on success.
+Marks an incoming message as read on behalf of a business account. Requires the *can_read_messages* business bot right. Returns *True* on success.
 
 |Parameter|Type|Required|Description|
 |-----------|

@@ -2,7 +2,7 @@
 
 > Part of the [Telegram Bot API](../../api.md). Canonical location: [KeyboardButtonRequestChat](../../api.md#keyboardbuttonrequestchat).
 
-This object defines the criteria used to request a suitable chat. Information about the selected chat will be shared with the bot when the corresponding button is pressed. The bot will be granted requested rights in the chat if appropriate. [More about requesting chats »](../../features.md#chat-and-user-selection).
+This object defines the criteria used to request a suitable chat. Information about the selected chat will be shared with the bot when the corresponding button is pressed. The bot will be granted the requested rights in the chat if appropriate. [More about requesting chats »](../../features.md#chat-and-user-selection).
 
 |Field|Type|Description|
 |-----------|

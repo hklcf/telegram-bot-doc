@@ -2,7 +2,7 @@
 
 > Part of the [Telegram Bot API](../../api.md). Canonical location: [setBusinessAccountName](../../api.md#setbusinessaccountname).
 
-Changes the first and last name of a managed business account. Requires the *can_change_name* business bot right. Returns *True* on success.
+Changes the first and last name of a managed business account. Requires the *can_edit_name* business bot right. Returns *True* on success.
 
 |Parameter|Type|Required|Description|
 |-----------|

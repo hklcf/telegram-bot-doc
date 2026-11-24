@@ -2,7 +2,7 @@
 
 > Part of the [Telegram Bot API](../../api.md). Canonical location: [editChatSubscriptionInviteLink](../../api.md#editchatsubscriptioninvitelink).
 
-Use this method to edit a subscription invite link created by the bot. The bot must have the *can_invite_users* administrator rights. Returns the edited invite link as a [ChatInviteLink](../types/chatinvitelink.md) object.
+Use this method to edit a subscription invite link created by the bot. The bot must have the *can_invite_users* administrator right. Returns the edited invite link as a [ChatInviteLink](../types/chatinvitelink.md) object.
 
 |Parameter|Type|Required|Description|
 |-----------|

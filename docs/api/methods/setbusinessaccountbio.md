@@ -2,7 +2,7 @@
 
 > Part of the [Telegram Bot API](../../api.md). Canonical location: [setBusinessAccountBio](../../api.md#setbusinessaccountbio).
 
-Changes the bio of a managed business account. Requires the *can_change_bio* business bot right. Returns *True* on success.
+Changes the bio of a managed business account. Requires the *can_edit_bio* business bot right. Returns *True* on success.
 
 |Parameter|Type|Required|Description|
 |-----------|

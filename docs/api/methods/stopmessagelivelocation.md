@@ -2,7 +2,7 @@
 
 > Part of the [Telegram Bot API](../../api.md). Canonical location: [stopMessageLiveLocation](../../api.md#stopmessagelivelocation).
 
-Use this method to stop updating a live location message before *live_period* expires. On success, if the message is not an inline message, the edited [Message](../types/message.md) is returned, otherwise *True* is returned.
+Use this method to stop updating a live location message before *live_period* expires. On success, if the message is not an inline message, the edited [Message](../types/message.md) is returned; otherwise, *True* is returned.
 
 |Parameter|Type|Required|Description|
 |-----------|

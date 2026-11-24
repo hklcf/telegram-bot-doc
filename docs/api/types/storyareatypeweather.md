@@ -7,6 +7,6 @@ Describes a story area containing weather information. Currently, a story can ha
 |Field|Type|Description|
 |-----------|
 |type|String|Type of the area, always "weather"|
-|temperature|Float|Temperature, in degree Celsius|
+|temperature|Float|Temperature, in degrees Celsius|
 |emoji|String|Emoji representing the weather|
 |background_color|Integer|A color of the area background in the ARGB format|

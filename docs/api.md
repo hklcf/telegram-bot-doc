@@ -65,14 +65,14 @@ Types of this section are listed at [Bot API types](./api/types.md#getting-updat
 - [getUpdates](./api/methods/getupdates.md): receive incoming updates using long polling (wiki).
 - [setWebhook](./api/methods/setwebhook.md): specify a URL and receive incoming updates via an outgoing webhook.
 - [deleteWebhook](./api/methods/deletewebhook.md): remove webhook integration if you decide to switch back to getUpdates.
-- [getWebhookInfo](./api/methods/getwebhookinfo.md): get current webhook status.
+- [getWebhookInfo](./api/methods/getwebhookinfo.md): get the current webhook status.
 
 ### Available types
-All types used in the Bot API responses are represented as JSON-objects.
+All types used in the Bot API responses are represented as JSON objects.
 
 It is safe to use 32-bit signed integers for storing all **Integer** fields unless otherwise noted.
 
->**Optional** fields may be not returned when irrelevant.
+>**Optional** fields may not be returned when irrelevant.
 
 Types of this section are listed at [Bot API types](./api/types.md#available-types).
 
@@ -108,7 +108,7 @@ The following algorithm is used to determine the list of commands for a particul
 
 There are three ways to send files (photos, stickers, audio, media, etc.):
 
-1. If the file is already stored somewhere on the Telegram servers, you don't need to reupload it: each file object has a **file_id** field, simply pass this **file_id** as a parameter instead of uploading. There are **no limits** for files sent this way.
+1. If the file is already stored somewhere on the Telegram servers, you don't need to reupload it: each file object has a **file_id** field; simply pass this **file_id** as a parameter instead of uploading. There are **no limits** for files sent this way.
 2. Provide Telegram with an HTTP URL for the file to be sent. Telegram will download and send the file. 5 MB max size for photos and 20 MB max for other types of content.
 3. Post the file using multipart/form-data in the usual way that files are uploaded via the browser. 10 MB max size for photos, 50 MB for other files.
 
@@ -178,7 +178,7 @@ Objects and methods used in the inline mode are described in the [Inline mode se
 ### Available methods
 
 >All methods in the Bot API are case-insensitive. We support **GET** and **POST** HTTP methods. Use either [URL query string](https://en.wikipedia.org/wiki/Query_string) or *application/json* or *application/x-www-form-urlencoded* or *multipart/form-data* for passing parameters in Bot API requests.
-On successful call, a JSON-object containing the result will be returned.
+On a successful call, a JSON object containing the result will be returned.
 
 - [getMe](./api/methods/getme.md): A simple method for testing your bot's authentication token.
 - [logOut](./api/methods/logout.md): log out from the cloud Bot API server before launching the bot locally.
@@ -191,13 +191,13 @@ Message text formatting is documented at [Formatting options](./api/formatting.m
 
 #### Ephemeral Messages and Commands
 
-Ephemeral interactions allow a bot and an individual member of a group or supergroup chat to communicate privately on the public timeline without cluttering the chat for other members. They may disappear automatically after some time, or if the app is restarted.
+Ephemeral interactions allow a bot and an individual member of a chat to communicate privately on the public timeline without cluttering the chat for other members. They may disappear automatically after some time, or if the app is restarted.
 
 **Ephemeral Commands (User to Bot)**
 Bots can declare ephemeral commands by setting the *is_ephemeral* field to *True* in the [BotCommand](./api/types/botcommand.md) class. A user can then send an ephemeral command that is received by the target bot but remains invisible to all members of the chat, including both users and other bots.
 
 **Ephemeral Messages**
-Bots can send an ephemeral message response back to a specific user designated by the *receiver_user_id* parameter. Other members of the group or supergroup chat will not see the message.
+Bots can send an ephemeral message response back to a specific user designated by the field *receiver_user_id* in the parameter *ephemeral_message_parameters*. Other members of the chat will not see the message. If *callback_query_id* is specified and *receiver_user_id* is omitted, then the message is sent as an ephemeral reply to the callback query and is shown only to the user who pressed the button. Such replies can be sent in any chat except channel direct messages chats.
 
 > It is **not guaranteed** that the ephemeral message will be received, especially if the user is offline.
 
@@ -205,10 +205,10 @@ Bots can send an ephemeral message response back to a specific user designated b
 
 * Any bot can send an ephemeral message to a user within **15 seconds** of the incoming eligible action. The message will be sent to the exact client application that triggered the action. For this the bot must provide either:
 
-  * The *callback_query_id* from a received callback query, or
+  * The *ephemeral_message_parameters.callback_query_id* from a received callback query, or
   * The *reply_parameters.ephemeral_message_id* from an incoming ephemeral message.
 
-* If the bot is a chat administrator, it can send an ephemeral message to any non-bot member of the chat at any time without needing to specify a *callback_query_id* or *reply_parameters.ephemeral_message_id*. In this case, the message may be delivered across multiple active client applications of the user, but is regardless not guaranteed to be delivered to any of them.
+* If the bot is a chat administrator, it can send an ephemeral message to any non-bot member of the chat at any time without needing to specify *ephemeral_message_parameters.callback_query_id* or *reply_parameters.ephemeral_message_id*. In this case, the message may be delivered across multiple active client applications of the user, but is regardless not guaranteed to be delivered to any of them.
 
 #### Paid Broadcasts
 
@@ -226,15 +226,15 @@ Each message broadcasted over the free amount of 30 messages per second incurs a
 - [sendLivePhoto](./api/methods/sendlivephoto.md): send live photos.
 - [sendAudio](./api/methods/sendaudio.md): send audio files, if you want Telegram clients to display them in the music player.
 - [sendDocument](./api/methods/senddocument.md): send general files.
-- [sendVideo](./api/methods/sendvideo.md): send video files, Telegram clients support MPEG4 videos (other formats may be sent as Document).
+- [sendVideo](./api/methods/sendvideo.md): send video files; Telegram clients support MPEG4 videos (other formats may be sent as Document).
 - [sendAnimation](./api/methods/sendanimation.md): send animation files (GIF or H.264/MPEG-4 AVC video without sound).
 - [sendVoice](./api/methods/sendvoice.md): send audio files, if you want Telegram clients to display the file as a playable voice message.
-- [sendVideoNote](./api/methods/sendvideonote.md): send a rounded square MPEG4 video of up to 1 minute long.
+- [sendVideoNote](./api/methods/sendvideonote.md): send a rounded square MPEG4 video up to 1 minute long.
 - [sendWidget](./api/methods/sendwidget.md): send a message with an HTML widget.
-- [sendSharedWidget](./api/methods/sendsharedwidget.md): send again a shared widget created by the bot.
+- [sendSharedWidget](./api/methods/sendsharedwidget.md): resend a shared widget created by the bot.
 - [sendPaidMedia](./api/methods/sendpaidmedia.md): send paid media.
 - [sendMediaGroup](./api/methods/sendmediagroup.md): send a group of photos, live photos, videos, documents or audios as an album.
-- [sendLocation](./api/methods/sendlocation.md): send point on the map.
+- [sendLocation](./api/methods/sendlocation.md): send a point on the map.
 - [sendVenue](./api/methods/sendvenue.md): send information about a venue.
 - [sendContact](./api/methods/sendcontact.md): send phone contacts.
 - [sendPoll](./api/methods/sendpoll.md): send a native poll.
@@ -284,7 +284,7 @@ Each message broadcasted over the free amount of 30 messages per second incurs a
 - [deleteChatStickerSet](./api/methods/deletechatstickerset.md): delete a group sticker set from a supergroup.
 - [getForumTopicIconStickers](./api/methods/getforumtopiciconstickers.md): get custom emoji stickers, which can be used as a forum topic icon by any user.
 - [createForumTopic](./api/methods/createforumtopic.md): create a topic in a forum supergroup chat or a private chat with a user.
-- [editForumTopic](./api/methods/editforumtopic.md): edit name and icon of a topic in a forum supergroup chat or a private chat with a user.
+- [editForumTopic](./api/methods/editforumtopic.md): edit the name and icon of a topic in a forum supergroup chat or a private chat with a user.
 - [closeForumTopic](./api/methods/closeforumtopic.md): close an open topic in a forum supergroup chat.
 - [reopenForumTopic](./api/methods/reopenforumtopic.md): reopen a closed topic in a forum supergroup chat.
 - [deleteForumTopic](./api/methods/deleteforumtopic.md): delete a forum topic along with all its messages in a forum supergroup chat or a private chat with a user.
@@ -304,7 +304,7 @@ Each message broadcasted over the free amount of 30 messages per second incurs a
 - [replaceManagedBotToken](./api/methods/replacemanagedbottoken.md): revoke the current token of a managed bot and generate a new one.
 - [getManagedBotAccessSettings](./api/methods/getmanagedbotaccesssettings.md): get the access settings of a managed bot.
 - [setManagedBotAccessSettings](./api/methods/setmanagedbotaccesssettings.md): change the access settings of a managed bot.
-- [setMySettings](./api/methods/setmysettings.md): change settings of the bot.
+- [setMySettings](./api/methods/setmysettings.md): change the settings of the bot.
 - [setMyCommands](./api/methods/setmycommands.md): change the list of the bot's commands.
 - [deleteMyCommands](./api/methods/deletemycommands.md): delete the list of the bot's commands for the given scope and user language.
 - [getMyCommands](./api/methods/getmycommands.md): get the current list of the bot's commands for the given scope and user language.
@@ -327,8 +327,8 @@ Each message broadcasted over the free amount of 30 messages per second incurs a
 - [verifyChat](./api/methods/verifychat.md): Verifies a chat on behalf of the organization which is represented by the bot.
 - [removeUserVerification](./api/methods/removeuserverification.md): Removes verification from a user who is currently verified on behalf of the organization represented by the bot.
 - [removeChatVerification](./api/methods/removechatverification.md): Removes verification from a chat that is currently verified on behalf of the organization represented by the bot.
-- [readBusinessMessage](./api/methods/readbusinessmessage.md): Marks incoming message as read on behalf of a business account.
-- [deleteBusinessMessages](./api/methods/deletebusinessmessages.md): Delete messages on behalf of a business account.
+- [readBusinessMessage](./api/methods/readbusinessmessage.md): Marks an incoming message as read on behalf of a business account.
+- [deleteBusinessMessages](./api/methods/deletebusinessmessages.md): Deletes messages on behalf of a business account.
 - [setBusinessAccountName](./api/methods/setbusinessaccountname.md): Changes the first and last name of a managed business account.
 - [setBusinessAccountUsername](./api/methods/setbusinessaccountusername.md): Changes the username of a managed business account.
 - [setBusinessAccountBio](./api/methods/setbusinessaccountbio.md): Changes the bio of a managed business account.
@@ -361,11 +361,11 @@ Methods and objects used in the inline mode are described in the [Inline mode se
 
 The following methods allow you to change an existing message in the message history instead of sending a new one with a result of an action. This is most useful for messages with [inline keyboards](./features.md#inline-keyboards) using callback queries, but can also help reduce clutter in conversations with regular chat bots.
 
-Please note, that it is currently only possible to edit messages without *reply_markup* or with [inline keyboards](./features.md#inline-keyboards).
+Please note that it is currently only possible to edit messages without *reply_markup* or with [inline keyboards](./features.md#inline-keyboards).
 
 - [editMessageText](./api/methods/editmessagetext.md): edit text, rich and game messages.
 - [editMessageCaption](./api/methods/editmessagecaption.md): edit captions of messages.
-- [editMessageMedia](./api/methods/editmessagemedia.md): edit animation, audio, document, live photo, photo, or video messages, or to replace a text or a rich message with a media.
+- [editMessageMedia](./api/methods/editmessagemedia.md): edit animation, audio, document, live photo, photo, or video messages, or to replace a text or a rich message with media.
 - [editMessageLiveLocation](./api/methods/editmessagelivelocation.md): edit live location messages.
 - [stopMessageLiveLocation](./api/methods/stopmessagelivelocation.md): stop updating a live location message before *live_period* expires.
 - [editMessageChecklist](./api/methods/editmessagechecklist.md): edit a checklist on behalf of a connected business account.
@@ -444,7 +444,7 @@ Types of this section are listed at [Bot API types](./api/types.md#payments).
 
 Types of this section are listed at [Bot API types](./api/types.md#telegram-passport).
 
-- [setPassportDataErrors](./api/methods/setpassportdataerrors.md): Informs a user that some of the Telegram Passport elements they provided contains errors.
+- [setPassportDataErrors](./api/methods/setpassportdataerrors.md): Informs a user that some of the Telegram Passport elements they provided contain errors.
 
 ### Games
 
@@ -455,7 +455,7 @@ Your bot can offer users **HTML5 games** to play solo or to compete against each
 * If you send the game message without any buttons, it will automatically have a 'Play *GameName*' button. When this button is pressed, your bot gets a [CallbackQuery](./api/types/callbackquery.md) with the *game_short_name* of the requested game. You provide the correct URL for this particular user and the app opens the game in the in-app browser.
 * You can manually add multiple buttons to your game message. Please note that the first button in the first row **must always** launch the game, using the field *callback_game* in [InlineKeyboardButton](./api/types/inlinekeyboardbutton.md). You can add extra buttons according to taste: e.g., for a description of the rules, or to open the game's official community.
 * To make your game more attractive, you can upload a GIF animation that demonstrates the game to the users via [BotFather](https://t.me/botfather) (see [Lumberjack](https://t.me/gamebot?game=lumberjack) for example).
-* A game message will also display high scores for the current chat. Use [setGameScore](./api/methods/setgamescore.md) to post high scores to the chat with the game, add the *disable_edit_message* parameter to disable automatic update of the message with the current scoreboard.
+* A game message will also display high scores for the current chat. Use [setGameScore](./api/methods/setgamescore.md) to post high scores to the chat with the game; add the *disable_edit_message* parameter to disable automatic update of the message with the current scoreboard.
 * Use [getGameHighScores](./api/methods/getgamehighscores.md) to get data for in-game high score tables.
 * You can also add an extra [sharing button](./games.md#sharing-your-game-to-telegram-chats) for users to share their best score to different chats.
 * For examples of what can be done using this new stuff, check the [@gamebot](https://t.me/gamebot) and [@gamee](https://t.me/gamee) bots.
@@ -502,7 +502,7 @@ Use this method to receive incoming updates using long polling ([wiki](https://e
 |-----------|
 |offset|Integer|Optional|Identifier of the first update to be returned. Must be greater by one than the highest among the identifiers of previously received updates. By default, updates starting with the earliest unconfirmed update are returned. An update is considered confirmed as soon as [getUpdates](./api/methods/getupdates.md) is called with an *offset* higher than its *update_id*. The negative offset can be specified to retrieve updates starting from *-offset* update from the end of the updates queue. All previous updates will be forgotten.|
 |limit|Integer|Optional|Limits the number of updates to be retrieved. Values between 1-100 are accepted. Defaults to 100.|
-|timeout|Integer|Optional|Timeout in seconds for long polling. Defaults to 0, i.e. usual short polling. Should be positive, short polling should be used for testing purposes only.|
+|timeout|Integer|Optional|Timeout in seconds for long polling. Defaults to 0, i.e. usual short polling. Should be positive; short polling should be used for testing purposes only.|
 |allowed_updates|Array of String|Optional|A JSON-serialized list of the update types you want your bot to receive. For example, specify `["message", "edited_channel_post", "callback_query"]` to only receive updates of these types. See [Update](./api/types/update.md) for a complete list of available update types. Specify an empty list to receive all update types except *chat_member*, *message_reaction*, and *message_reaction_count* (default). If not specified, the previous setting will be used. \
 \
 Please note that this parameter doesn't affect updates created before the call to getUpdates, so unwanted updates may be received for a short period of time.|
@@ -513,7 +513,7 @@ Please note that this parameter doesn't affect updates created before the call t
 
 #### setWebhook
 
-Use this method to specify a URL and receive incoming updates via an outgoing webhook. Whenever there is an update for the bot, we will send an HTTPS POST request to the specified URL, containing a JSON-serialized [Update](./api/types/update.md). In case of an unsuccessful request (a request with response [HTTP status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) different from `2XY`), we will repeat the request and give up after a reasonable amount of attempts. Returns *True* on success.
+Use this method to specify a URL and receive incoming updates via an outgoing webhook. Whenever there is an update for the bot, we will send an HTTPS POST request to the specified URL, containing a JSON-serialized [Update](./api/types/update.md). In case of an unsuccessful request (a request with response [HTTP status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) different from `2XY`), we will repeat the request and give up after a reasonable number of attempts. Returns *True* on success.
 
 If you'd like to make sure that the webhook was set by you, you can specify secret data in the parameter *secret_token*. If specified, the request will contain a header "X-Telegram-Bot-Api-Secret-Token" with the secret token as content.
 
@@ -524,13 +524,13 @@ If you'd like to make sure that the webhook was set by you, you can specify secr
 |ip_address|String|Optional|The fixed IP address which will be used to send webhook requests instead of the IP address resolved through DNS|
 |max_connections|Integer|Optional|The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery, 1-100. Defaults to *40*. Use lower values to limit the load on your bot's server, and higher values to increase your bot's throughput.|
 |allowed_updates|Array of String|Optional|A JSON-serialized list of the update types you want your bot to receive. For example, specify `["message", "edited_channel_post", "callback_query"]` to only receive updates of these types. See [Update](./api/types/update.md) for a complete list of available update types. Specify an empty list to receive all update types except *chat_member*, *message_reaction*, and *message_reaction_count* (default). If not specified, the previous setting will be used. \
-Please note that this parameter doesn't affect updates created before the call to the setWebhook, so unwanted updates may be received for a short period of time.|
+Please note that this parameter doesn't affect updates created before the call to setWebhook, so unwanted updates may be received for a short period of time.|
 |drop_pending_updates|Boolean|Optional|Pass *True* to drop all pending updates|
 |secret_token|String|Optional|A secret token to be sent in a header "X-Telegram-Bot-Api-Secret-Token" in every webhook request, 1-256 characters. Only characters `A-Z`, `a-z`, `0-9`, `_` and `-` are allowed. The header is useful to ensure that the request comes from a webhook set by you.|
 
 >**Notes**
 **1.** You will not be able to receive updates using [getUpdates](./api/methods/getupdates.md) for as long as an outgoing webhook is set up.
-**2.** To use a self-signed certificate, you need to upload your [public key certificate](./self-signed.md) using *certificate* parameter. Please upload as InputFile, sending a String will not work.
+**2.** To use a self-signed certificate, you need to upload your [public key certificate](./self-signed.md) using the *certificate* parameter. Please upload it as InputFile; sending a String will not work.
 **3.** Ports currently supported *for webhooks*: **443, 80, 88, 8443**.
 
 >If you're having any trouble setting up webhooks, please check out this [amazing guide to webhooks](./webhooks.md).
@@ -545,7 +545,7 @@ Use this method to remove webhook integration if you decide to switch back to [g
 
 #### getWebhookInfo
 
-Use this method to get current webhook status. Requires no parameters. On success, returns a [WebhookInfo](./api/types/webhookinfo.md) object. If the bot is using [getUpdates](./api/methods/getupdates.md), will return an object with the *url* field empty.
+Use this method to get the current webhook status. Requires no parameters. On success, returns a [WebhookInfo](./api/types/webhookinfo.md) object. If the bot is using [getUpdates](./api/methods/getupdates.md), it will return an object with the *url* field empty.
 
 #### sendPhoto
 
@@ -574,7 +574,7 @@ Use this method to send photos. On success, the sent [Message](./api/types/messa
 
 #### sendDocument
 
-Use this method to send general files. On success, the sent [Message](./api/types/message.md) is returned. Bots can currently send files of any type of up to 50 MB in size, this limit may be changed in the future.
+Use this method to send general files. On success, the sent [Message](./api/types/message.md) is returned. Bots can currently send files of any type of up to 50 MB in size; this limit may be changed in the future.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -584,7 +584,7 @@ Use this method to send general files. On success, the sent [Message](./api/type
 |direct_messages_topic_id|Integer|Optional|Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat|
 |ephemeral_message_parameters|[EphemeralMessageParameters](./api/types/ephemeralmessageparameters.md)|Optional|A JSON-serialized object containing the parameters of the ephemeral message to send|
 |document|[InputFile](./api/types/inputfile.md) or String|Yes|File to send. Pass a file_id as String to send a file that exists on the Telegram servers (recommended), pass an HTTP URL as a String for Telegram to get a file from the Internet, or upload a new one using multipart/form-data. [More information on Sending Files »](./api.md#sending-files)|
-|thumbnail|[InputFile](./api/types/inputfile.md) or String|Optional|Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://&lt;file_attach_name&gt;" if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. [More information on Sending Files »](./api.md#sending-files)|
+|thumbnail|[InputFile](./api/types/inputfile.md) or String|Optional|Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can only be uploaded as a new file, so you can pass "attach://&lt;file_attach_name&gt;" if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. [More information on Sending Files »](./api.md#sending-files)|
 |caption|String|Optional|Document caption (may also be used when resending documents by *file_id*), 0-1024 characters after entities parsing|
 |parse_mode|String|Optional|Mode for parsing entities in the document caption. See [formatting options](./api/formatting.md) for more details.|
 |caption_entities|Array of [MessageEntity](./api/types/messageentity.md)|Optional|A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse_mode*|
@@ -599,7 +599,7 @@ Use this method to send general files. On success, the sent [Message](./api/type
 
 #### sendAudio
 
-Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent [Message](./api/types/message.md) is returned. Bots can currently send audio files of up to 50 MB in size, this limit may be changed in the future.
+Use this method to send audio files, if you want Telegram clients to display them in the music player. Your audio must be in the .MP3 or .M4A format. On success, the sent [Message](./api/types/message.md) is returned. Bots can currently send audio files of up to 50 MB in size; this limit may be changed in the future.
 
 For sending voice messages, use the [sendVoice](./api/methods/sendvoice.md) method instead.
 
@@ -617,7 +617,7 @@ For sending voice messages, use the [sendVoice](./api/methods/sendvoice.md) meth
 |duration|Integer|Optional|Duration of the audio in seconds|
 |performer|String|Optional|Performer|
 |title|String|Optional|Track name|
-|thumbnail|[InputFile](./api/types/inputfile.md) or String|Optional|Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://&lt;file_attach_name&gt;" if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. [More information on Sending Files »](./api.md#sending-files)|
+|thumbnail|[InputFile](./api/types/inputfile.md) or String|Optional|Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can only be uploaded as a new file, so you can pass "attach://&lt;file_attach_name&gt;" if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. [More information on Sending Files »](./api.md#sending-files)|
 |disable_notification|Boolean|Optional|Sends the message [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound.|
 |protect_content|Boolean|Optional|Protects the contents of the sent message from forwarding and saving|
 |allow_paid_broadcast|Boolean|Optional|Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](./faq.md#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.|
@@ -628,7 +628,7 @@ For sending voice messages, use the [sendVoice](./api/methods/sendvoice.md) meth
 
 #### sendVoice
 
-Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format (other formats may be sent as [Audio](./api/types/audio.md) or [Document](./api/types/document.md)). On success, the sent [Message](./api/types/message.md) is returned. Bots can currently send voice messages of up to 50 MB in size, this limit may be changed in the future.
+Use this method to send audio files, if you want Telegram clients to display the file as a playable voice message. For this to work, your audio must be in an .OGG file encoded with OPUS, or in .MP3 format, or in .M4A format (other formats may be sent as [Audio](./api/types/audio.md) or [Document](./api/types/document.md)). On success, the sent [Message](./api/types/message.md) is returned. Bots can currently send voice messages of up to 50 MB in size; this limit may be changed in the future.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -652,11 +652,11 @@ Use this method to send audio files, if you want Telegram clients to display the
 
 #### getMe
 
-A simple method for testing your bot's authentication token. Requires no parameters. Returns information about the bot in form of a [BotFullInfo](./api/types/botfullinfo.md) object.
+A simple method for testing your bot's authentication token. Requires no parameters. Returns information about the bot in the form of a [BotFullInfo](./api/types/botfullinfo.md) object.
 
 #### logOut
 
-Use this method to log out from the cloud Bot API server before launching the bot locally. You **must** log out the bot before running it locally, otherwise there is no guarantee that the bot will receive updates. After a successful call, you can immediately log in on a local server, but will not be able to log in back to the cloud Bot API server for 10 minutes. Returns *True* on success. Requires no parameters.
+Use this method to log out from the cloud Bot API server before launching the bot locally. You **must** log out the bot before running it locally; otherwise, there is no guarantee that the bot will receive updates. After a successful call, you can immediately log in on a local server, but will not be able to log back in to the cloud Bot API server for 10 minutes. Returns *True* on success. Requires no parameters.
 
 #### close
 
@@ -767,12 +767,12 @@ Use this method to send live photos. On success, the sent [Message](./api/types/
 |direct_messages_topic_id|Integer|Optional|Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat|
 |ephemeral_message_parameters|[EphemeralMessageParameters](./api/types/ephemeralmessageparameters.md)|Optional|A JSON-serialized object containing the parameters of the ephemeral message to send|
 |live_photo|[InputFile](./api/types/inputfile.md) or String|Yes|Live photo video to send. The video must be no longer than 10 seconds and must not exceed 10 MB in size. Pass a file_id as String to send a video that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. [More information on Sending Files »](./api.md#sending-files). Sending live photos by a URL is currently unsupported.|
-|photo|[InputFile](./api/types/inputfile.md) or String|Yes|The static photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. [More information on Sending Files »](./api.md#sending-files). Sending live photos by a URL is currently unsupported.|
-|caption|String|Optional|Video caption (may also be used when resending videos by *file_id*), 0-1024 characters after entities parsing|
-|parse_mode|String|Optional|Mode for parsing entities in the video caption. See [formatting options](./api/formatting.md) for more details.|
+|photo|[InputFile](./api/types/inputfile.md) or String|Yes|The static photo to send. Pass a file_id as String to send a photo that exists on the Telegram servers (recommended) or upload a new photo using multipart/form-data. [More information on Sending Files »](./api.md#sending-files). Sending live photos by a URL is currently unsupported.|
+|caption|String|Optional|Live photo caption (may also be used when resending live photos by *file_id*), 0-1024 characters after entities parsing|
+|parse_mode|String|Optional|Mode for parsing entities in the live photo caption. See [formatting options](./api/formatting.md) for more details.|
 |caption_entities|Array of [MessageEntity](./api/types/messageentity.md)|Optional|A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse_mode*|
 |show_caption_above_media|Boolean|Optional|Pass *True* if the caption must be shown above the message media|
-|has_spoiler|Boolean|Optional|Pass *True* if the video needs to be covered with a spoiler animation|
+|has_spoiler|Boolean|Optional|Pass *True* if the live photo needs to be covered with a spoiler animation|
 |disable_notification|Boolean|Optional|Sends the message [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound.|
 |protect_content|Boolean|Optional|Protects the contents of the sent message from forwarding and saving|
 |allow_paid_broadcast|Boolean|Optional|Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](./faq.md#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.|
@@ -783,7 +783,7 @@ Use this method to send live photos. On success, the sent [Message](./api/types/
 
 #### sendVideo
 
-Use this method to send video files, Telegram clients support MPEG4 videos (other formats may be sent as [Document](./api/types/document.md)). On success, the sent [Message](./api/types/message.md) is returned. Bots can currently send video files of up to 50 MB in size, this limit may be changed in the future.
+Use this method to send video files; Telegram clients support MPEG4 videos (other formats may be sent as [Document](./api/types/document.md)). On success, the sent [Message](./api/types/message.md) is returned. Bots can currently send video files of up to 50 MB in size; this limit may be changed in the future.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -796,7 +796,7 @@ Use this method to send video files, Telegram clients support MPEG4 videos (othe
 |duration|Integer|Optional|Duration of sent video in seconds|
 |width|Integer|Optional|Video width|
 |height|Integer|Optional|Video height|
-|thumbnail|[InputFile](./api/types/inputfile.md) or String|Optional|Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://&lt;file_attach_name&gt;" if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. [More information on Sending Files »](./api.md#sending-files)|
+|thumbnail|[InputFile](./api/types/inputfile.md) or String|Optional|Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can only be uploaded as a new file, so you can pass "attach://&lt;file_attach_name&gt;" if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. [More information on Sending Files »](./api.md#sending-files)|
 |cover|[InputFile](./api/types/inputfile.md) or String|Optional|Cover for the video in the message. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://&lt;file_attach_name&gt;" to upload a new one using multipart/form-data under &lt;file_attach_name&gt; name. [More information on Sending Files »](./api.md#sending-files)|
 |start_timestamp|Integer|Optional|Start timestamp for the video in the message|
 |caption|String|Optional|Video caption (may also be used when resending videos by *file_id*), 0-1024 characters after entities parsing|
@@ -815,7 +815,7 @@ Use this method to send video files, Telegram clients support MPEG4 videos (othe
 
 #### sendAnimation
 
-Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound). On success, the sent [Message](./api/types/message.md) is returned. Bots can currently send animation files of up to 50 MB in size, this limit may be changed in the future.
+Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without sound). On success, the sent [Message](./api/types/message.md) is returned. Bots can currently send animation files of up to 50 MB in size; this limit may be changed in the future.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -828,8 +828,8 @@ Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without s
 |duration|Integer|Optional|Duration of sent animation in seconds|
 |width|Integer|Optional|Animation width|
 |height|Integer|Optional|Animation height|
-|thumbnail|[InputFile](./api/types/inputfile.md) or String|Optional|Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://&lt;file_attach_name&gt;" if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. [More information on Sending Files »](./api.md#sending-files)|
-|caption|String|Optional|Animation caption (may also be used when resending animation by *file_id*), 0-1024 characters after entities parsing|
+|thumbnail|[InputFile](./api/types/inputfile.md) or String|Optional|Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can only be uploaded as a new file, so you can pass "attach://&lt;file_attach_name&gt;" if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. [More information on Sending Files »](./api.md#sending-files)|
+|caption|String|Optional|Animation caption (may also be used when resending animations by *file_id*), 0-1024 characters after entities parsing|
 |parse_mode|String|Optional|Mode for parsing entities in the animation caption. See [formatting options](./api/formatting.md) for more details.|
 |caption_entities|Array of [MessageEntity](./api/types/messageentity.md)|Optional|A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse_mode*|
 |show_caption_above_media|Boolean|Optional|Pass *True* if the caption must be shown above the message media|
@@ -844,7 +844,7 @@ Use this method to send animation files (GIF or H.264/MPEG-4 AVC video without s
 
 #### sendVideoNote
 
-Use this method to send a rounded square MPEG4 video of up to 1 minute long. On success, the sent [Message](./api/types/message.md) is returned.
+Use this method to send a rounded square MPEG4 video up to 1 minute long. On success, the sent [Message](./api/types/message.md) is returned.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -856,7 +856,7 @@ Use this method to send a rounded square MPEG4 video of up to 1 minute long. On 
 |video_note|[InputFile](./api/types/inputfile.md) or String|Yes|Video note to send. Pass a file_id as String to send a video note that exists on the Telegram servers (recommended) or upload a new video using multipart/form-data. [More information on Sending Files »](./api.md#sending-files). Sending video notes by a URL is currently unsupported.|
 |duration|Integer|Optional|Duration of sent video in seconds|
 |length|Integer|Optional|Video width and height, i.e. diameter of the video message|
-|thumbnail|[InputFile](./api/types/inputfile.md) or String|Optional|Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://&lt;file_attach_name&gt;" if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. [More information on Sending Files »](./api.md#sending-files)|
+|thumbnail|[InputFile](./api/types/inputfile.md) or String|Optional|Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can only be uploaded as a new file, so you can pass "attach://&lt;file_attach_name&gt;" if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. [More information on Sending Files »](./api.md#sending-files)|
 |disable_notification|Boolean|Optional|Sends the message [silently](https://telegram.org/blog/channels-2-0#silent-messages). Users will receive a notification with no sound.|
 |protect_content|Boolean|Optional|Protects the contents of the sent message from forwarding and saving|
 |allow_paid_broadcast|Boolean|Optional|Pass *True* to allow up to 1000 messages per second, ignoring [broadcasting limits](./faq.md#how-can-i-message-all-of-my-bot-39s-subscribers-at-once) for a fee of 0.1 Telegram Stars per message. The relevant Stars will be withdrawn from the bot's balance.|
@@ -893,7 +893,7 @@ Use this method to send a message with an [HTML widget](./widgets.md). Currently
 
 #### sendSharedWidget
 
-Use this method to send again a shared widget created by the bot. Currently, in the production environment, widgets can be sent only to private chats, and sent widgets automatically have protected content and therefore can't be forwarded. On success, the sent [Message](./api/types/message.md) is returned.
+Use this method to resend a shared widget created by the bot. Currently, in the production environment, widgets can be sent only to private chats, and sent widgets automatically have protected content and therefore can't be forwarded. On success, the sent [Message](./api/types/message.md) is returned.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -924,7 +924,7 @@ Use this method to send paid media. On success, the sent [Message](./api/types/m
 |direct_messages_topic_id|Integer|Optional|Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat|
 |star_count|Integer|Yes|The number of Telegram Stars that must be paid to buy access to the media; 1-25000|
 |media|Array of [InputPaidMedia](./api/types/inputpaidmedia.md)|Yes|A JSON-serialized Array describing the media to be sent; up to 10 items|
-|payload|String|Optional|Bot-defined paid media payload, 0-128 bytes. This will not be displayed to the user, use it for your internal processes.|
+|payload|String|Optional|Bot-defined paid media payload, 0-128 bytes. This will not be displayed to the user; use it for your internal processes.|
 |caption|String|Optional|Media caption, 0-1024 characters after entities parsing|
 |parse_mode|String|Optional|Mode for parsing entities in the media caption. See [formatting options](./api/formatting.md) for more details.|
 |caption_entities|Array of [MessageEntity](./api/types/messageentity.md)|Optional|A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse_mode*|
@@ -938,7 +938,7 @@ Use this method to send paid media. On success, the sent [Message](./api/types/m
 
 #### sendMediaGroup
 
-Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can be only grouped in an album with messages of the same type. On success, an Array of [Message](./api/types/message.md) objects that were sent is returned.
+Use this method to send a group of photos, live photos, videos, documents or audios as an album. Documents and audio files can only be grouped in an album with messages of the same type. On success, an Array of [Message](./api/types/message.md) objects that were sent is returned.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -955,7 +955,7 @@ Use this method to send a group of photos, live photos, videos, documents or aud
 
 #### sendLocation
 
-Use this method to send point on the map. On success, the sent [Message](./api/types/message.md) is returned.
+Use this method to send a point on the map. On success, the sent [Message](./api/types/message.md) is returned.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -1044,7 +1044,7 @@ Use this method to send a native poll. On success, the sent [Message](./api/type
 |is_anonymous|Boolean|Optional|*True*, if the poll needs to be anonymous, defaults to *True*|
 |type|String|Optional|Poll type, "quiz" or "regular", defaults to "regular"|
 |allows_multiple_answers|Boolean|Optional|Pass *True* if the poll allows multiple answers, defaults to *False*|
-|allows_revoting|Boolean|Optional|Pass *True* if the poll allows to change chosen answer options, defaults to *False* for quizzes and to *True* for regular polls|
+|allows_revoting|Boolean|Optional|Pass *True* if the poll allows changing the chosen answer options, defaults to *False* for quizzes and to *True* for regular polls|
 |shuffle_options|Boolean|Optional|Pass *True* if the poll options must be shown in random order|
 |allow_adding_options|Boolean|Optional|Pass *True* if answer options can be added to the poll after creation; not supported for anonymous polls and quizzes|
 |hide_results_until_closes|Boolean|Optional|Pass *True* if poll results must be shown only after the poll closes|
@@ -1182,7 +1182,7 @@ Use this method to ban a user in a group, a supergroup or a channel. In the case
 |-----------|
 |chat_id|Integer or String|Yes|Unique identifier for the target group or username of the target supergroup or channel in the format `@username`|
 |user_id|Integer|Yes|Unique identifier of the target user|
-|until_date|Integer|Optional|Date when the user will be unbanned; Unix time. If user is banned for more than 366 days or less than 30 seconds from the current time they are considered to be banned forever. Applied for supergroups and channels only.|
+|until_date|Integer|Optional|Date when the user will be unbanned; Unix time. If the user is banned for more than 366 days or less than 30 seconds from the current time, they are considered to be banned forever. Applied for supergroups and channels only.|
 |revoke_messages|Boolean|Optional|Pass *True* to delete all messages from the chat for the user that is being removed. If *False*, the user will be able to see messages in the group that were sent before the user was removed. Always *True* for supergroups and channels.|
 
 #### unbanChatMember
@@ -1205,7 +1205,7 @@ Use this method to restrict a user in a supergroup. The bot must be an administr
 |user_id|Integer|Yes|Unique identifier of the target user|
 |permissions|[ChatPermissions](./api/types/chatpermissions.md)|Yes|A JSON-serialized object for new user permissions|
 |use_independent_chat_permissions|Boolean|Optional|Pass *True* if chat permissions are set independently. Otherwise, the *can_send_other_messages* and *can_add_web_page_previews* permissions will imply the *can_send_messages*, *can_send_audios*, *can_send_documents*, *can_send_photos*, *can_send_videos*, *can_send_video_notes*, and *can_send_voice_notes* permissions; the *can_send_polls* permission will imply the *can_send_messages* permission.|
-|until_date|Integer|Optional|Date when restrictions will be lifted for the user; Unix time. If user is restricted for more than 366 days or less than 30 seconds from the current time, they are considered to be restricted forever.|
+|until_date|Integer|Optional|Date when restrictions will be lifted for the user; Unix time. If the user is restricted for more than 366 days or less than 30 seconds from the current time, they are considered to be restricted forever.|
 
 #### promoteChatMember
 
@@ -1221,7 +1221,7 @@ Use this method to promote or demote a user in a supergroup or a channel. The bo
 |can_manage_video_chats|Boolean|Optional|Pass *True* if the administrator can manage video chats|
 |can_restrict_members|Boolean|Optional|Pass *True* if the administrator can restrict, ban or unban chat members, or access supergroup statistics. For backward compatibility, defaults to *True* for promotions of channel administrators.|
 |can_promote_members|Boolean|Optional|Pass *True* if the administrator can add new administrators with a subset of their own privileges or demote administrators that they have promoted, directly or indirectly (promoted by administrators that were appointed by him)|
-|can_change_info|Boolean|Optional|Pass *True* if the administrator can change chat title, photo and other settings|
+|can_change_info|Boolean|Optional|Pass *True* if the administrator can change the chat title, photo and other settings|
 |can_invite_users|Boolean|Optional|Pass *True* if the administrator can invite new users to the chat|
 |can_post_stories|Boolean|Optional|Pass *True* if the administrator can post stories to the chat|
 |can_edit_stories|Boolean|Optional|Pass *True* if the administrator can edit stories posted by other users, post stories to the chat page, pin chat stories, and access the chat's story archive|
@@ -1274,7 +1274,7 @@ Use this method to unban a previously banned channel chat in a supergroup or cha
 
 #### setChatPermissions
 
-Use this method to set default chat permissions for all members. The bot must be an administrator in the group or a supergroup for this to work and must have the *can_restrict_members* administrator rights. Returns *True* on success.
+Use this method to set default chat permissions for all members. The bot must be an administrator in the group or a supergroup for this to work and must have the *can_restrict_members* administrator right. Returns *True* on success.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -1294,7 +1294,7 @@ Use this method to generate a new primary invite link for a chat; any previously
 
 #### createChatInviteLink
 
-Use this method to create an additional invite link for a chat. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. The link can be revoked using the method [revokeChatInviteLink](./api/methods/revokechatinvitelink.md). Returns the new invite link as [ChatInviteLink](./api/types/chatinvitelink.md) object.
+Use this method to create an additional invite link for a chat. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. The link can be revoked using the method [revokeChatInviteLink](./api/methods/revokechatinvitelink.md). Returns the new invite link as a [ChatInviteLink](./api/types/chatinvitelink.md) object.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -1319,7 +1319,7 @@ Use this method to edit a non-primary invite link created by the bot. The bot mu
 
 #### createChatSubscriptionInviteLink
 
-Use this method to create a [subscription invite link](https://telegram.org/blog/superchannels-star-reactions-subscriptions#star-subscriptions) for a channel chat. The bot must have the *can_invite_users* administrator rights. The link can be edited using the method [editChatSubscriptionInviteLink](./api/methods/editchatsubscriptioninvitelink.md) or revoked using the method [revokeChatInviteLink](./api/methods/revokechatinvitelink.md). Returns the new invite link as a [ChatInviteLink](./api/types/chatinvitelink.md) object.
+Use this method to create a [subscription invite link](https://telegram.org/blog/superchannels-star-reactions-subscriptions#star-subscriptions) for a channel chat. The bot must have the *can_invite_users* administrator right. The link can be edited using the method [editChatSubscriptionInviteLink](./api/methods/editchatsubscriptioninvitelink.md) or revoked using the method [revokeChatInviteLink](./api/methods/revokechatinvitelink.md). Returns the new invite link as a [ChatInviteLink](./api/types/chatinvitelink.md) object.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -1330,7 +1330,7 @@ Use this method to create a [subscription invite link](https://telegram.org/blog
 
 #### editChatSubscriptionInviteLink
 
-Use this method to edit a subscription invite link created by the bot. The bot must have the *can_invite_users* administrator rights. Returns the edited invite link as a [ChatInviteLink](./api/types/chatinvitelink.md) object.
+Use this method to edit a subscription invite link created by the bot. The bot must have the *can_invite_users* administrator right. Returns the edited invite link as a [ChatInviteLink](./api/types/chatinvitelink.md) object.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -1340,7 +1340,7 @@ Use this method to edit a subscription invite link created by the bot. The bot m
 
 #### revokeChatInviteLink
 
-Use this method to revoke an invite link created by the bot. If the primary link is revoked, a new link is automatically generated. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the revoked invite link as [ChatInviteLink](./api/types/chatinvitelink.md) object.
+Use this method to revoke an invite link created by the bot. If the primary link is revoked, a new link is automatically generated. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. Returns the revoked invite link as a [ChatInviteLink](./api/types/chatinvitelink.md) object.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -1536,7 +1536,7 @@ Use this method to create a topic in a forum supergroup chat or a private chat w
 
 #### editForumTopic
 
-Use this method to edit name and icon of a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the *can_manage_topics* administrator rights, unless it is the creator of the topic. Returns *True* on success.
+Use this method to edit the name and icon of a topic in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the *can_manage_topics* administrator right, unless it is the creator of the topic. Returns *True* on success.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -1547,7 +1547,7 @@ Use this method to edit name and icon of a topic in a forum supergroup chat or a
 
 #### closeForumTopic
 
-Use this method to close an open topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the *can_manage_topics* administrator rights, unless it is the creator of the topic. Returns *True* on success.
+Use this method to close an open topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the *can_manage_topics* administrator right, unless it is the creator of the topic. Returns *True* on success.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -1556,7 +1556,7 @@ Use this method to close an open topic in a forum supergroup chat. The bot must 
 
 #### reopenForumTopic
 
-Use this method to reopen a closed topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the *can_manage_topics* administrator rights, unless it is the creator of the topic. Returns *True* on success.
+Use this method to reopen a closed topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the *can_manage_topics* administrator right, unless it is the creator of the topic. Returns *True* on success.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -1565,7 +1565,7 @@ Use this method to reopen a closed topic in a forum supergroup chat. The bot mus
 
 #### deleteForumTopic
 
-Use this method to delete a forum topic along with all its messages in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the *can_delete_messages* administrator rights. Returns *True* on success.
+Use this method to delete a forum topic along with all its messages in a forum supergroup chat or a private chat with a user. In the case of a supergroup chat the bot must be an administrator in the chat for this to work and must have the *can_delete_messages* administrator right. Returns *True* on success.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -1583,7 +1583,7 @@ Use this method to clear the list of pinned messages in a forum topic in a forum
 
 #### editGeneralForumTopic
 
-Use this method to edit the name of the 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the *can_manage_topics* administrator rights. Returns *True* on success.
+Use this method to edit the name of the 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the *can_manage_topics* administrator right. Returns *True* on success.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -1592,7 +1592,7 @@ Use this method to edit the name of the 'General' topic in a forum supergroup ch
 
 #### closeGeneralForumTopic
 
-Use this method to close an open 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the *can_manage_topics* administrator rights. Returns *True* on success.
+Use this method to close an open 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the *can_manage_topics* administrator right. Returns *True* on success.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -1600,7 +1600,7 @@ Use this method to close an open 'General' topic in a forum supergroup chat. The
 
 #### reopenGeneralForumTopic
 
-Use this method to reopen a closed 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the *can_manage_topics* administrator rights. The topic will be automatically unhidden if it was hidden. Returns *True* on success.
+Use this method to reopen a closed 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the *can_manage_topics* administrator right. The topic will be automatically unhidden if it was hidden. Returns *True* on success.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -1608,7 +1608,7 @@ Use this method to reopen a closed 'General' topic in a forum supergroup chat. T
 
 #### hideGeneralForumTopic
 
-Use this method to hide the 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the *can_manage_topics* administrator rights. The topic will be automatically closed if it was open. Returns *True* on success.
+Use this method to hide the 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the *can_manage_topics* administrator right. The topic will be automatically closed if it was open. Returns *True* on success.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -1616,7 +1616,7 @@ Use this method to hide the 'General' topic in a forum supergroup chat. The bot 
 
 #### unhideGeneralForumTopic
 
-Use this method to unhide the 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the *can_manage_topics* administrator rights. Returns *True* on success.
+Use this method to unhide the 'General' topic in a forum supergroup chat. The bot must be an administrator in the chat for this to work and must have the *can_manage_topics* administrator right. Returns *True* on success.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -1717,7 +1717,7 @@ Use this method to change the access settings of a managed bot. Returns *True* o
 
 #### setMySettings
 
-Use this method to change settings of the bot. Settings that aren't specified remain unchanged. Returns *True* on success.
+Use this method to change the settings of the bot. Settings that aren't specified remain unchanged. Returns *True* on success.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -1860,7 +1860,7 @@ Use this method to get the current default administrator rights of the bot. Retu
 
 |Parameter|Type|Required|Description|
 |-----------|
-|for_channels|Boolean|Optional|Pass *True* to get default administrator rights of the bot in channels. Otherwise, default administrator rights of the bot for groups and supergroups will be returned.|
+|for_channels|Boolean|Optional|Pass *True* to get the default administrator rights of the bot in channels. Otherwise, the default administrator rights of the bot for groups and supergroups will be returned.|
 
 #### getAvailableGifts
 
@@ -1929,11 +1929,11 @@ Removes verification from a chat that is currently verified [on behalf of the or
 
 |Parameter|Type|Required|Description|
 |-----------|
-|chat_id|Integer or String|Yes|Unique identifier for the target chat or username of the target bot or channel in the format `@username`|
+|chat_id|Integer or String|Yes|Unique identifier for the target chat or username of the target bot, supergroup, or channel in the format `@username`|
 
 #### readBusinessMessage
 
-Marks incoming message as read on behalf of a business account. Requires the *can_read_messages* business bot right. Returns *True* on success.
+Marks an incoming message as read on behalf of a business account. Requires the *can_read_messages* business bot right. Returns *True* on success.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -1943,7 +1943,7 @@ Marks incoming message as read on behalf of a business account. Requires the *ca
 
 #### deleteBusinessMessages
 
-Delete messages on behalf of a business account. Requires the *can_delete_sent_messages* business bot right to delete messages sent by the bot itself, or the *can_delete_all_messages* business bot right to delete any message. Returns *True* on success.
+Deletes messages on behalf of a business account. Requires the *can_delete_sent_messages* business bot right to delete messages sent by the bot itself, or the *can_delete_all_messages* business bot right to delete any message. Returns *True* on success.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -1952,7 +1952,7 @@ Delete messages on behalf of a business account. Requires the *can_delete_sent_m
 
 #### setBusinessAccountName
 
-Changes the first and last name of a managed business account. Requires the *can_change_name* business bot right. Returns *True* on success.
+Changes the first and last name of a managed business account. Requires the *can_edit_name* business bot right. Returns *True* on success.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -1962,7 +1962,7 @@ Changes the first and last name of a managed business account. Requires the *can
 
 #### setBusinessAccountUsername
 
-Changes the username of a managed business account. Requires the *can_change_username* business bot right. Returns *True* on success.
+Changes the username of a managed business account. Requires the *can_edit_username* business bot right. Returns *True* on success.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -1971,7 +1971,7 @@ Changes the username of a managed business account. Requires the *can_change_use
 
 #### setBusinessAccountBio
 
-Changes the bio of a managed business account. Requires the *can_change_bio* business bot right. Returns *True* on success.
+Changes the bio of a managed business account. Requires the *can_edit_bio* business bot right. Returns *True* on success.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -2039,7 +2039,7 @@ Returns the gifts received and owned by a managed business account. Requires the
 |exclude_unique|Boolean|Optional|Pass *True* to exclude unique gifts|
 |exclude_from_blockchain|Boolean|Optional|Pass *True* to exclude gifts that were assigned from the TON blockchain and can't be resold or transferred in Telegram|
 |sort_by_price|Boolean|Optional|Pass *True* to sort results by gift price instead of send date. Sorting is applied before pagination.|
-|offset|String|Optional|Offset of the first entry to return as received from the previous request; use empty string to get the first chunk of results|
+|offset|String|Optional|Offset of the first entry to return as received from the previous request; use an empty string to get the first chunk of results|
 |limit|Integer|Optional|The maximum number of gifts to be returned; 1-100. Defaults to 100.|
 
 #### getUserGifts
@@ -2102,17 +2102,17 @@ Upgrades a given regular gift to a unique gift. Requires the *can_transfer_and_u
 |business_connection_id|String|Yes|Unique identifier of the business connection|
 |owned_gift_id|String|Yes|Unique identifier of the regular gift that should be upgraded to a unique one|
 |keep_original_details|Boolean|Optional|Pass *True* to keep the original gift text, sender and receiver in the upgraded gift|
-|star_count|Integer|Optional|The amount of Telegram Stars that will be paid for the upgrade from the business account balance. If `gift.prepaid_upgrade_star_count > 0`, then pass 0, otherwise, the *can_transfer_stars* business bot right is required and `gift.upgrade_star_count` must be passed.|
+|star_count|Integer|Optional|The amount of Telegram Stars that will be paid for the upgrade from the business account balance. If `gift.prepaid_upgrade_star_count > 0`, then pass 0; otherwise, the *can_transfer_stars* business bot right is required and `gift.upgrade_star_count` must be passed.|
 
 #### transferGift
 
-Transfers an owned unique gift to another user. Requires the *can_transfer_and_upgrade_gifts* business bot right. Requires *can_transfer_stars* business bot right if the transfer is paid. Returns *True* on success.
+Transfers an owned unique gift to another user. Requires the *can_transfer_and_upgrade_gifts* business bot right. Requires the *can_transfer_stars* business bot right if the transfer is paid. Returns *True* on success.
 
 |Parameter|Type|Required|Description|
 |-----------|
 |business_connection_id|String|Yes|Unique identifier of the business connection|
-|owned_gift_id|String|Yes|Unique identifier of the regular gift that should be transferred|
-|new_owner_chat_id|Integer|Yes|Unique identifier of the chat which will own the gift. The chat must be active in the last 24 hours.|
+|owned_gift_id|String|Yes|Unique identifier of the unique gift that should be transferred|
+|new_owner_chat_id|Integer|Yes|Unique identifier of the chat which will own the gift. The chat must have been active in the last 24 hours.|
 |star_count|Integer|Optional|The amount of Telegram Stars that will be paid for the transfer from the business account balance. If positive, then the *can_transfer_stars* business bot right is required.|
 
 #### deleteBusinessAccountGift
@@ -2209,7 +2209,7 @@ Stores a keyboard button that can be used by a user within a Mini App. Returns a
 
 #### editMessageText
 
-Use this method to edit text, rich and [game](./api.md#games) messages. On success, if the edited message is not an inline message, the edited [Message](./api/types/message.md) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
+Use this method to edit text, rich and [game](./api.md#games) messages. On success, if the edited message is not an inline message, the edited [Message](./api/types/message.md) is returned; otherwise, *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -2221,12 +2221,12 @@ Use this method to edit text, rich and [game](./api.md#games) messages. On succe
 |parse_mode|String|Optional|Mode for parsing entities in the message text. See [formatting options](./api/formatting.md) for more details.|
 |entities|Array of [MessageEntity](./api/types/messageentity.md)|Optional|A JSON-serialized list of special entities that appear in message text, which can be specified instead of *parse_mode*|
 |link_preview_options|[LinkPreviewOptions](./api/types/linkpreviewoptions.md)|Optional|Link preview generation options for the message|
-|rich_message|[InputRichMessage](./api/types/inputrichmessage.md)|Optional|New rich content of the message; required if *text* isn't specified. Direct upload of new files and explicit upload of files by a URL isn't supported when an inline message is edited.|
+|rich_message|[InputRichMessage](./api/types/inputrichmessage.md)|Optional|New rich content of the message; required if *text* isn't specified. Direct upload of new files and explicit upload of files by a URL aren't supported when an inline message is edited.|
 |reply_markup|[InlineKeyboardMarkup](./api/types/inlinekeyboardmarkup.md)|Optional|A JSON-serialized object for an [inline keyboard](./features.md#inline-keyboards)|
 
 #### editMessageCaption
 
-Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited [Message](./api/types/message.md) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
+Use this method to edit captions of messages. On success, if the edited message is not an inline message, the edited [Message](./api/types/message.md) is returned; otherwise, *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -2237,12 +2237,12 @@ Use this method to edit captions of messages. On success, if the edited message 
 |caption|String|Optional|New caption of the message, 0-1024 characters after entities parsing|
 |parse_mode|String|Optional|Mode for parsing entities in the message caption. See [formatting options](./api/formatting.md) for more details.|
 |caption_entities|Array of [MessageEntity](./api/types/messageentity.md)|Optional|A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse_mode*|
-|show_caption_above_media|Boolean|Optional|Pass *True* if the caption must be shown above the message media. Supported only for animation, photo and video messages.|
+|show_caption_above_media|Boolean|Optional|Pass *True* if the caption must be shown above the message media. Supported only for animation, live photo, paid media, photo, video and widget messages.|
 |reply_markup|[InlineKeyboardMarkup](./api/types/inlinekeyboardmarkup.md)|Optional|A JSON-serialized object for an [inline keyboard](./features.md#inline-keyboards)|
 
 #### editMessageMedia
 
-Use this method to edit animation, audio, document, live photo, photo, or video messages, or to replace a text or a rich message with a media. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file_id or specify a URL. On success, if the edited message is not an inline message, the edited [Message](./api/types/message.md) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
+Use this method to edit animation, audio, document, live photo, photo, or video messages, or to replace a text or a rich message with media. If a message is part of a message album, then it can be edited only to an audio for audio albums, only to a document for document albums and to a photo, a live photo, or a video otherwise. When an inline message is edited, a new file can't be uploaded; use a previously uploaded file via its file_id or specify a URL. On success, if the edited message is not an inline message, the edited [Message](./api/types/message.md) is returned; otherwise, *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -2255,7 +2255,7 @@ Use this method to edit animation, audio, document, live photo, photo, or video 
 
 #### editMessageLiveLocation
 
-Use this method to edit live location messages. A location can be edited until its *live_period* expires or editing is explicitly disabled by a call to [stopMessageLiveLocation](./api/methods/stopmessagelivelocation.md). On success, if the edited message is not an inline message, the edited [Message](./api/types/message.md) is returned, otherwise *True* is returned.
+Use this method to edit live location messages. A location can be edited until its *live_period* expires or editing is explicitly disabled by a call to [stopMessageLiveLocation](./api/methods/stopmessagelivelocation.md). On success, if the edited message is not an inline message, the edited [Message](./api/types/message.md) is returned; otherwise, *True* is returned.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -2273,7 +2273,7 @@ Use this method to edit live location messages. A location can be edited until i
 
 #### stopMessageLiveLocation
 
-Use this method to stop updating a live location message before *live_period* expires. On success, if the message is not an inline message, the edited [Message](./api/types/message.md) is returned, otherwise *True* is returned.
+Use this method to stop updating a live location message before *live_period* expires. On success, if the message is not an inline message, the edited [Message](./api/types/message.md) is returned; otherwise, *True* is returned.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -2289,7 +2289,7 @@ Use this method to edit a checklist on behalf of a connected business account. O
 
 |Parameter|Type|Required|Description|
 |-----------|
-|business_connection_id|String|Yes|Unique identifier of the business connection on behalf of which the message will be sent|
+|business_connection_id|String|Yes|Unique identifier of the business connection on behalf of which the message to be edited was sent|
 |chat_id|Integer or String|Yes|Unique identifier for the target chat or username of the target bot in the format `@username`|
 |message_id|Integer|Yes|Unique identifier for the target message|
 |checklist|[InputChecklist](./api/types/inputchecklist.md)|Yes|A JSON-serialized object for the new checklist|
@@ -2319,7 +2319,7 @@ Use this method to edit public data of a shared widget created by the bot. A sha
 
 #### editMessageReplyMarkup
 
-Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited [Message](./api/types/message.md) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
+Use this method to edit only the reply markup of messages. On success, if the edited message is not an inline message, the edited [Message](./api/types/message.md) is returned; otherwise, *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -2380,7 +2380,7 @@ Use this method to edit the caption of an ephemeral message. Note that it is not
 |caption|String|Optional|New caption of the message, 0-1024 characters after entities parsing|
 |parse_mode|String|Optional|Mode for parsing entities in the message caption. See [formatting options](./api/formatting.md) for more details.|
 |caption_entities|Array of [MessageEntity](./api/types/messageentity.md)|Optional|A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse_mode*|
-|show_caption_above_media|Boolean|Optional|Pass *True* if the caption must be shown above the message media. Supported only for animation, photo and video messages.|
+|show_caption_above_media|Boolean|Optional|Pass *True* if the caption must be shown above the message media. Supported only for animation, live photo, photo and video messages.|
 |reply_markup|[InlineKeyboardMarkup](./api/types/inlinekeyboardmarkup.md)|Optional|A JSON-serialized object for an [inline keyboard](./features.md#inline-keyboards)|
 
 #### editEphemeralMessageReplyMarkup
@@ -2402,7 +2402,7 @@ Use this method to approve a suggested post in a direct messages chat. The bot m
 |-----------|
 |chat_id|Integer|Yes|Unique identifier for the target direct messages chat|
 |message_id|Integer|Yes|Identifier of a suggested post message to approve|
-|send_date|Integer|Optional|Point in time (Unix timestamp) when the post is expected to be published; omit if the date has already been specified when the suggested post was created. If specified, then the date must be not more than 2678400 seconds (30 days) in the future.|
+|send_date|Integer|Optional|Point in time (Unix timestamp) when the post is expected to be published; omit if the date has already been specified when the suggested post was created. If specified, then the date must not be more than 2678400 seconds (30 days) in the future.|
 
 #### declineSuggestedPost
 
@@ -2424,8 +2424,8 @@ Use this method to delete a message, including service messages, with the follow
 - Bots can delete incoming messages in private chats.
 - Bots granted *can_post_messages* permissions can delete outgoing messages in channels.
 - If the bot is an administrator of a group, it can delete any message there.
-- If the bot has *can_delete_messages* administrator right in a supergroup or a channel, it can delete any message there.
-- If the bot has *can_manage_direct_messages* administrator right in a channel, it can delete any message in the corresponding direct messages chat.
+- If the bot has the *can_delete_messages* administrator right in a supergroup or a channel, it can delete any message there.
+- If the bot has the *can_manage_direct_messages* administrator right in a channel, it can delete any message in the corresponding direct messages chat.
 Returns *True* on success.
 
 |Parameter|Type|Required|Description|
@@ -2587,7 +2587,7 @@ Use this method to change search keywords assigned to a regular or custom emoji 
 |Parameter|Type|Required|Description|
 |-----------|
 |sticker|String|Yes|File identifier of the sticker|
-|keywords|Array of String|Optional|A JSON-serialized list of 0-20 search keywords for the sticker with total length of up to 64 characters|
+|keywords|Array of String|Optional|A JSON-serialized list of 0-20 search keywords for the sticker with a total length of up to 64 characters|
 
 #### setStickerMaskPosition
 
@@ -2660,14 +2660,14 @@ Use this method to send invoices. On success, the sent [Message](./api/types/mes
 |direct_messages_topic_id|Integer|Optional|Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat|
 |title|String|Yes|Product name, 1-32 characters|
 |description|String|Yes|Product description, 1-255 characters|
-|payload|String|Yes|Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.|
+|payload|String|Yes|Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user; use it for your internal processes.|
 |provider_token|String|Optional|Payment provider token, obtained via [@BotFather](https://t.me/botfather). Pass an empty string for payments in [Telegram Stars](https://t.me/BotNews/90).|
 |currency|String|Yes|Three-letter ISO 4217 currency code, see [more on currencies](./payments.md#supported-currencies). Pass "XTR" for payments in [Telegram Stars](https://t.me/BotNews/90).|
 |prices|Array of [LabeledPrice](./api/types/labeledprice.md)|Yes|Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in [Telegram Stars](https://t.me/BotNews/90).|
-|max_tip_amount|Integer|Optional|The maximum accepted amount for tips in the *smallest units* of the currency (integer, **not** float/double). For example, for a maximum tip of `US$ 1.45` pass `max_tip_amount = 145`. See the *exp* parameter in [currencies.json](https://core.telegram.org/bots/payments/currencies.json), it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0. Not supported for payments in [Telegram Stars](https://t.me/BotNews/90).|
-|suggested_tip_amounts|Array of Integer|Optional|A JSON-serialized Array of suggested amounts of tips in the *smallest units* of the currency (integer, **not** float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed *max_tip_amount*.|
+|max_tip_amount|Integer|Optional|The maximum accepted amount for tips in the *smallest units* of the currency (integer, **not** float/double). For example, for a maximum tip of `US$ 1.45` pass `max_tip_amount = 145`. See the *exp* parameter in [currencies.json](https://core.telegram.org/bots/payments/currencies.json); it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0. Not supported for payments in [Telegram Stars](https://t.me/BotNews/90).|
+|suggested_tip_amounts|Array of Integer|Optional|A JSON-serialized Array of suggested amounts of tips in the *smallest units* of the currency (integer, **not** float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increasing order and must not exceed *max_tip_amount*.|
 |start_parameter|String|Optional|Unique deep-linking parameter. If left empty, **forwarded copies** of the sent message will have a *Pay* button, allowing multiple users to pay directly from the forwarded message, using the same invoice. If non-empty, forwarded copies of the sent message will have a *URL* button with a deep link to the bot (instead of a *Pay* button), with the value used as the start parameter.|
-|provider_data|String|Optional|JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of required fields should be provided by the payment provider.|
+|provider_data|String|Optional|JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of the required fields should be provided by the payment provider.|
 |photo_url|String|Optional|URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service. People like it better when they see what they are paying for.|
 |photo_size|Integer|Optional|Photo size in bytes|
 |photo_width|Integer|Optional|Photo width|
@@ -2696,14 +2696,14 @@ Use this method to create a link for an invoice. Returns the created invoice lin
 |business_connection_id|String|Optional|Unique identifier of the business connection on behalf of which the link will be created. For payments in [Telegram Stars](https://t.me/BotNews/90) only.|
 |title|String|Yes|Product name, 1-32 characters|
 |description|String|Yes|Product description, 1-255 characters|
-|payload|String|Yes|Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.|
+|payload|String|Yes|Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user; use it for your internal processes.|
 |provider_token|String|Optional|Payment provider token, obtained via [@BotFather](https://t.me/botfather). Pass an empty string for payments in [Telegram Stars](https://t.me/BotNews/90).|
 |currency|String|Yes|Three-letter ISO 4217 currency code, see [more on currencies](./payments.md#supported-currencies). Pass "XTR" for payments in [Telegram Stars](https://t.me/BotNews/90).|
 |prices|Array of [LabeledPrice](./api/types/labeledprice.md)|Yes|Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in [Telegram Stars](https://t.me/BotNews/90).|
-|subscription_period|Integer|Optional|The number of seconds the subscription will be active for before the next payment. The currency must be set to "XTR" (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified. Any number of subscriptions can be active for a given bot at the same time, including multiple concurrent subscriptions from the same user. Subscription price must no exceed 10000 Telegram Stars.|
-|max_tip_amount|Integer|Optional|The maximum accepted amount for tips in the *smallest units* of the currency (integer, **not** float/double). For example, for a maximum tip of `US$ 1.45` pass `max_tip_amount = 145`. See the *exp* parameter in [currencies.json](https://core.telegram.org/bots/payments/currencies.json), it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0. Not supported for payments in [Telegram Stars](https://t.me/BotNews/90).|
-|suggested_tip_amounts|Array of Integer|Optional|A JSON-serialized Array of suggested amounts of tips in the *smallest units* of the currency (integer, **not** float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed *max_tip_amount*.|
-|provider_data|String|Optional|JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of required fields should be provided by the payment provider.|
+|subscription_period|Integer|Optional|The number of seconds the subscription will be active for before the next payment. The currency must be set to "XTR" (Telegram Stars) if the parameter is used. Currently, it must always be 2592000 (30 days) if specified. Any number of subscriptions can be active for a given bot at the same time, including multiple concurrent subscriptions from the same user. Subscription price must not exceed 10000 Telegram Stars.|
+|max_tip_amount|Integer|Optional|The maximum accepted amount for tips in the *smallest units* of the currency (integer, **not** float/double). For example, for a maximum tip of `US$ 1.45` pass `max_tip_amount = 145`. See the *exp* parameter in [currencies.json](https://core.telegram.org/bots/payments/currencies.json); it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0. Not supported for payments in [Telegram Stars](https://t.me/BotNews/90).|
+|suggested_tip_amounts|Array of Integer|Optional|A JSON-serialized Array of suggested amounts of tips in the *smallest units* of the currency (integer, **not** float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increasing order and must not exceed *max_tip_amount*.|
+|provider_data|String|Optional|JSON-serialized data about the invoice, which will be shared with the payment provider. A detailed description of the required fields should be provided by the payment provider.|
 |photo_url|String|Optional|URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service.|
 |photo_size|Integer|Optional|Photo size in bytes|
 |photo_width|Integer|Optional|Photo width|
@@ -2725,7 +2725,7 @@ If you sent an invoice requesting a shipping address and the parameter *is_flexi
 |shipping_query_id|String|Yes|Unique identifier for the query to be answered|
 |ok|Boolean|Yes|Pass *True* if delivery to the specified address is possible and *False* if there are any problems (for example, if delivery to the specified address is not possible)|
 |shipping_options|Array of [ShippingOption](./api/types/shippingoption.md)|Optional|Required if *ok* is *True*. A JSON-serialized Array of available shipping options.|
-|error_message|String|Optional|Required if *ok* is *False*. Error message in human readable form that explains why it is impossible to complete the order (e.g. "Sorry, delivery to your desired address is unavailable"). Telegram will display this message to the user.|
+|error_message|String|Optional|Required if *ok* is *False*. Error message in human-readable form that explains why it is impossible to complete the order (e.g. "Sorry, delivery to your desired address is unavailable"). Telegram will display this message to the user.|
 
 #### answerPreCheckoutQuery
 
@@ -2735,7 +2735,7 @@ Once the user has confirmed their payment and shipping details, the Bot API send
 |-----------|
 |pre_checkout_query_id|String|Yes|Unique identifier for the query to be answered|
 |ok|Boolean|Yes|Specify *True* if everything is alright (goods are available, etc.) and the bot is ready to proceed with the order. Use *False* if there are any problems.|
-|error_message|String|Optional|Required if *ok* is *False*. Error message in human readable form that explains the reason for failure to proceed with the checkout (e.g. "Sorry, somebody just bought the last of our amazing black T-shirts while you were busy filling out your payment details. Please choose a different color or garment!"). Telegram will display this message to the user.|
+|error_message|String|Optional|Required if *ok* is *False*. Error message in human-readable form that explains the reason for failure to proceed with the checkout (e.g. "Sorry, somebody just bought the last of our amazing black T-shirts while you were busy filling out your payment details. Please choose a different color or garment!"). Telegram will display this message to the user.|
 
 #### getMyStarBalance
 
@@ -2771,7 +2771,7 @@ Allows the bot to cancel or re-enable extension of a subscription paid in Telegr
 
 #### setPassportDataErrors
 
-Informs a user that some of the Telegram Passport elements they provided contains errors. The user will not be able to re-submit their Passport to you until the errors are fixed (the contents of the field for which you returned the error must change). Returns *True* on success.
+Informs a user that some of the Telegram Passport elements they provided contain errors. The user will not be able to re-submit their Passport to you until the errors are fixed (the contents of the field for which you returned the error must change). Returns *True* on success.
 
 Use this if the data submitted by the user doesn't satisfy the standards your service requires for any reason. For example, if a birthday date seems invalid, a submitted document is blurry, a scan shows evidence of tampering, etc. Supply some details in the error message to make sure the user knows how to correct the issues.
 
@@ -2799,7 +2799,7 @@ Use this method to send a game. On success, the sent [Message](./api/types/messa
 
 #### setGameScore
 
-Use this method to set the score of the specified user in a game message. On success, if the message is not an inline message, the [Message](./api/types/message.md) is returned, otherwise *True* is returned. Returns an error, if the new score is not greater than the user's current score in the chat and *force* is *False*.
+Use this method to set the score of the specified user in a game message. On success, if the message is not an inline message, the [Message](./api/types/message.md) is returned; otherwise, *True* is returned. Returns an error if the new score is not greater than the user's current score in the chat and *force* is *False*.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -2830,7 +2830,7 @@ Use this method to send rich messages. If the message contains a block with a me
 
 |Parameter|Type|Required|Description|
 |-----------|
-|business_connection_id|String|Optional|Unique identifier of the business connection on behalf of which the message will be sent. Bot can send rich messages on behalf of a business account only if the corresponding user can send rich messages.|
+|business_connection_id|String|Optional|Unique identifier of the business connection on behalf of which the message will be sent. The bot can send rich messages on behalf of a business account only if the corresponding user can send rich messages.|
 |chat_id|Integer or String|Optional|Unique identifier for the target chat or username of the target bot, supergroup, or channel in the format `@username`; required unless the message is sent as an ephemeral reply to a callback query|
 |message_thread_id|Integer|Optional|Unique identifier for the target message thread (topic) of a forum; for forum supergroups and private chats of bots with forum topic mode enabled only|
 |direct_messages_topic_id|Integer|Optional|Identifier of the direct messages topic to which the message will be sent; required if the message is sent to a direct messages chat|
@@ -2853,7 +2853,7 @@ Use this method to stream a partial rich message to a user while the message is 
 |chat_id|Integer|Yes|Unique identifier for the target private chat|
 |message_thread_id|Integer|Optional|Unique identifier for the target message thread|
 |draft_id|Integer|Yes|Unique identifier of the message draft; must be non-zero. Changes to drafts with the same identifier are animated. Otherwise, the draft is replaced without animation.|
-|rich_message|[InputRichMessage](./api/types/inputrichmessage.md)|Yes|The partial message to be streamed. Direct upload of new files and explicit upload of files by a URL isn't supported.|
+|rich_message|[InputRichMessage](./api/types/inputrichmessage.md)|Yes|The partial message to be streamed. Direct upload of new files and explicit upload of files by a URL aren't supported.|
 |can_stop|Boolean|Optional|Pass *True* to show the user a button to stop further drafts. The bot will receive an [Update](./api/types/update.md) "stopped_message_generation" if the user presses the button.|
 |keep_on_stop|Boolean|Optional|Pass *True* to keep the draft in the chat when the button is pressed. The draft will still disappear after a short time or if the bot sends a message. To fully preserve the partial draft, the bot should send it as a new message.|
 
@@ -2866,7 +2866,7 @@ At most **one** of the optional fields can be present in any given update.
 
 |Field|Type|Description|
 |-----------|
-|update_id|Integer|The update's unique identifier. Update identifiers start from a certain positive number and increase sequentially. This identifier becomes especially handy if you're using [webhooks](./api/methods/setwebhook.md), since it allows you to ignore repeated updates or to restore the correct update sequence, should they get out of order. If there are no new updates for at least a week, then identifier of the next update will be chosen randomly instead of sequentially.|
+|update_id|Integer|The update's unique identifier. Update identifiers start from a certain positive number and increase sequentially. This identifier becomes especially handy if you're using [webhooks](./api/methods/setwebhook.md), since it allows you to ignore repeated updates or to restore the correct update sequence, should they get out of order. If there are no new updates for at least a week, then the identifier of the next update will be chosen randomly instead of sequentially.|
 |message|[Message](./api/types/message.md)|*Optional*. New incoming message of any kind - text, photo, sticker, etc.|
 |edited_message|[Message](./api/types/message.md)|*Optional*. New version of a message that is known to the bot and was edited. This update may at times be triggered by changes to message fields that are either unavailable or not actively used by your bot.|
 |channel_post|[Message](./api/types/message.md)|*Optional*. New incoming channel post of any kind - text, photo, sticker, etc.|
@@ -2877,7 +2877,7 @@ At most **one** of the optional fields can be present in any given update.
 |deleted_business_messages|[BusinessMessagesDeleted](./api/types/businessmessagesdeleted.md)|*Optional*. Messages were deleted from a connected business account|
 |guest_message|[Message](./api/types/message.md)|*Optional*. New guest message. The bot can use the field *Message.guest_query_id* and the method [answerGuestQuery](./api/methods/answerguestquery.md) to send a message in response.|
 |message_reaction|[MessageReactionUpdated](./api/types/messagereactionupdated.md)|*Optional*. A reaction to a message was changed by a user. The bot must be an administrator in the chat and must explicitly specify `"message_reaction"` in the list of *allowed_updates* to receive these updates. The update isn't received for reactions set by bots.|
-|message_reaction_count|[MessageReactionCountUpdated](./api/types/messagereactioncountupdated.md)|*Optional*. Reactions to a message with anonymous reactions were changed. The bot must be an administrator in the chat and must explicitly specify `"message_reaction_count"` in the list of *allowed_updates* to receive these updates. The updates are grouped and can be sent with delay up to a few minutes.|
+|message_reaction_count|[MessageReactionCountUpdated](./api/types/messagereactioncountupdated.md)|*Optional*. Reactions to a message with anonymous reactions were changed. The bot must be an administrator in the chat and must explicitly specify `"message_reaction_count"` in the list of *allowed_updates* to receive these updates. The updates are grouped and can be sent with a delay of up to a few minutes.|
 |inline_query|[InlineQuery](./api/types/inlinequery.md)|*Optional*. New incoming [inline](./api.md#inline-mode) query|
 |chosen_inline_result|[ChosenInlineResult](./api/types/choseninlineresult.md)|*Optional*. The result of an [inline](./api.md#inline-mode) query that was chosen by a user and sent to their chat partner. Please see our documentation on the [feedback collecting](./inline.md#collecting-feedback) for details on how to enable these updates for your bot. The updates can also be enabled using the parameter *inline_feedback_share_denominator* of the method [setMySettings](./api/methods/setmysettings.md).|
 |callback_query|[CallbackQuery](./api/types/callbackquery.md)|*Optional*. New incoming callback query|
@@ -2886,14 +2886,14 @@ At most **one** of the optional fields can be present in any given update.
 |shipping_query|[ShippingQuery](./api/types/shippingquery.md)|*Optional*. New incoming shipping query. Only for invoices with flexible price.|
 |pre_checkout_query|[PreCheckoutQuery](./api/types/precheckoutquery.md)|*Optional*. New incoming pre-checkout query. Contains full information about checkout.|
 |purchased_paid_media|[PaidMediaPurchased](./api/types/paidmediapurchased.md)|*Optional*. A user purchased paid media with a non-empty payload sent by the bot in a non-channel chat|
-|poll|[Poll](./api/types/poll.md)|*Optional*. New poll state. Bots receive only updates about manually stopped polls and polls, which are sent by the bot.|
+|poll|[Poll](./api/types/poll.md)|*Optional*. New poll state. Bots receive only updates about manually stopped polls and polls which are sent by the bot.|
 |poll_answer|[PollAnswer](./api/types/pollanswer.md)|*Optional*. A user changed their answer in a non-anonymous poll. Bots receive new votes only in polls that were sent by the bot itself.|
 |my_chat_member|[ChatMemberUpdated](./api/types/chatmemberupdated.md)|*Optional*. The bot's chat member status was updated in a chat. For private chats, this update is received only when the bot is blocked or unblocked by the user.|
 |chat_member|[ChatMemberUpdated](./api/types/chatmemberupdated.md)|*Optional*. A chat member's status was updated in a chat. The bot must be an administrator in the chat and must explicitly specify `"chat_member"` in the list of *allowed_updates* to receive these updates.|
 |chat_join_request|[ChatJoinRequest](./api/types/chatjoinrequest.md)|*Optional*. A request to join the chat has been sent. The bot must have the *can_invite_users* administrator right in the chat to receive these updates.|
 |chat_boost|[ChatBoostUpdated](./api/types/chatboostupdated.md)|*Optional*. A chat boost was added or changed. The bot must be an administrator in the chat to receive these updates.|
 |removed_chat_boost|[ChatBoostRemoved](./api/types/chatboostremoved.md)|*Optional*. A boost was removed from a chat. The bot must be an administrator in the chat to receive these updates.|
-|managed_bot|[ManagedBotUpdated](./api/types/managedbotupdated.md)|*Optional*. A new bot was created to be managed by the bot, or token or owner of a managed bot was changed|
+|managed_bot|[ManagedBotUpdated](./api/types/managedbotupdated.md)|*Optional*. A new bot was created to be managed by the bot, or the token or owner of a managed bot was changed|
 |subscription|[BotSubscriptionUpdated](./api/types/botsubscriptionupdated.md)|*Optional*. User payment subscription has changed|
 |stopped_message_generation|[MessageGenerationStopped](./api/types/messagegenerationstopped.md)|*Optional*. A user asked the bot to stop the generation of a message|
 
@@ -2919,7 +2919,7 @@ This object contains full information about the bot itself.
 
 |Field|Type|Description|
 |-----------|
-|id|Integer|Unique identifier for this bot. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier.|
+|id|Integer|Unique identifier for this bot. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type is safe for storing this identifier.|
 |is_bot|True|Always *True*|
 |first_name|String|Bot's first name|
 |username|String|*Optional*. Bot's username|
@@ -2944,7 +2944,7 @@ This object represents a Telegram user or bot.
 
 |Field|Type|Description|
 |-----------|
-|id|Integer|Unique identifier for this user or bot. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier.|
+|id|Integer|Unique identifier for this user or bot. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type is safe for storing this identifier.|
 |is_bot|Boolean|*True*, if this user is a bot|
 |first_name|String|User's or bot's first name|
 |last_name|String|*Optional*. User's or bot's last name|
@@ -2959,7 +2959,7 @@ This object represents a chat.
 
 |Field|Type|Description|
 |-----------|
-|id|Integer|Unique identifier for this chat. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.|
+|id|Integer|Unique identifier for this chat. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type is safe for storing this identifier.|
 |type|String|Type of the chat, can be either "private", "group", "supergroup" or "channel"|
 |title|String|*Optional*. Title, for supergroups, channels and group chats|
 |username|String|*Optional*. Username, for private chats, supergroups and channels if available|
@@ -2974,7 +2974,7 @@ This object contains full information about a chat.
 
 |Field|Type|Description|
 |-----------|
-|id|Integer|Unique identifier for this chat. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.|
+|id|Integer|Unique identifier for this chat. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type is safe for storing this identifier.|
 |type|String|Type of the chat, can be either "private", "group", "supergroup" or "channel"|
 |title|String|*Optional*. Title, for supergroups, channels and group chats|
 |username|String|*Optional*. Username, for private chats, supergroups and channels if available|
@@ -2999,7 +2999,7 @@ This object contains full information about a chat.
 |emoji_status_custom_emoji_id|String|*Optional*. Custom emoji identifier of the emoji status of the chat or the other party in a private chat|
 |emoji_status_expiration_date|Integer|*Optional*. Expiration date of the emoji status of the chat or the other party in a private chat, in Unix time, if any|
 |bio|String|*Optional*. Bio of the other party in a private chat|
-|has_private_forwards|True|*Optional*. *True*, if privacy settings of the other party in the private chat allows to use `tg://user?id=<user_id>` links only in chats with the user|
+|has_private_forwards|True|*Optional*. *True*, if the privacy settings of the other party in the private chat allow using `tg://user?id=<user_id>` links only in chats with the user|
 |has_restricted_voice_and_video_messages|True|*Optional*. *True*, if the privacy settings of the other party restrict sending voice and video note messages in the private chat|
 |join_to_send_messages|True|*Optional*. *True*, if users need to join the supergroup before they can send messages|
 |join_by_request|True|*Optional*. *True*, if all users directly joining the supergroup without using an invite link need to be approved by supergroup administrators|
@@ -3019,7 +3019,7 @@ This object contains full information about a chat.
 |sticker_set_name|String|*Optional*. For supergroups, name of the group sticker set|
 |can_set_sticker_set|True|*Optional*. *True*, if the bot can change the group sticker set|
 |custom_emoji_sticker_set_name|String|*Optional*. For supergroups, the name of the group's custom emoji sticker set. Custom emoji from this set can be used by all users and bots in the group.|
-|linked_chat_id|Integer|*Optional*. Unique identifier for the linked chat, i.e. the discussion group identifier for a channel and vice versa; for supergroups and channel chats. This identifier may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64 bit integer or double-precision float type are safe for storing this identifier.|
+|linked_chat_id|Integer|*Optional*. Unique identifier for the linked chat, i.e. the discussion group identifier for a channel and vice versa; for supergroups and channel chats. This identifier may be greater than 32 bits and some programming languages may have difficulty/silent defects in interpreting it. But it is smaller than 52 bits, so a signed 64-bit integer or double-precision float type is safe for storing this identifier.|
 |location|[ChatLocation](./api/types/chatlocation.md)|*Optional*. For supergroups, the location to which the supergroup is connected|
 |rating|[UserRating](./api/types/userrating.md)|*Optional*. For private chats, the rating of the user if any|
 |first_profile_audio|[Audio](./api/types/audio.md)|*Optional*. For private chats, the first audio added to the profile of the user|
@@ -3103,14 +3103,14 @@ This object represents a message.
 |chat_owner_left|[ChatOwnerLeft](./api/types/chatownerleft.md)|*Optional*. Service message: chat owner has left|
 |chat_owner_changed|[ChatOwnerChanged](./api/types/chatownerchanged.md)|*Optional*. Service message: chat owner has changed|
 |new_chat_title|String|*Optional*. A chat title was changed to this value|
-|new_chat_photo|Array of [PhotoSize](./api/types/photosize.md)|*Optional*. A chat photo was change to this value|
+|new_chat_photo|Array of [PhotoSize](./api/types/photosize.md)|*Optional*. A chat photo was changed to this value|
 |delete_chat_photo|True|*Optional*. Service message: the chat photo was deleted|
 |group_chat_created|True|*Optional*. Service message: the group has been created|
-|supergroup_chat_created|True|*Optional*. Service message: the supergroup has been created. This field can't be received in a message coming through updates, because bot can't be a member of a supergroup when it is created. It can only be found in reply_to_message if someone replies to a very first message in a directly created supergroup.|
-|channel_chat_created|True|*Optional*. Service message: the channel has been created. This field can't be received in a message coming through updates, because bot can't be a member of a channel when it is created. It can only be found in reply_to_message if someone replies to a very first message in a channel.|
+|supergroup_chat_created|True|*Optional*. Service message: the supergroup has been created. This field can't be received in a message coming through updates, because a bot can't be a member of a supergroup when it is created. It can only be found in reply_to_message if someone replies to the very first message in a directly created supergroup.|
+|channel_chat_created|True|*Optional*. Service message: the channel has been created. This field can't be received in a message coming through updates, because a bot can't be a member of a channel when it is created. It can only be found in reply_to_message if someone replies to the very first message in a channel.|
 |message_auto_delete_timer_changed|[MessageAutoDeleteTimerChanged](./api/types/messageautodeletetimerchanged.md)|*Optional*. Service message: auto-delete timer settings changed in the chat|
-|migrate_to_chat_id|Integer|*Optional*. The group has been migrated to a supergroup with the specified identifier. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.|
-|migrate_from_chat_id|Integer|*Optional*. The supergroup has been migrated from a group with the specified identifier. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.|
+|migrate_to_chat_id|Integer|*Optional*. The group has been migrated to a supergroup with the specified identifier. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type is safe for storing this identifier.|
+|migrate_from_chat_id|Integer|*Optional*. The supergroup has been migrated from a group with the specified identifier. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type is safe for storing this identifier.|
 |pinned_message|[MaybeInaccessibleMessage](./api/types/maybeinaccessiblemessage.md)|*Optional*. Specified message was pinned. Note that the [Message](./api/types/message.md) object in this field will not contain further *reply_to_message* fields even if it itself is a reply.|
 |invoice|[Invoice](./api/types/invoice.md)|*Optional*. Message is an invoice for a [payment](./api.md#payments), information about the invoice. [More about payments »](./api.md#payments)|
 |successful_payment|[SuccessfulPayment](./api/types/successfulpayment.md)|*Optional*. Message is a service message about a successful payment, information about the payment. [More about payments »](./api.md#payments)|
@@ -3166,7 +3166,7 @@ This object represents a unique message identifier.
 
 |Field|Type|Description|
 |-----------|
-|message_id|Integer|Unique message identifier. In specific instances (e.g., message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent.|
+|message_id|Integer|Unique message identifier. In specific instances (e.g., a message containing a video sent to a big chat), the server might automatically schedule a message instead of sending it immediately. In such cases, this field will be 0 and the relevant message will be unusable until it is actually sent.|
 
 #### InaccessibleMessage
 
@@ -3194,7 +3194,7 @@ This object represents one special entity in a text message. For example, hashta
 |type|String|Type of the entity. Currently, can be "mention" (`@username`), "hashtag" (`#hashtag` or `#hashtag@chatusername`), "cashtag" (`$USD` or `$USD@chatusername`), "bot_command" (`/start@jobs_bot`), "url" (`https://telegram.org`), "email" (`do-not-reply@telegram.org`), "phone_number" (`+1-212-555-0123`), "bank_card_number" (bank card number), "ton_address" (address in the TON blockchain), "bold" (**bold text**), "italic" (*italic text*), "underline" (underlined text), "strikethrough" (strikethrough text), "spoiler" (spoiler message), "blockquote" (block quotation), "expandable_blockquote" (collapsed-by-default block quotation), "code" (monowidth string), "pre" (monowidth block), "text_link" (for clickable text URLs), "text_mention" (for users [without usernames](https://telegram.org/blog/edit#new-mentions)), "custom_emoji" (for inline custom emoji stickers), or "date_time" (for formatted date and time).|
 |offset|Integer|Offset in [UTF-16 code units](https://core.telegram.org/api/entities.md#entity-length) to the start of the entity|
 |length|Integer|Length of the entity in [UTF-16 code units](https://core.telegram.org/api/entities.md#entity-length)|
-|url|String|*Optional*. For "text_link" only, URL that will be opened after user taps on the text|
+|url|String|*Optional*. For "text_link" only, URL that will be opened after the user taps on the text|
 |user|[User](./api/types/user.md)|*Optional*. For "text_mention" only, the mentioned user|
 |language|String|*Optional*. For "pre" only, the programming language of the entity text|
 |custom_emoji_id|String|*Optional*. For "custom_emoji" only, unique identifier of the custom emoji. Use [getCustomEmojiStickers](./api/methods/getcustomemojistickers.md) to get full information about the sticker.|
@@ -3260,12 +3260,14 @@ Describes reply parameters for the message that is being sent.
 |quote|String|*Optional*. Quoted part of the message to be replied to; 0-1024 characters after entities parsing. The quote must be an exact substring of the message to be replied to, including *bold*, *italic*, *underline*, *strikethrough*, *spoiler*, *custom_emoji*, and *date_time* entities. The message will fail to send if the quote isn't found in the original message. Ignored for ephemeral messages.|
 |quote_parse_mode|String|*Optional*. Mode for parsing entities in the quote. See [formatting options](./api/formatting.md) for more details.|
 |quote_entities|Array of [MessageEntity](./api/types/messageentity.md)|*Optional*. A JSON-serialized list of special entities that appear in the quote. It can be specified instead of *quote_parse_mode*.|
-|quote_rich_texts|Array of [RichText](./api/types/richtext.md)|*Optional*. A JSON-serialized list of quoted parts of the [rich message](./api/types/richmessage.md) to be replied to. Must contain one element for each quoted text of the message in the order of their appearance. Each of the following is a separate quoted text: the text of a paragraph, a heading, a preformatted block, a footer, or a mathematical expression; the text and the credit of a block quotation or a pull quotation; the summary of a details block; the caption and each cell of a table; the text and the credit of a caption of a media block, a collage, a slideshow, or a map. Texts of blocks nested in lists, block quotations, details, collages, and slideshows are separate quoted texts too. The first and the last elements can contain only a part of the corresponding text; all other elements must contain the whole text. Formatting of the quoted parts must be kept, and rich texts must be nested in the same way as in the message received from the server. Mathematical expressions must be quoted entirely. Buttons in [RichBlockButtons](./api/types/richblockbuttons.md), anchors and dividers can't be quoted. Up to 32 quoted texts with total length up to 1024 characters can be specified. Only plain text, [RichTextBold](./api/types/richtextbold.md), [RichTextItalic](./api/types/richtextitalic.md), [RichTextUnderline](./api/types/richtextunderline.md), [RichTextStrikethrough](./api/types/richtextstrikethrough.md), [RichTextSpoiler](./api/types/richtextspoiler.md), [RichTextSubscript](./api/types/richtextsubscript.md), [RichTextSuperscript](./api/types/richtextsuperscript.md), [RichTextDateTime](./api/types/richtextdatetime.md), [RichTextCustomEmoji](./api/types/richtextcustomemoji.md), [RichTextMathematicalExpression](./api/types/richtextmathematicalexpression.md), and arrays of them are kept in the quote; other rich text types are replaced with their text. If non-empty, then *quote*, *quote_parse_mode* and *quote_entities* are ignored.|
+|quote_rich_texts|Array of [RichText](./api/types/richtext.md)|*Optional*. A JSON-serialized list of quoted parts of the [rich message](./api/types/richmessage.md) to be replied to. Must contain one element for each quoted text of the message in the order of their appearance. Each of the following is a separate quoted text: the text of a paragraph, a heading, a preformatted block, a footer, or a mathematical expression; the text and the credit of a block quotation or a pull quotation; the summary of a details block; the caption and each cell of a table; the text and the credit of a caption of a media block, a collage, a slideshow, or a map. Texts of blocks nested in lists, block quotations, details, collages, and slideshows are separate quoted texts too. The first and the last elements can contain only a part of the corresponding text; all other elements must contain the whole text. Formatting of the quoted parts must be kept, and rich texts must be nested in the same way as in the message received from the server. Mathematical expressions must be quoted entirely. Buttons in [RichBlockButtons](./api/types/richblockbuttons.md), anchors and dividers can't be quoted. Up to 32 quoted texts with a total length of up to 1024 characters can be specified. Only plain text, [RichTextBold](./api/types/richtextbold.md), [RichTextItalic](./api/types/richtextitalic.md), [RichTextUnderline](./api/types/richtextunderline.md), [RichTextStrikethrough](./api/types/richtextstrikethrough.md), [RichTextSpoiler](./api/types/richtextspoiler.md), [RichTextSubscript](./api/types/richtextsubscript.md), [RichTextSuperscript](./api/types/richtextsuperscript.md), [RichTextDateTime](./api/types/richtextdatetime.md), [RichTextCustomEmoji](./api/types/richtextcustomemoji.md), [RichTextMathematicalExpression](./api/types/richtextmathematicalexpression.md), and arrays of them are kept in the quote; other rich text types are replaced with their text. If non-empty, then *quote*, *quote_parse_mode* and *quote_entities* are ignored.|
 |quote_position|Integer|*Optional*. Position of the quote in the original message in UTF-16 code units. For quotes from rich messages, it is the position in the text formed by joining plain texts of all quotable texts of the message, separated by line feeds.|
 |checklist_task_id|Integer|*Optional*. Identifier of the specific checklist task to be replied to|
 |poll_option_id|String|*Optional*. Persistent identifier of the specific poll option to be replied to|
 
 #### EphemeralMessageParameters
+
+Describes the parameters of an ephemeral message to be sent.
 
 |Field|Type|Description|
 |-----------|
@@ -3351,7 +3353,7 @@ This object represents an animation file (GIF or H.264/MPEG-4 AVC video without 
 |thumbnail|[PhotoSize](./api/types/photosize.md)|*Optional*. Animation thumbnail as defined by the sender|
 |file_name|String|*Optional*. Original animation filename as defined by the sender|
 |mime_type|String|*Optional*. MIME type of the file as defined by the sender|
-|file_size|Integer|*Optional*. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.|
+|file_size|Integer|*Optional*. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type is safe for storing this value.|
 
 #### Audio
 
@@ -3366,7 +3368,7 @@ This object represents an audio file to be treated as music by the Telegram clie
 |title|String|*Optional*. Title of the audio as defined by the sender or by audio tags|
 |file_name|String|*Optional*. Original filename as defined by the sender|
 |mime_type|String|*Optional*. MIME type of the file as defined by the sender|
-|file_size|Integer|*Optional*. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.|
+|file_size|Integer|*Optional*. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type is safe for storing this value.|
 |thumbnail|[PhotoSize](./api/types/photosize.md)|*Optional*. Thumbnail of the album cover to which the music file belongs|
 
 #### Document
@@ -3380,7 +3382,7 @@ This object represents a general file (as opposed to [photos](./api/types/photos
 |thumbnail|[PhotoSize](./api/types/photosize.md)|*Optional*. Document thumbnail as defined by the sender|
 |file_name|String|*Optional*. Original filename as defined by the sender|
 |mime_type|String|*Optional*. MIME type of the file as defined by the sender|
-|file_size|Integer|*Optional*. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.|
+|file_size|Integer|*Optional*. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type is safe for storing this value.|
 
 #### LivePhoto
 
@@ -3389,13 +3391,13 @@ This object represents a live photo.
 |Field|Type|Description|
 |-----------|
 |photo|Array of [PhotoSize](./api/types/photosize.md)|*Optional*. Available sizes of the corresponding static photo|
-|file_id|String|Identifier for the video file which can be used to download or reuse the file|
-|file_unique_id|String|Unique identifier for the video file which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.|
+|file_id|String|Identifier for the video file, which can be used to download or reuse the file|
+|file_unique_id|String|Unique identifier for the video file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.|
 |width|Integer|Video width as defined by the sender|
 |height|Integer|Video height as defined by the sender|
 |duration|Integer|Duration of the video in seconds as defined by the sender|
 |mime_type|String|*Optional*. MIME type of the file as defined by the sender|
-|file_size|Integer|*Optional*. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.|
+|file_size|Integer|*Optional*. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type is safe for storing this value.|
 
 #### Story
 
@@ -3417,7 +3419,7 @@ This object represents a video file of a specific quality.
 |width|Integer|Video width|
 |height|Integer|Video height|
 |codec|String|Codec that was used to encode the video, for example, "h264", "h265", or "av01"|
-|file_size|Integer|*Optional*. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.|
+|file_size|Integer|*Optional*. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type is safe for storing this value.|
 
 #### Video
 
@@ -3436,7 +3438,7 @@ This object represents a video file.
 |qualities|Array of [VideoQuality](./api/types/videoquality.md)|*Optional*. List of available qualities of the video|
 |file_name|String|*Optional*. Original filename as defined by the sender|
 |mime_type|String|*Optional*. MIME type of the file as defined by the sender|
-|file_size|Integer|*Optional*. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.|
+|file_size|Integer|*Optional*. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type is safe for storing this value.|
 
 #### VideoNote
 
@@ -3461,7 +3463,7 @@ This object represents a voice note.
 |file_unique_id|String|Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.|
 |duration|Integer|Duration of the audio in seconds as defined by the sender|
 |mime_type|String|*Optional*. MIME type of the file as defined by the sender|
-|file_size|Integer|*Optional*. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.|
+|file_size|Integer|*Optional*. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type is safe for storing this value.|
 
 #### Widget
 
@@ -3541,7 +3543,7 @@ This object represents a phone contact.
 |phone_number|String|Contact's phone number|
 |first_name|String|Contact's first name|
 |last_name|String|*Optional*. Contact's last name|
-|user_id|Integer|*Optional*. Contact's user identifier in Telegram. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier.|
+|user_id|Integer|*Optional*. Contact's user identifier in Telegram. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type is safe for storing this identifier.|
 |vcard|String|*Optional*. Additional data about the contact in the form of a [vCard](https://en.wikipedia.org/wiki/VCard)|
 
 #### Dice
@@ -3657,8 +3659,8 @@ This object contains information about a poll.
 |is_anonymous|Boolean|*True*, if the poll is anonymous|
 |type|String|Poll type, currently can be "regular" or "quiz"|
 |allows_multiple_answers|Boolean|*True*, if the poll allows multiple answers|
-|allows_revoting|Boolean|*True*, if the poll allows to change the chosen answer options|
-|members_only|Boolean|*True* if voting is limited to users who have been members of the chat where the poll was originally sent for more than 24 hours|
+|allows_revoting|Boolean|*True*, if the poll allows changing the chosen answer options|
+|members_only|Boolean|*True*, if voting is limited to users who have been members of the chat where the poll was originally sent for more than 24 hours|
 |country_codes|Array of String|*Optional*. A list of two-letter [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes indicating the countries from which users can vote in the poll. The country code "FT" is used for users with anonymous numbers. If omitted, then users from any country can participate in the poll.|
 |correct_option_ids|Array of Integer|*Optional*. Array of 0-based identifiers of the correct answer options. Available only for polls in quiz mode which are closed or were sent (not forwarded) by the bot or to the private chat with the bot.|
 |explanation|String|*Optional*. Text that is shown when a user chooses an incorrect answer or taps on the lamp icon in a quiz-style poll, 0-200 characters|
@@ -3729,7 +3731,7 @@ This object represents a point on the map.
 |longitude|Float|Longitude as defined by the sender|
 |horizontal_accuracy|Float|*Optional*. The radius of uncertainty for the location, measured in meters; 0-1500|
 |live_period|Integer|*Optional*. Time relative to the message sending date, during which the location can be updated; in seconds. For active live locations only.|
-|heading|Integer|*Optional*. The direction in which user is moving, in degrees; 1-360. For active live locations only.|
+|heading|Integer|*Optional*. The direction in which the user is moving, in degrees; 1-360. For active live locations only.|
 |proximity_alert_radius|Integer|*Optional*. The maximum distance for proximity alerts about approaching another chat member, in meters. For sent live locations only.|
 
 #### Venue
@@ -3788,7 +3790,7 @@ This object contains information about the creation, token update, or owner upda
 |Field|Type|Description|
 |-----------|
 |user|[User](./api/types/user.md)|User that created the bot|
-|bot|[User](./api/types/user.md)|Information about the bot. Token of the bot can be fetched using the method [getManagedBotToken](./api/methods/getmanagedbottoken.md).|
+|bot|[User](./api/types/user.md)|Information about the bot. The token of the bot can be fetched using the method [getManagedBotToken](./api/methods/getmanagedbottoken.md).|
 
 #### BotSubscriptionUpdated
 
@@ -4007,11 +4009,11 @@ This object represents a service message about a forum topic reopened in the cha
 
 #### GeneralForumTopicHidden
 
-This object represents a service message about General forum topic hidden in the chat. Currently holds no information.
+This object represents a service message about the General forum topic hidden in the chat. Currently holds no information.
 
 #### GeneralForumTopicUnhidden
 
-This object represents a service message about General forum topic unhidden in the chat. Currently holds no information.
+This object represents a service message about the General forum topic unhidden in the chat. Currently holds no information.
 
 #### SharedUser
 
@@ -4041,7 +4043,7 @@ This object contains information about a chat that was shared with the bot using
 |Field|Type|Description|
 |-----------|
 |request_id|Integer|Identifier of the request|
-|chat_id|Integer|Identifier of the shared chat. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. The bot may not have access to the chat and could be unable to use this identifier, unless the chat is already known to the bot by some other means.|
+|chat_id|Integer|Identifier of the shared chat. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type is safe for storing this identifier. The bot may not have access to the chat and could be unable to use this identifier, unless the chat is already known to the bot by some other means.|
 |title|String|*Optional*. Title of the chat, if the title was requested by the bot|
 |username|String|*Optional*. Username of the chat, if the username was requested by the bot and available|
 |photo|Array of [PhotoSize](./api/types/photosize.md)|*Optional*. Available sizes of the chat photo, if the photo was requested by the bot|
@@ -4181,10 +4183,10 @@ This object represents a message about a scheduled giveaway.
 |-----------|
 |chats|Array of [Chat](./api/types/chat.md)|The list of chats which the user must join to participate in the giveaway|
 |winners_selection_date|Integer|Point in time (Unix timestamp) when winners of the giveaway will be selected|
-|winner_count|Integer|The number of users which are supposed to be selected as winners of the giveaway|
+|winner_count|Integer|The number of users who are supposed to be selected as winners of the giveaway|
 |only_new_members|True|*Optional*. *True*, if only users who join the chats after the giveaway started should be eligible to win|
 |has_public_winners|True|*Optional*. *True*, if the list of giveaway winners will be visible to everyone|
-|prize_description|String|*Optional*. Description of additional giveaway prize|
+|prize_description|String|*Optional*. Description of an additional giveaway prize|
 |country_codes|Array of String|*Optional*. A list of two-letter [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country codes indicating the countries from which eligible users for the giveaway must come. If empty, then all users can participate in the giveaway. Users with a phone number that was bought on Fragment can always participate in giveaways.|
 |prize_star_count|Integer|*Optional*. The number of Telegram Stars to be split between giveaway winners; for Telegram Star giveaways only|
 |premium_subscription_month_count|Integer|*Optional*. The number of months the Telegram Premium subscription won from the giveaway will be active for; for Telegram Premium giveaways only|
@@ -4206,7 +4208,7 @@ This object represents a message about the completion of a giveaway with public 
 |unclaimed_prize_count|Integer|*Optional*. Number of undistributed prizes|
 |only_new_members|True|*Optional*. *True*, if only users who had joined the chats after the giveaway started were eligible to win|
 |was_refunded|True|*Optional*. *True*, if the giveaway was canceled because the payment for it was refunded|
-|prize_description|String|*Optional*. Description of additional giveaway prize|
+|prize_description|String|*Optional*. Description of an additional giveaway prize|
 
 #### GiveawayCompleted
 
@@ -4257,7 +4259,7 @@ Contains parameters of a post that is being suggested by the bot.
 |Field|Type|Description|
 |-----------|
 |price|[SuggestedPostPrice](./api/types/suggestedpostprice.md)|*Optional*. Proposed price for the post. If the field is omitted, then the post is unpaid.|
-|send_date|Integer|*Optional*. Proposed send date of the post. If specified, then the date must be between 300 second and 2678400 seconds (30 days) in the future. If the field is omitted, then the post can be published at any time within 30 days at the sole discretion of the user who approves it.|
+|send_date|Integer|*Optional*. Proposed send date of the post. If specified, then the date must be between 300 seconds and 2678400 seconds (30 days) in the future. If the field is omitted, then the post can be published at any time within 30 days at the sole discretion of the user who approves it.|
 
 #### DirectMessagesTopic
 
@@ -4265,12 +4267,12 @@ Describes a topic of a direct messages chat.
 
 |Field|Type|Description|
 |-----------|
-|topic_id|Integer|Unique identifier of the topic. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier.|
+|topic_id|Integer|Unique identifier of the topic. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type is safe for storing this identifier.|
 |user|[User](./api/types/user.md)|*Optional*. Information about the user that created the topic. Currently, it is always present.|
 
 #### UserProfilePhotos
 
-This object represent a user's profile pictures.
+This object represents a user's profile pictures.
 
 |Field|Type|Description|
 |-----------|
@@ -4296,7 +4298,7 @@ This object represents a file ready to be downloaded. The file can be downloaded
 |-----------|
 |file_id|String|Identifier for this file, which can be used to download or reuse the file|
 |file_unique_id|String|Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.|
-|file_size|Integer|*Optional*. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.|
+|file_size|Integer|*Optional*. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type is safe for storing this value.|
 |file_path|String|*Optional*. File path. Use `https://api.telegram.org/file/bot<token>/<file_path>` to get the file.|
 
 #### WebAppInfo
@@ -4320,7 +4322,7 @@ This object represents a [custom keyboard](./features.md#keyboards) with reply o
 |input_field_placeholder|String|*Optional*. The placeholder to be shown in the input field when the keyboard is active; 1-64 characters|
 |selective|Boolean|*Optional*. Use this parameter if you want to show the keyboard to specific users only. Targets: 1) users that are @mentioned in the *text* of the [Message](./api/types/message.md) object; 2) if the bot's message is a reply to a message in the same chat and forum topic, sender of the original message.\
 \
-*Example:* A user requests to change the bot's language, bot replies to the request with a keyboard to select the new language. Other users in the group don't see the keyboard.|
+*Example:* A user requests to change the bot's language, and the bot replies to the request with a keyboard to select the new language. Other users in the group don't see the keyboard.|
 |force_reply|Boolean|*Optional*. Pass *True* if the reply interface must be shown to the user, as if they had manually selected the bot's message and tapped 'Reply'|
 
 #### KeyboardButton
@@ -4356,7 +4358,7 @@ This object defines the criteria used to request suitable users. Information abo
 
 #### KeyboardButtonRequestChat
 
-This object defines the criteria used to request a suitable chat. Information about the selected chat will be shared with the bot when the corresponding button is pressed. The bot will be granted requested rights in the chat if appropriate. [More about requesting chats »](./features.md#chat-and-user-selection).
+This object defines the criteria used to request a suitable chat. Information about the selected chat will be shared with the bot when the corresponding button is pressed. The bot will be granted the requested rights in the chat if appropriate. [More about requesting chats »](./features.md#chat-and-user-selection).
 
 |Field|Type|Description|
 |-----------|
@@ -4384,7 +4386,7 @@ This object defines the parameters for the creation of a managed bot. Informatio
 
 #### KeyboardButtonPollType
 
-This object represents type of a poll, which is allowed to be created and sent when the corresponding button is pressed.
+This object represents the type of a poll, which is allowed to be created and sent when the corresponding button is pressed.
 
 |Field|Type|Description|
 |-----------|
@@ -4396,10 +4398,10 @@ Upon receiving a message with this object, Telegram clients will remove the curr
 
 |Field|Type|Description|
 |-----------|
-|remove_keyboard|True|Requests clients to remove the custom keyboard (user will not be able to summon this keyboard; if you want to hide the keyboard from sight but keep it accessible, use *one_time_keyboard* in [ReplyKeyboardMarkup](./api/types/replykeyboardmarkup.md))|
+|remove_keyboard|True|Requests clients to remove the custom keyboard (the user will not be able to summon this keyboard; if you want to hide the keyboard from sight but keep it accessible, use *one_time_keyboard* in [ReplyKeyboardMarkup](./api/types/replykeyboardmarkup.md))|
 |selective|Boolean|*Optional*. Use this parameter if you want to remove the keyboard for specific users only. Targets: 1) users that are @mentioned in the *text* of the [Message](./api/types/message.md) object; 2) if the bot's message is a reply to a message in the same chat and forum topic, sender of the original message.\
 \
-*Example:* A user votes in a poll, bot returns confirmation message in reply to the vote and removes the keyboard for that user, while still showing the keyboard with poll options to users who haven't voted yet.|
+*Example:* A user votes in a poll, and the bot returns a confirmation message in reply to the vote and removes the keyboard for that user, while still showing the keyboard with poll options to users who haven't voted yet.|
 
 #### InlineKeyboardMarkup
 
@@ -4432,7 +4434,7 @@ This offers a quick way for the user to open your bot in inline mode in the same
 |callback_game|[CallbackGame](./api/types/callbackgame.md)|*Optional*. Description of the game that will be launched when the user presses the button.\
 \
 **NOTE:** This type of button **must** always be the first button in the first row.|
-|pay|Boolean|*Optional*. Specify *True*, to send a [Pay button](./api.md#payments). Substrings "⭐" and "XTR" in the buttons's text will be replaced with a Telegram Star icon. \
+|pay|Boolean|*Optional*. Specify *True* to send a [Pay button](./api.md#payments). Substrings "⭐" and "XTR" in the button's text will be replaced with a Telegram Star icon. \
 \
 **NOTE:** This type of button **must** always be the first button in the first row and can only be used in invoice messages.|
 |disabled|[DisabledButton](./api/types/disabledbutton.md)|*Optional*. If set, then the button is disabled and does nothing|
@@ -4491,7 +4493,7 @@ This object represents an incoming callback query from a callback button in an [
 |message|[MaybeInaccessibleMessage](./api/types/maybeinaccessiblemessage.md)|*Optional*. Message sent by the bot with the callback button that originated the query|
 |inline_message_id|String|*Optional*. Identifier of the message sent via the bot in inline mode, that originated the query. Can also be present for messages sent by the bot, depending on the parameter *callback_query_mode* of the method [setMySettings](./api/methods/setmysettings.md).|
 |chat_instance|String|Global identifier, uniquely corresponding to the chat to which the message with the callback button was sent. Useful for high scores in [games](./api.md#games).|
-|data|String|*Optional*. Data associated with the callback button. Be aware that the message originated the query can contain no callback buttons with this data.|
+|data|String|*Optional*. Data associated with the callback button. Be aware that the message that originated the query can contain no callback buttons with this data.|
 |game_short_name|String|*Optional*. Short name of a [Game](./api/types/game.md) to be returned, serves as the unique identifier for the game|
 
 >**NOTE:** After the user presses a callback button, Telegram clients will display a progress bar until you call [answerCallbackQuery](./api/methods/answercallbackquery.md). It is, therefore, necessary to react by calling [answerCallbackQuery](./api/methods/answercallbackquery.md) even if no notification to the user is needed (e.g., without specifying any of the optional parameters).
@@ -4575,7 +4577,7 @@ This object represents an incoming query from a forwarded message with a shared 
 
 #### ForceReply
 
-Upon receiving a message with this object, Telegram clients will display a reply interface to the user (act as if the user has selected the bot's message and tapped 'Reply'). This can be extremely useful if you want to create user-friendly step-by-step interfaces without having to sacrifice [privacy mode](./features.md#privacy-mode). Not supported in channels and for messages sent on behalf of a user account.
+Upon receiving a message with this object, Telegram clients will display a reply interface to the user (act as if the user has selected the bot's message and tapped 'Reply'). This can be extremely useful if you want to create user-friendly step-by-step interfaces without having to sacrifice [privacy mode](./features.md#privacy-mode). Not supported in channels and for messages sent on behalf of a business account.
 
 |Field|Type|Description|
 |-----------|
@@ -4585,7 +4587,7 @@ Upon receiving a message with this object, Telegram clients will display a reply
 
 >**Example:** A [poll bot](https://t.me/PollBot) for groups runs in privacy mode (only receives commands, replies to its messages and mentions). There could be two ways to create a new poll:
 >
-- Explain the user how to send a command with parameters (e.g. /newpoll question answer1 answer2). May be appealing for hardcore users but lacks modern day polish.
+- Explain to the user how to send a command with parameters (e.g. /newpoll question answer1 answer2). May be appealing for hardcore users but lacks modern-day polish.
 - Guide the user through a step-by-step process. 'Please send me your question', 'Cool, now let's add the first answer option', 'Great. Keep adding answer options, then send /done when you're ready'.
 >
 The last option is definitely more attractive. And if you use [ForceReply](./api/types/forcereply.md) in your bot's questions, it will receive the user's answers even if it only receives replies, commands and mentions - without any extra work for the user.
@@ -4596,7 +4598,7 @@ Represents a community (a group of chats).
 
 |Field|Type|Description|
 |-----------|
-|id|Integer|Unique identifier for this community. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.|
+|id|Integer|Unique identifier for this community. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type is safe for storing this identifier.|
 |name|String|Name of the community|
 
 #### ChatPhoto
@@ -4622,7 +4624,7 @@ Represents an invite link for a chat.
 |is_primary|Boolean|*True*, if the link is primary|
 |is_revoked|Boolean|*True*, if the link is revoked|
 |name|String|*Optional*. Invite link name|
-|expire_date|Integer|*Optional*. Point in time (Unix timestamp) when the link will expire or has been expired|
+|expire_date|Integer|*Optional*. Point in time (Unix timestamp) when the link will expire or has expired|
 |member_limit|Integer|*Optional*. The maximum number of users that can be members of the chat simultaneously after joining the chat via this invite link; 1-99999|
 |pending_join_request_count|Integer|*Optional*. Number of pending join requests created using this link|
 |subscription_period|Integer|*Optional*. The number of seconds the subscription will be active for before the next payment|
@@ -4785,7 +4787,7 @@ Represents a join request sent to a chat.
 |-----------|
 |chat|[Chat](./api/types/chat.md)|Chat to which the request was sent|
 |from|[User](./api/types/user.md)|User that sent the join request|
-|user_chat_id|Integer|Identifier of a private chat with the user who sent the join request. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier. The bot can use this identifier for 5 minutes to send messages until the join request is processed, assuming no other administrator contacted the user.|
+|user_chat_id|Integer|Identifier of a private chat with the user who sent the join request. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type is safe for storing this identifier. The bot can use this identifier for 5 minutes to send messages until the join request is processed, assuming no other administrator contacted the user.|
 |date|Integer|Date the request was sent in Unix time|
 |bio|String|*Optional*. Bio of the user|
 |invite_link|[ChatInviteLink](./api/types/chatinvitelink.md)|*Optional*. Chat invite link that was used by the user to send the join request|
@@ -4863,11 +4865,11 @@ Describes the opening hours of a business.
 
 #### UserRating
 
-This object describes the rating of a user based on their Telegram Star spendings.
+This object describes the rating of a user based on their Telegram Star spending.
 
 |Field|Type|Description|
 |-----------|
-|level|Integer|Current level of the user, indicating their reliability when purchasing digital goods and services. A higher level suggests a more trustworthy customer; a negative level is likely reason for concern.|
+|level|Integer|Current level of the user, indicating their reliability when purchasing digital goods and services. A higher level suggests a more trustworthy customer; a negative level is likely a reason for concern.|
 |rating|Integer|Numerical value of the user's rating; the higher the rating, the better|
 |current_level_rating|Integer|The rating value required to get the current level|
 |next_level_rating|Integer|*Optional*. The rating value required to get to the next level; omitted if the maximum level was reached|
@@ -5038,7 +5040,7 @@ Describes a story area pointing to a suggested reaction. Currently, a story can 
 |type|String|Type of the area, always "suggested_reaction"|
 |reaction_type|[ReactionType](./api/types/reactiontype.md)|Type of the reaction|
 |is_dark|Boolean|*Optional*. Pass *True* if the reaction area has a dark background|
-|is_flipped|Boolean|*Optional*. Pass *True* if reaction area corner is flipped|
+|is_flipped|Boolean|*Optional*. Pass *True* if the reaction area corner is flipped|
 
 #### StoryAreaTypeLink
 
@@ -5056,7 +5058,7 @@ Describes a story area containing weather information. Currently, a story can ha
 |Field|Type|Description|
 |-----------|
 |type|String|Type of the area, always "weather"|
-|temperature|Float|Temperature, in degree Celsius|
+|temperature|Float|Temperature, in degrees Celsius|
 |emoji|String|Emoji representing the weather|
 |background_color|Integer|A color of the area background in the ARGB format|
 
@@ -5199,7 +5201,7 @@ This object represents a gift that can be sent by the bot.
 
 #### Gifts
 
-This object represent a list of gifts.
+This object represents a list of gifts.
 
 |Field|Type|Description|
 |-----------|
@@ -5224,7 +5226,7 @@ This object describes the symbol shown on the pattern of a unique gift.
 |-----------|
 |name|String|Name of the symbol|
 |sticker|[Sticker](./api/types/sticker.md)|The sticker that represents the unique gift|
-|rarity_per_mille|Integer|The number of unique gifts that receive this model for every 1000 gifts upgraded|
+|rarity_per_mille|Integer|The number of unique gifts that receive this symbol for every 1000 gifts upgraded|
 
 #### UniqueGiftBackdropColors
 
@@ -5273,7 +5275,7 @@ This object describes a unique gift that was upgraded from a regular gift.
 |model|[UniqueGiftModel](./api/types/uniquegiftmodel.md)|Model of the gift|
 |symbol|[UniqueGiftSymbol](./api/types/uniquegiftsymbol.md)|Symbol of the gift|
 |backdrop|[UniqueGiftBackdrop](./api/types/uniquegiftbackdrop.md)|Backdrop of the gift|
-|is_premium|True|*Optional*. *True*, if the original regular gift was exclusively purchaseable by Telegram Premium subscribers|
+|is_premium|True|*Optional*. *True*, if the original regular gift was exclusively purchasable by Telegram Premium subscribers|
 |is_burned|True|*Optional*. *True*, if the gift was used to craft another gift and isn't available anymore|
 |is_from_blockchain|True|*Optional*. *True*, if the gift is assigned from the TON blockchain and can't be resold or transferred in Telegram|
 |colors|[UniqueGiftColors](./api/types/uniquegiftcolors.md)|*Optional*. The color scheme that can be used by the gift's owner for the chat's name, replies to messages and link previews; for business account gifts and gifts that are currently on sale only|
@@ -5564,7 +5566,7 @@ The boost was obtained by the creation of Telegram Premium gift codes to boost a
 |Field|Type|Description|
 |-----------|
 |source|String|Source of the boost, always "gift_code"|
-|user|[User](./api/types/user.md)|User for which the gift code was created|
+|user|[User](./api/types/user.md)|User for whom the gift code was created|
 
 #### ChatBoostSourceGiveaway
 
@@ -5662,7 +5664,7 @@ Describes the connection of the bot with a business account.
 |-----------|
 |id|String|Unique identifier of the business connection|
 |user|[User](./api/types/user.md)|Business account user that created the business connection|
-|user_chat_id|Integer|Identifier of a private chat with the user who created the business connection. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type are safe for storing this identifier.|
+|user_chat_id|Integer|Identifier of a private chat with the user who created the business connection. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a 64-bit integer or double-precision float type is safe for storing this identifier.|
 |date|Integer|Date the connection was established in Unix time|
 |rights|[BusinessBotRights](./api/types/businessbotrights.md)|*Optional*. Rights of the business bot|
 |is_enabled|Boolean|*True*, if the connection is active|
@@ -5716,7 +5718,7 @@ Describes why a request was unsuccessful.
 
 |Field|Type|Description|
 |-----------|
-|migrate_to_chat_id|Integer|*Optional*. The group has been migrated to a supergroup with the specified identifier. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this identifier.|
+|migrate_to_chat_id|Integer|*Optional*. The group has been migrated to a supergroup with the specified identifier. This number may have more than 32 significant bits and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type is safe for storing this identifier.|
 |retry_after|Integer|*Optional*. In case of exceeding flood control, the number of seconds left to wait before the request can be repeated|
 
 #### InputMedia
@@ -5738,7 +5740,7 @@ Represents an animation file (GIF or H.264/MPEG-4 AVC video without sound) to be
 |-----------|
 |type|String|Type of the media, must be *animation*|
 |media|String|File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://&lt;file_attach_name&gt;" to upload a new one using multipart/form-data under &lt;file_attach_name&gt; name. [More information on Sending Files »](./api.md#sending-files)|
-|thumbnail|String|*Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://&lt;file_attach_name&gt;" if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. [More information on Sending Files »](./api.md#sending-files)|
+|thumbnail|String|*Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can only be uploaded as a new file, so you can pass "attach://&lt;file_attach_name&gt;" if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. [More information on Sending Files »](./api.md#sending-files)|
 |caption|String|*Optional*. Caption of the animation to be sent, 0-1024 characters after entities parsing|
 |parse_mode|String|*Optional*. Mode for parsing entities in the animation caption. See [formatting options](./api/formatting.md) for more details.|
 |caption_entities|Array of [MessageEntity](./api/types/messageentity.md)|*Optional*. List of special entities that appear in the caption, which can be specified instead of *parse_mode*|
@@ -5756,7 +5758,7 @@ Represents an audio file to be treated as music to be sent.
 |-----------|
 |type|String|Type of the media, must be *audio*|
 |media|String|File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://&lt;file_attach_name&gt;" to upload a new one using multipart/form-data under &lt;file_attach_name&gt; name. [More information on Sending Files »](./api.md#sending-files)|
-|thumbnail|String|*Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://&lt;file_attach_name&gt;" if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. [More information on Sending Files »](./api.md#sending-files)|
+|thumbnail|String|*Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can only be uploaded as a new file, so you can pass "attach://&lt;file_attach_name&gt;" if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. [More information on Sending Files »](./api.md#sending-files)|
 |caption|String|*Optional*. Caption of the audio to be sent, 0-1024 characters after entities parsing|
 |parse_mode|String|*Optional*. Mode for parsing entities in the audio caption. See [formatting options](./api/formatting.md) for more details.|
 |caption_entities|Array of [MessageEntity](./api/types/messageentity.md)|*Optional*. List of special entities that appear in the caption, which can be specified instead of *parse_mode*|
@@ -5772,7 +5774,7 @@ Represents a general file to be sent.
 |-----------|
 |type|String|Type of the media, must be *document*|
 |media|String|File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://&lt;file_attach_name&gt;" to upload a new one using multipart/form-data under &lt;file_attach_name&gt; name. [More information on Sending Files »](./api.md#sending-files)|
-|thumbnail|String|*Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://&lt;file_attach_name&gt;" if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. [More information on Sending Files »](./api.md#sending-files)|
+|thumbnail|String|*Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can only be uploaded as a new file, so you can pass "attach://&lt;file_attach_name&gt;" if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. [More information on Sending Files »](./api.md#sending-files)|
 |caption|String|*Optional*. Caption of the document to be sent, 0-1024 characters after entities parsing|
 |parse_mode|String|*Optional*. Mode for parsing entities in the document caption. See [formatting options](./api/formatting.md) for more details.|
 |caption_entities|Array of [MessageEntity](./api/types/messageentity.md)|*Optional*. List of special entities that appear in the caption, which can be specified instead of *parse_mode*|
@@ -5861,7 +5863,7 @@ Represents a video to be sent.
 |-----------|
 |type|String|Type of the media, must be *video*|
 |media|String|File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://&lt;file_attach_name&gt;" to upload a new one using multipart/form-data under &lt;file_attach_name&gt; name. [More information on Sending Files »](./api.md#sending-files)|
-|thumbnail|String|*Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://&lt;file_attach_name&gt;" if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. [More information on Sending Files »](./api.md#sending-files)|
+|thumbnail|String|*Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can only be uploaded as a new file, so you can pass "attach://&lt;file_attach_name&gt;" if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. [More information on Sending Files »](./api.md#sending-files)|
 |cover|String|*Optional*. Cover for the video in the message. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://&lt;file_attach_name&gt;" to upload a new one using multipart/form-data under &lt;file_attach_name&gt; name. [More information on Sending Files »](./api.md#sending-files)|
 |start_timestamp|Integer|*Optional*. Start timestamp for the video in the message|
 |caption|String|*Optional*. Caption of the video to be sent, 0-1024 characters after entities parsing|
@@ -5881,7 +5883,7 @@ Represents a voice message file to be sent.
 |Field|Type|Description|
 |-----------|
 |type|String|Type of the media, must be *voice_note*|
-|media|String|File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://<file_attach_name>" to upload a new one using multipart/form-data under <file_attach_name> name. [More information on Sending Files »](./api.md#sending-files)|
+|media|String|File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://&lt;file_attach_name&gt;" to upload a new one using multipart/form-data under &lt;file_attach_name&gt; name. [More information on Sending Files »](./api.md#sending-files)|
 |caption|String|*Optional*. Caption of the voice message to be sent, 0-1024 characters after entities parsing|
 |parse_mode|String|*Optional*. Mode for parsing entities in the voice message caption. See [formatting options](./api/formatting.md) for more details.|
 |caption_entities|Array of [MessageEntity](./api/types/messageentity.md)|*Optional*. List of special entities that appear in the caption, which can be specified instead of *parse_mode*|
@@ -5926,7 +5928,7 @@ The paid media to send is a video.
 |-----------|
 |type|String|Type of the media, must be *video*|
 |media|String|File to send. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://&lt;file_attach_name&gt;" to upload a new one using multipart/form-data under &lt;file_attach_name&gt; name. [More information on Sending Files »](./api.md#sending-files)|
-|thumbnail|String|*Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can be only uploaded as a new file, so you can pass "attach://&lt;file_attach_name&gt;" if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. [More information on Sending Files »](./api.md#sending-files)|
+|thumbnail|String|*Optional*. Thumbnail of the file sent; can be ignored if thumbnail generation for the file is supported server-side. The thumbnail should be in JPEG format and less than 200 kB in size. A thumbnail's width and height should not exceed 320. Ignored if the file is not uploaded using multipart/form-data. Thumbnails can't be reused and can only be uploaded as a new file, so you can pass "attach://&lt;file_attach_name&gt;" if the thumbnail was uploaded using multipart/form-data under &lt;file_attach_name&gt;. [More information on Sending Files »](./api.md#sending-files)|
 |cover|String|*Optional*. Cover for the video in the message. Pass a file_id to send a file that exists on the Telegram servers (recommended), pass an HTTP URL for Telegram to get a file from the Internet, or pass "attach://&lt;file_attach_name&gt;" to upload a new one using multipart/form-data under &lt;file_attach_name&gt; name. [More information on Sending Files »](./api.md#sending-files)|
 |start_timestamp|Integer|*Optional*. Start timestamp for the video in the message|
 |width|Integer|*Optional*. Video width|
@@ -6029,7 +6031,7 @@ This object describes the position on faces where a mask should be placed by def
 |Field|Type|Description|
 |-----------|
 |point|String|The part of the face relative to which the mask should be placed. One of "forehead", "eyes", "mouth", or "chin".|
-|x_shift|Float|Shift by X-axis measured in widths of the mask scaled to the face size, from left to right. For example, choosing -1.0 will place mask just to the left of the default mask position.|
+|x_shift|Float|Shift by X-axis measured in widths of the mask scaled to the face size, from left to right. For example, choosing -1.0 will place the mask just to the left of the default mask position.|
 |y_shift|Float|Shift by Y-axis measured in heights of the mask scaled to the face size, from top to bottom. For example, 1.0 will place the mask just below the default mask position.|
 |scale|Float|Mask scaling coefficient. For example, 2.0 means double size.|
 
@@ -6043,7 +6045,7 @@ This object describes a sticker to be added to a sticker set.
 |format|String|Format of the added sticker, must be one of "static" for a **.WEBP** or **.PNG** image, "animated" for a **.TGS** animation, "video" for a **.WEBM** video|
 |emoji_list|Array of String|List of 1-20 emoji associated with the sticker|
 |mask_position|[MaskPosition](./api/types/maskposition.md)|*Optional*. Position where the mask should be placed on faces. For "mask" stickers only.|
-|keywords|Array of String|*Optional*. List of 0-20 search keywords for the sticker with total length of up to 64 characters. For "regular" and "custom_emoji" stickers only.|
+|keywords|Array of String|*Optional*. List of 0-20 search keywords for the sticker with a total length of up to 64 characters. For "regular" and "custom_emoji" stickers only.|
 
 #### InlineQuery
 
@@ -6055,7 +6057,7 @@ This object represents an incoming inline query. When the user sends an empty qu
 |from|[User](./api/types/user.md)|Sender|
 |query|String|Text of the query (up to 256 characters)|
 |offset|String|Offset of the results to be returned, can be controlled by the bot|
-|chat_type|String|*Optional*. Type of the chat from which the inline query was sent. Can be either "sender" for a private chat with the inline query sender, "private", "group", "supergroup", or "channel". The chat type should be always known for requests sent from official clients and most third-party clients, unless the request was sent from a secret chat.|
+|chat_type|String|*Optional*. Type of the chat from which the inline query was sent. Can be either "sender" for a private chat with the inline query sender, "private", "group", "supergroup", or "channel". The chat type should always be known for requests sent from official clients and most third-party clients, unless the request was sent from a secret chat.|
 |location|[Location](./api/types/location.md)|*Optional*. Sender location, only for bots that enabled user location requests via [@BotFather](https://t.me/botfather) or using the parameter *needs_inline_query_location* of the method [setMySettings](./api/methods/setmysettings.md)|
 
 #### InlineQueryResultsButton
@@ -6116,7 +6118,7 @@ Represents a link to an article or web page.
 
 #### InlineQueryResultPhoto
 
-Represents a link to a photo. By default, this photo will be sent by the user with optional caption. Alternatively, you can use *input_message_content* to send a message with the specified content instead of the photo.
+Represents a link to a photo. By default, this photo will be sent by the user with an optional caption. Alternatively, you can use *input_message_content* to send a message with the specified content instead of the photo.
 
 |Field|Type|Description|
 |-----------|
@@ -6137,7 +6139,7 @@ Represents a link to a photo. By default, this photo will be sent by the user wi
 
 #### InlineQueryResultGif
 
-Represents a link to an animated GIF file. By default, this animated GIF file will be sent by the user with optional caption. Alternatively, you can use *input_message_content* to send a message with the specified content instead of the animation.
+Represents a link to an animated GIF file. By default, this animated GIF file will be sent by the user with an optional caption. Alternatively, you can use *input_message_content* to send a message with the specified content instead of the animation.
 
 |Field|Type|Description|
 |-----------|
@@ -6159,7 +6161,7 @@ Represents a link to an animated GIF file. By default, this animated GIF file wi
 
 #### InlineQueryResultMpeg4Gif
 
-Represents a link to a video animation (H.264/MPEG-4 AVC video without sound). By default, this animated MPEG-4 file will be sent by the user with optional caption. Alternatively, you can use *input_message_content* to send a message with the specified content instead of the animation.
+Represents a link to a video animation (H.264/MPEG-4 AVC video without sound). By default, this animated MPEG-4 file will be sent by the user with an optional caption. Alternatively, you can use *input_message_content* to send a message with the specified content instead of the animation.
 
 |Field|Type|Description|
 |-----------|
@@ -6202,7 +6204,7 @@ Represents a link to a page containing an embedded video player or a video file.
 |video_duration|Integer|*Optional*. Video duration in seconds|
 |description|String|*Optional*. Short description of the result|
 |reply_markup|[InlineKeyboardMarkup](./api/types/inlinekeyboardmarkup.md)|*Optional*. [Inline keyboard](./features.md#inline-keyboards) attached to the message|
-|input_message_content|[InputMessageContent](./api/types/inputmessagecontent.md)|*Optional*. Content of the message to be sent instead of the video. This field is **required** if InlineQueryResultVideo is used to send an HTML-page as a result (e.g., a YouTube video).|
+|input_message_content|[InputMessageContent](./api/types/inputmessagecontent.md)|*Optional*. Content of the message to be sent instead of the video. This field is **required** if InlineQueryResultVideo is used to send an HTML page as a result (e.g., a YouTube video).|
 
 #### InlineQueryResultAudio
 
@@ -6224,7 +6226,7 @@ Represents a link to an MP3 audio file. By default, this audio file will be sent
 
 #### InlineQueryResultVoice
 
-Represents a link to a voice recording in an .OGG container encoded with OPUS. By default, this voice recording will be sent by the user. Alternatively, you can use *input_message_content* to send a message with the specified content instead of the the voice message.
+Represents a link to a voice recording in an .OGG container encoded with OPUS. By default, this voice recording will be sent by the user. Alternatively, you can use *input_message_content* to send a message with the specified content instead of the voice message.
 
 |Field|Type|Description|
 |-----------|
@@ -6352,7 +6354,7 @@ Represents a link to a photo stored on the Telegram servers. By default, this ph
 
 #### InlineQueryResultCachedGif
 
-Represents a link to an animated GIF file stored on the Telegram servers. By default, this animated GIF file will be sent by the user with an optional caption. Alternatively, you can use *input_message_content* to send a message with specified content instead of the animation.
+Represents a link to an animated GIF file stored on the Telegram servers. By default, this animated GIF file will be sent by the user with an optional caption. Alternatively, you can use *input_message_content* to send a message with the specified content instead of the animation.
 
 |Field|Type|Description|
 |-----------|
@@ -6541,12 +6543,12 @@ Represents the [content](./api/types/inputmessagecontent.md) of an invoice messa
 |-----------|
 |title|String|Product name, 1-32 characters|
 |description|String|Product description, 1-255 characters|
-|payload|String|Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user, use it for your internal processes.|
+|payload|String|Bot-defined invoice payload, 1-128 bytes. This will not be displayed to the user; use it for your internal processes.|
 |provider_token|String|*Optional*. Payment provider token, obtained via [@BotFather](https://t.me/botfather). Pass an empty string for payments in [Telegram Stars](https://t.me/BotNews/90).|
 |currency|String|Three-letter ISO 4217 currency code, see [more on currencies](./payments.md#supported-currencies). Pass "XTR" for payments in [Telegram Stars](https://t.me/BotNews/90).|
 |prices|Array of [LabeledPrice](./api/types/labeledprice.md)|Price breakdown, a JSON-serialized list of components (e.g. product price, tax, discount, delivery cost, delivery tax, bonus, etc.). Must contain exactly one item for payments in [Telegram Stars](https://t.me/BotNews/90).|
-|max_tip_amount|Integer|*Optional*. The maximum accepted amount for tips in the *smallest units* of the currency (integer, **not** float/double). For example, for a maximum tip of `US$ 1.45` pass `max_tip_amount = 145`. See the *exp* parameter in [currencies.json](https://core.telegram.org/bots/payments/currencies.json), it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0. Not supported for payments in [Telegram Stars](https://t.me/BotNews/90).|
-|suggested_tip_amounts|Array of Integer|*Optional*. A JSON-serialized Array of suggested amounts of tip in the *smallest units* of the currency (integer, **not** float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increased order and must not exceed *max_tip_amount*.|
+|max_tip_amount|Integer|*Optional*. The maximum accepted amount for tips in the *smallest units* of the currency (integer, **not** float/double). For example, for a maximum tip of `US$ 1.45` pass `max_tip_amount = 145`. See the *exp* parameter in [currencies.json](https://core.telegram.org/bots/payments/currencies.json); it shows the number of digits past the decimal point for each currency (2 for the majority of currencies). Defaults to 0. Not supported for payments in [Telegram Stars](https://t.me/BotNews/90).|
+|suggested_tip_amounts|Array of Integer|*Optional*. A JSON-serialized Array of suggested amounts of tips in the *smallest units* of the currency (integer, **not** float/double). At most 4 suggested tip amounts can be specified. The suggested tip amounts must be positive, passed in a strictly increasing order and must not exceed *max_tip_amount*.|
 |provider_data|String|*Optional*. A JSON-serialized object for data about the invoice, which will be shared with the payment provider. A detailed description of the required fields should be provided by the payment provider.|
 |photo_url|String|*Optional*. URL of the product photo for the invoice. Can be a photo of the goods or a marketing image for a service.|
 |photo_size|Integer|*Optional*. Photo size in bytes|
@@ -6600,7 +6602,7 @@ Represents a [result](./api/types/inlinequeryresult.md) of an inline query that 
 |result_id|String|The unique identifier for the result that was chosen|
 |from|[User](./api/types/user.md)|The user that chose the result|
 |location|[Location](./api/types/location.md)|*Optional*. Sender location, only for bots that enabled user location requests via [@BotFather](https://t.me/botfather) or using the parameter *needs_inline_query_location* of the method [setMySettings](./api/methods/setmysettings.md)|
-|inline_message_id|String|*Optional*. Identifier of the sent inline message. Available only if there is an [inline keyboard](./api/types/inlinekeyboardmarkup.md) attached to the message. Will be also received in [callback queries](./api/types/callbackquery.md) and can be used to [edit](./api.md#updating-messages) the message.|
+|inline_message_id|String|*Optional*. Identifier of the sent inline message. Available only if there is an [inline keyboard](./api/types/inlinekeyboardmarkup.md) attached to the message. Will also be received in [callback queries](./api/types/callbackquery.md) and can be used to [edit](./api.md#updating-messages) the message.|
 |query|String|The query that was used to obtain the result|
 
 **Note:** It is necessary to enable [inline feedback](./inline.md#collecting-feedback) via [@BotFather](https://t.me/botfather) or using the parameter *inline_feedback_share_denominator* of the method [setMySettings](./api/methods/setmysettings.md) in order to receive these objects in updates.
@@ -6612,7 +6614,7 @@ This object represents a portion of the price for goods or services.
 |Field|Type|Description|
 |-----------|
 |label|String|Portion label|
-|amount|Integer|Price of the product in the *smallest units* of the [currency](./payments.md#supported-currencies) (integer, **not** float/double). For example, for a price of `US$ 1.45` pass `amount = 145`. See the *exp* parameter in [currencies.json](https://core.telegram.org/bots/payments/currencies.json), it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).|
+|amount|Integer|Price of the product in the *smallest units* of the [currency](./payments.md#supported-currencies) (integer, **not** float/double). For example, for a price of `US$ 1.45` pass `amount = 145`. See the *exp* parameter in [currencies.json](https://core.telegram.org/bots/payments/currencies.json); it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).|
 
 #### Invoice
 
@@ -6624,7 +6626,7 @@ This object contains basic information about an invoice.
 |description|String|Product description|
 |start_parameter|String|Unique bot deep-linking parameter that can be used to generate this invoice|
 |currency|String|Three-letter ISO 4217 [currency](./payments.md#supported-currencies) code, or "XTR" for payments in [Telegram Stars](https://t.me/BotNews/90)|
-|total_amount|Integer|Total price in the *smallest units* of the currency (integer, **not** float/double). For example, for a price of `US$ 1.45` pass `amount = 145`. See the *exp* parameter in [currencies.json](https://core.telegram.org/bots/payments/currencies.json), it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).|
+|total_amount|Integer|Total price in the *smallest units* of the currency (integer, **not** float/double). For example, for a price of `US$ 1.45`, `total_amount = 145`. See the *exp* parameter in [currencies.json](https://core.telegram.org/bots/payments/currencies.json); it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).|
 
 #### ShippingAddress
 
@@ -6667,7 +6669,7 @@ This object contains basic information about a successful payment. Note that if 
 |Field|Type|Description|
 |-----------|
 |currency|String|Three-letter ISO 4217 [currency](./payments.md#supported-currencies) code, or "XTR" for payments in [Telegram Stars](https://t.me/BotNews/90)|
-|total_amount|Integer|Total price in the *smallest units* of the currency (integer, **not** float/double). For example, for a price of `US$ 1.45` pass `amount = 145`. See the *exp* parameter in [currencies.json](https://core.telegram.org/bots/payments/currencies.json), it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).|
+|total_amount|Integer|Total price in the *smallest units* of the currency (integer, **not** float/double). For example, for a price of `US$ 1.45`, `total_amount = 145`. See the *exp* parameter in [currencies.json](https://core.telegram.org/bots/payments/currencies.json); it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).|
 |invoice_payload|String|Bot-specified invoice payload|
 |subscription_expiration_date|Integer|*Optional*. Expiration date of the subscription, in Unix time; for recurring payments only|
 |is_recurring|True|*Optional*. *True*, if the payment is a recurring payment for a subscription|
@@ -6684,7 +6686,7 @@ This object contains basic information about a refunded payment.
 |Field|Type|Description|
 |-----------|
 |currency|String|Three-letter ISO 4217 [currency](./payments.md#supported-currencies) code, or "XTR" for payments in [Telegram Stars](https://t.me/BotNews/90). Currently, always "XTR".|
-|total_amount|Integer|Total refunded price in the *smallest units* of the currency (integer, **not** float/double). For example, for a price of `US$ 1.45`, `total_amount = 145`. See the *exp* parameter in [currencies.json](https://core.telegram.org/bots/payments/currencies.json), it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).|
+|total_amount|Integer|Total refunded price in the *smallest units* of the currency (integer, **not** float/double). For example, for a price of `US$ 1.45`, `total_amount = 145`. See the *exp* parameter in [currencies.json](https://core.telegram.org/bots/payments/currencies.json); it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).|
 |invoice_payload|String|Bot-specified invoice payload|
 |telegram_payment_charge_id|String|Telegram payment identifier|
 |provider_payment_charge_id|String|*Optional*. Provider payment identifier|
@@ -6698,7 +6700,7 @@ This object contains information about an incoming shipping query.
 |id|String|Unique query identifier|
 |from|[User](./api/types/user.md)|User who sent the query|
 |invoice_payload|String|Bot-specified invoice payload|
-|shipping_address|[ShippingAddress](./api/types/shippingaddress.md)|User specified shipping address|
+|shipping_address|[ShippingAddress](./api/types/shippingaddress.md)|User-specified shipping address|
 
 #### PreCheckoutQuery
 
@@ -6709,7 +6711,7 @@ This object contains information about an incoming pre-checkout query.
 |id|String|Unique query identifier|
 |from|[User](./api/types/user.md)|User who sent the query|
 |currency|String|Three-letter ISO 4217 [currency](./payments.md#supported-currencies) code, or "XTR" for payments in [Telegram Stars](https://t.me/BotNews/90)|
-|total_amount|Integer|Total price in the *smallest units* of the currency (integer, **not** float/double). For example, for a price of `US$ 1.45` pass `amount = 145`. See the *exp* parameter in [currencies.json](https://core.telegram.org/bots/payments/currencies.json), it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).|
+|total_amount|Integer|Total price in the *smallest units* of the currency (integer, **not** float/double). For example, for a price of `US$ 1.45`, `total_amount = 145`. See the *exp* parameter in [currencies.json](https://core.telegram.org/bots/payments/currencies.json); it shows the number of digits past the decimal point for each currency (2 for the majority of currencies).|
 |invoice_payload|String|Bot-specified invoice payload|
 |shipping_option_id|String|*Optional*. Identifier of the shipping option chosen by the user|
 |order_info|[OrderInfo](./api/types/orderinfo.md)|*Optional*. Order information provided by the user|
@@ -6879,7 +6881,7 @@ Describes Telegram Passport data shared with the bot by the user.
 
 |Field|Type|Description|
 |-----------|
-|data|Array of [EncryptedPassportElement](./api/types/encryptedpassportelement.md)|Array with information about documents and other Telegram Passport elements that was shared with the bot|
+|data|Array of [EncryptedPassportElement](./api/types/encryptedpassportelement.md)|Array with information shared with the bot about documents and other Telegram Passport elements|
 |credentials|[EncryptedCredentials](./api/types/encryptedcredentials.md)|Encrypted credentials required to decrypt the data|
 
 #### PassportFile
@@ -6959,7 +6961,7 @@ Represents an issue with the front side of a document. The error is considered r
 
 #### PassportElementErrorReverseSide
 
-Represents an issue with the reverse side of a document. The error is considered resolved when the file with reverse side of the document changes.
+Represents an issue with the reverse side of a document. The error is considered resolved when the file with the reverse side of the document changes.
 
 |Field|Type|Description|
 |-----------|
@@ -7014,7 +7016,7 @@ Represents an issue with one of the files that constitute the translation of a d
 
 #### PassportElementErrorTranslationFiles
 
-Represents an issue with the translated version of a document. The error is considered resolved when a file with the document translation change.
+Represents an issue with the translated version of a document. The error is considered resolved when a file with the document translation changes.
 
 |Field|Type|Description|
 |-----------|
@@ -7036,7 +7038,7 @@ Represents an issue in an unspecified place. The error is considered resolved wh
 
 #### Game
 
-This object represents a game. Use BotFather to create and edit games, their short names will act as unique identifiers.
+This object represents a game. Use BotFather to create and edit games; their short names will act as unique identifiers.
 
 |Field|Type|Description|
 |-----------|
@@ -7180,7 +7182,7 @@ A block with a general file, corresponding to the custom HTML tag `<tg-document>
 
 #### InputRichBlockExpandableBlockQuotation
 
-A block quotation, corresponding to the HTML tag `<blockquote>` with custom attribute `"expandable"`.
+A block quotation, corresponding to the HTML tag `<blockquote>` with the custom attribute `"expandable"`.
 
 |Field|Type|Description|
 |-----------|
@@ -7314,7 +7316,7 @@ A table, corresponding to the HTML tag `<table>`.
 
 #### InputRichBlockThinking
 
-A block with a "Thinking..." placeholder, corresponding to the custom HTML tag `<tg-thinking>`. The block may be used only in [sendRichMessageDraft](./api/methods/sendrichmessagedraft.md), therefore it can't be received in messages. See [https://t.me/addemoji/AIActions](https://t.me/addemoji/AIActions) for examples of custom emoji that are recommended for usage in the block.
+A block with a "Thinking..." placeholder, corresponding to the custom HTML tag `<tg-thinking>`. The block may be used only in [sendRichMessageDraft](./api/methods/sendrichmessagedraft.md); therefore, it can't be received in messages. See [https://t.me/addemoji/AIActions](https://t.me/addemoji/AIActions) for examples of custom emoji that are recommended for usage in the block.
 
 |Field|Type|Description|
 |-----------|
@@ -7348,8 +7350,8 @@ Describes a rich message to be sent. Exactly **one** of the fields *html*, *mark
 |Field|Type|Description|
 |-----------|
 |blocks|Array of [InputRichBlock](./api/types/inputrichblock.md)|*Optional*. Content of the rich message to send described as a list of blocks|
-|html|String|*Optional*. Content of the rich message to send described using HTML formatting. See [rich message formatting options](./api/rich-messages.md#rich-message-formatting-options) for more details. Use *media* field to specify the media used in the message.|
-|markdown|String|*Optional*. Content of the rich message to send described using Markdown formatting. See [rich message formatting options](./api/rich-messages.md#rich-message-formatting-options) for more details. Use *media* field to specify the media used in the message.|
+|html|String|*Optional*. Content of the rich message to send described using HTML formatting. See [rich message formatting options](./api/rich-messages.md#rich-message-formatting-options) for more details. Use the *media* field to specify the media used in the message.|
+|markdown|String|*Optional*. Content of the rich message to send described using Markdown formatting. See [rich message formatting options](./api/rich-messages.md#rich-message-formatting-options) for more details. Use the *media* field to specify the media used in the message.|
 |media|Array of [InputRichMessageMedia](./api/types/inputrichmessagemedia.md)|*Optional*. List of media that are specified in the *markdown* or *html* fields using `tg://photo?id=`, `tg://video?id=`, `tg://document?id=`, and `tg://audio?id=` links|
 |is_rtl|Boolean|*Optional*. Pass *True* if the rich message must be shown right-to-left|
 |skip_entity_detection|Boolean|*Optional*. Pass *True* to skip automatic detection of entities (e.g., URLs, email addresses, username mentions, hashtags, cashtags, bot commands, or phone numbers) in the text|
@@ -7492,7 +7494,7 @@ A block with a general file, corresponding to the custom HTML tag `<tg-document>
 
 #### RichBlockExpandableBlockQuotation
 
-A block quotation, corresponding to the HTML tag `<blockquote>` with custom attribute `"expandable"`.
+A block quotation, corresponding to the HTML tag `<blockquote>` with the custom attribute `"expandable"`.
 
 |Field|Type|Description|
 |-----------|
@@ -7641,7 +7643,7 @@ Cell in a table.
 
 #### RichBlockThinking
 
-A block with a "Thinking..." placeholder, corresponding to the custom HTML tag `<tg-thinking>`. The block may be used only in [sendRichMessageDraft](./api/methods/sendrichmessagedraft.md), therefore it can't be received in messages. See [https://t.me/addemoji/AIActions](https://t.me/addemoji/AIActions) for examples of custom emoji that are recommended for usage in the block.
+A block with a "Thinking..." placeholder, corresponding to the custom HTML tag `<tg-thinking>`. The block may be used only in [sendRichMessageDraft](./api/methods/sendrichmessagedraft.md); therefore, it can't be received in messages. See [https://t.me/addemoji/AIActions](https://t.me/addemoji/AIActions) for examples of custom emoji that are recommended for usage in the block.
 
 |Field|Type|Description|
 |-----------|
@@ -7745,7 +7747,7 @@ A link to an anchor.
 |-----------|
 |type|String|Type of the rich text, always "anchor_link"|
 |text|[RichText](./api/types/richtext.md)|The link text|
-|anchor_name|String|The name of the anchor. If the name is empty, then the link brings back to the top of the message.|
+|anchor_name|String|The name of the anchor. If the name is empty, then the link brings the user back to the top of the message.|
 
 #### RichTextBankCardNumber
 

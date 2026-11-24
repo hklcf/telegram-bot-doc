@@ -2,7 +2,7 @@
 
 > Part of the [Telegram Bot API](../../api.md). Canonical location: [createChatInviteLink](../../api.md#createchatinvitelink).
 
-Use this method to create an additional invite link for a chat. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. The link can be revoked using the method [revokeChatInviteLink](./revokechatinvitelink.md). Returns the new invite link as [ChatInviteLink](../types/chatinvitelink.md) object.
+Use this method to create an additional invite link for a chat. The bot must be an administrator in the chat for this to work and must have the appropriate administrator rights. The link can be revoked using the method [revokeChatInviteLink](./revokechatinvitelink.md). Returns the new invite link as a [ChatInviteLink](../types/chatinvitelink.md) object.
 
 |Parameter|Type|Required|Description|
 |-----------|

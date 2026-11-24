@@ -2,7 +2,7 @@
 
 > Part of the [Telegram Bot API](../../api.md). Canonical location: [setBusinessAccountUsername](../../api.md#setbusinessaccountusername).
 
-Changes the username of a managed business account. Requires the *can_change_username* business bot right. Returns *True* on success.
+Changes the username of a managed business account. Requires the *can_edit_username* business bot right. Returns *True* on success.
 
 |Parameter|Type|Required|Description|
 |-----------|

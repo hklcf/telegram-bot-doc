@@ -2,7 +2,7 @@
 
 > Part of the [Telegram Bot API](../../api.md). Canonical location: [editMessageLiveLocation](../../api.md#editmessagelivelocation).
 
-Use this method to edit live location messages. A location can be edited until its *live_period* expires or editing is explicitly disabled by a call to [stopMessageLiveLocation](./stopmessagelivelocation.md). On success, if the edited message is not an inline message, the edited [Message](../types/message.md) is returned, otherwise *True* is returned.
+Use this method to edit live location messages. A location can be edited until its *live_period* expires or editing is explicitly disabled by a call to [stopMessageLiveLocation](./stopmessagelivelocation.md). On success, if the edited message is not an inline message, the edited [Message](../types/message.md) is returned; otherwise, *True* is returned.
 
 |Parameter|Type|Required|Description|
 |-----------|

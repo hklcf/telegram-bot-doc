@@ -21,7 +21,7 @@
 - [TextQuote](./types/textquote.md): This object contains information about the quoted part of a message that is replied to by the given message.
 - [ExternalReplyInfo](./types/externalreplyinfo.md): This object contains information about a message that is being replied to, which may come from another chat or forum topic.
 - [ReplyParameters](./types/replyparameters.md): Describes reply parameters for the message that is being sent.
-- [EphemeralMessageParameters](./types/ephemeralmessageparameters.md): 
+- [EphemeralMessageParameters](./types/ephemeralmessageparameters.md): Describes the parameters of an ephemeral message to be sent.
 - [MessageOrigin](./types/messageorigin.md): This object describes the origin of a message.
 - [MessageOriginUser](./types/messageoriginuser.md): The message was originally sent by a known user.
 - [MessageOriginHiddenUser](./types/messageoriginhiddenuser.md): The message was originally sent by an unknown user.
@@ -89,8 +89,8 @@
 - [ForumTopicClosed](./types/forumtopicclosed.md): a service message about a forum topic closed in the chat.
 - [ForumTopicEdited](./types/forumtopicedited.md): a service message about an edited forum topic.
 - [ForumTopicReopened](./types/forumtopicreopened.md): a service message about a forum topic reopened in the chat.
-- [GeneralForumTopicHidden](./types/generalforumtopichidden.md): a service message about General forum topic hidden in the chat.
-- [GeneralForumTopicUnhidden](./types/generalforumtopicunhidden.md): a service message about General forum topic unhidden in the chat.
+- [GeneralForumTopicHidden](./types/generalforumtopichidden.md): a service message about the General forum topic hidden in the chat.
+- [GeneralForumTopicUnhidden](./types/generalforumtopicunhidden.md): a service message about the General forum topic unhidden in the chat.
 - [SharedUser](./types/shareduser.md): This object contains information about a user that was shared with the bot using a KeyboardButtonRequestUsers button.
 - [UsersShared](./types/usersshared.md): This object contains information about the users whose identifiers were shared with the bot using a KeyboardButtonRequestUsers button.
 - [ChatShared](./types/chatshared.md): This object contains information about a chat that was shared with the bot using a KeyboardButtonRequestChat button.
@@ -117,7 +117,7 @@
 - [SuggestedPostInfo](./types/suggestedpostinfo.md): Contains information about a suggested post.
 - [SuggestedPostParameters](./types/suggestedpostparameters.md): Contains parameters of a post that is being suggested by the bot.
 - [DirectMessagesTopic](./types/directmessagestopic.md): Describes a topic of a direct messages chat.
-- [UserProfilePhotos](./types/userprofilephotos.md): This object represent a user's profile pictures.
+- [UserProfilePhotos](./types/userprofilephotos.md): a user's profile pictures.
 - [UserProfileAudios](./types/userprofileaudios.md): the audios displayed on a user's profile.
 - [File](./types/file.md): a file ready to be downloaded.
 - [WebAppInfo](./types/webappinfo.md): Describes a Web App.
@@ -126,7 +126,7 @@
 - [KeyboardButtonRequestUsers](./types/keyboardbuttonrequestusers.md): This object defines the criteria used to request suitable users.
 - [KeyboardButtonRequestChat](./types/keyboardbuttonrequestchat.md): This object defines the criteria used to request a suitable chat.
 - [KeyboardButtonRequestManagedBot](./types/keyboardbuttonrequestmanagedbot.md): This object defines the parameters for the creation of a managed bot.
-- [KeyboardButtonPollType](./types/keyboardbuttonpolltype.md): type of a poll, which is allowed to be created and sent when the corresponding button is pressed.
+- [KeyboardButtonPollType](./types/keyboardbuttonpolltype.md): the type of a poll, which is allowed to be created and sent when the corresponding button is pressed.
 - [ReplyKeyboardRemove](./types/replykeyboardremove.md): Upon receiving a message with this object, Telegram clients will remove the current custom keyboard and display the default letter-keyboard.
 - [InlineKeyboardMarkup](./types/inlinekeyboardmarkup.md): an inline keyboard that appears right next to the message it belongs to.
 - [InlineKeyboardButton](./types/inlinekeyboardbutton.md): one button of an inline keyboard.
@@ -162,7 +162,7 @@
 - [BusinessLocation](./types/businesslocation.md): Contains information about the location of a Telegram Business account.
 - [BusinessOpeningHoursInterval](./types/businessopeninghoursinterval.md): Describes an interval of time during which a business is open.
 - [BusinessOpeningHours](./types/businessopeninghours.md): Describes the opening hours of a business.
-- [UserRating](./types/userrating.md): This object describes the rating of a user based on their Telegram Star spendings.
+- [UserRating](./types/userrating.md): This object describes the rating of a user based on their Telegram Star spending.
 - [AreaPosition](./types/areaposition.md): Describes the position of a rectangle area on a story media or a TON wallet card.
 - [TonNft](./types/tonnft.md): an NFT in the TON blockchain.
 - [TonNftAttribute](./types/tonnftattribute.md): an attribute of an NFT in the TON blockchain.
@@ -195,7 +195,7 @@
 - [ForumTopic](./types/forumtopic.md): a forum topic.
 - [GiftBackground](./types/giftbackground.md): This object describes the background of a gift.
 - [Gift](./types/gift.md): a gift that can be sent by the bot.
-- [Gifts](./types/gifts.md): This object represent a list of gifts.
+- [Gifts](./types/gifts.md): a list of gifts.
 - [UniqueGiftModel](./types/uniquegiftmodel.md): This object describes the model of a unique gift.
 - [UniqueGiftSymbol](./types/uniquegiftsymbol.md): This object describes the symbol shown on the pattern of a unique gift.
 - [UniqueGiftBackdropColors](./types/uniquegiftbackdropcolors.md): This object describes the colors of the backdrop of a unique gift.

@@ -2,7 +2,7 @@
 
 > Part of the [Telegram Bot API](../../api.md). Canonical location: [UserProfilePhotos](../../api.md#userprofilephotos).
 
-This object represent a user's profile pictures.
+This object represents a user's profile pictures.
 
 |Field|Type|Description|
 |-----------|

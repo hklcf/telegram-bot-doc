@@ -2,6 +2,8 @@
 
 > Part of the [Telegram Bot API](../../api.md). Canonical location: [EphemeralMessageParameters](../../api.md#ephemeralmessageparameters).
 
+Describes the parameters of an ephemeral message to be sent.
+
 |Field|Type|Description|
 |-----------|
 |receiver_user_id|Integer|*Optional*. Identifier of the user who will receive the message; required unless the message is sent as an ephemeral reply to a callback query. If omitted, then the parameter *chat_id* of the method is ignored. If specified together with *callback_query_id*, then it must be the identifier of the user who pressed the button. Must be omitted for messages sent in chats where the bot isn't a member, unless the message is a reply to an ephemeral message. It is not guaranteed that the user will receive the message, especially if they are offline. See [here](../../api.md#ephemeral-messages-and-commands) for more details.|

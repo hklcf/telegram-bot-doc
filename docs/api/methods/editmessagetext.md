@@ -2,7 +2,7 @@
 
 > Part of the [Telegram Bot API](../../api.md). Canonical location: [editMessageText](../../api.md#editmessagetext).
 
-Use this method to edit text, rich and [game](../../api.md#games) messages. On success, if the edited message is not an inline message, the edited [Message](../types/message.md) is returned, otherwise *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
+Use this method to edit text, rich and [game](../../api.md#games) messages. On success, if the edited message is not an inline message, the edited [Message](../types/message.md) is returned; otherwise, *True* is returned. Note that business messages that were not sent by the bot and do not contain an inline keyboard can only be edited within **48 hours** from the time they were sent.
 
 |Parameter|Type|Required|Description|
 |-----------|
@@ -14,5 +14,5 @@ Use this method to edit text, rich and [game](../../api.md#games) messages. On s
 |parse_mode|String|Optional|Mode for parsing entities in the message text. See [formatting options](../formatting.md) for more details.|
 |entities|Array of [MessageEntity](../types/messageentity.md)|Optional|A JSON-serialized list of special entities that appear in message text, which can be specified instead of *parse_mode*|
 |link_preview_options|[LinkPreviewOptions](../types/linkpreviewoptions.md)|Optional|Link preview generation options for the message|
-|rich_message|[InputRichMessage](../types/inputrichmessage.md)|Optional|New rich content of the message; required if *text* isn't specified. Direct upload of new files and explicit upload of files by a URL isn't supported when an inline message is edited.|
+|rich_message|[InputRichMessage](../types/inputrichmessage.md)|Optional|New rich content of the message; required if *text* isn't specified. Direct upload of new files and explicit upload of files by a URL aren't supported when an inline message is edited.|
 |reply_markup|[InlineKeyboardMarkup](../types/inlinekeyboardmarkup.md)|Optional|A JSON-serialized object for an [inline keyboard](../../features.md#inline-keyboards)|

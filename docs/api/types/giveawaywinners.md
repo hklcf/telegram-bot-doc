@@ -17,4 +17,4 @@ This object represents a message about the completion of a giveaway with public 
 |unclaimed_prize_count|Integer|*Optional*. Number of undistributed prizes|
 |only_new_members|True|*Optional*. *True*, if only users who had joined the chats after the giveaway started were eligible to win|
 |was_refunded|True|*Optional*. *True*, if the giveaway was canceled because the payment for it was refunded|
-|prize_description|String|*Optional*. Description of additional giveaway prize|
+|prize_description|String|*Optional*. Description of an additional giveaway prize|

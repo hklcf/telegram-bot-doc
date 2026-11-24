@@ -2,7 +2,7 @@
 
 > Part of the [Telegram Bot API](../../api.md). Canonical location: [InputRichBlockExpandableBlockQuotation](../../api.md#inputrichblockexpandableblockquotation).
 
-A block quotation, corresponding to the HTML tag `<blockquote>` with custom attribute `"expandable"`.
+A block quotation, corresponding to the HTML tag `<blockquote>` with the custom attribute `"expandable"`.
 
 |Field|Type|Description|
 |-----------|

@@ -22,7 +22,7 @@ This offers a quick way for the user to open your bot in inline mode in the same
 |callback_game|[CallbackGame](./callbackgame.md)|*Optional*. Description of the game that will be launched when the user presses the button.\
 \
 **NOTE:** This type of button **must** always be the first button in the first row.|
-|pay|Boolean|*Optional*. Specify *True*, to send a [Pay button](../../api.md#payments). Substrings "⭐" and "XTR" in the buttons's text will be replaced with a Telegram Star icon. \
+|pay|Boolean|*Optional*. Specify *True* to send a [Pay button](../../api.md#payments). Substrings "⭐" and "XTR" in the button's text will be replaced with a Telegram Star icon. \
 \
 **NOTE:** This type of button **must** always be the first button in the first row and can only be used in invoice messages.|
 |disabled|[DisabledButton](./disabledbutton.md)|*Optional*. If set, then the button is disabled and does nothing|
