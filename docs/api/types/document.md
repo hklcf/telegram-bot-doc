@@ -11,4 +11,4 @@ This object represents a general file (as opposed to [photos](./photosize.md), [
 |thumbnail|[PhotoSize](./photosize.md)|*Optional*. Document thumbnail as defined by the sender|
 |file_name|String|*Optional*. Original filename as defined by the sender|
 |mime_type|String|*Optional*. MIME type of the file as defined by the sender|
-|file_size|Integer|*Optional*. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type are safe for storing this value.|
+|file_size|Integer|*Optional*. File size in bytes. It can be bigger than 2^31 and some programming languages may have difficulty/silent defects in interpreting it. But it has at most 52 significant bits, so a signed 64-bit integer or double-precision float type is safe for storing this value.|

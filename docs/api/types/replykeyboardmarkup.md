@@ -13,5 +13,5 @@ This object represents a [custom keyboard](../../features.md#keyboards) with rep
 |input_field_placeholder|String|*Optional*. The placeholder to be shown in the input field when the keyboard is active; 1-64 characters|
 |selective|Boolean|*Optional*. Use this parameter if you want to show the keyboard to specific users only. Targets: 1) users that are @mentioned in the *text* of the [Message](./message.md) object; 2) if the bot's message is a reply to a message in the same chat and forum topic, sender of the original message.\
 \
-*Example:* A user requests to change the bot's language, bot replies to the request with a keyboard to select the new language. Other users in the group don't see the keyboard.|
+*Example:* A user requests to change the bot's language, and the bot replies to the request with a keyboard to select the new language. Other users in the group don't see the keyboard.|
 |force_reply|Boolean|*Optional*. Pass *True* if the reply interface must be shown to the user, as if they had manually selected the bot's message and tapped 'Reply'|

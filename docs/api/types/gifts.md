@@ -2,7 +2,7 @@
 
 > Part of the [Telegram Bot API](../../api.md). Canonical location: [Gifts](../../api.md#gifts).
 
-This object represent a list of gifts.
+This object represents a list of gifts.
 
 |Field|Type|Description|
 |-----------|

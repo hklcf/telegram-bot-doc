@@ -2,7 +2,7 @@
 
 > Part of the [Telegram Bot API](../../api.md). Canonical location: [setMySettings](../../api.md#setmysettings).
 
-Use this method to change settings of the bot. Settings that aren't specified remain unchanged. Returns *True* on success.
+Use this method to change the settings of the bot. Settings that aren't specified remain unchanged. Returns *True* on success.
 
 |Parameter|Type|Required|Description|
 |-----------|

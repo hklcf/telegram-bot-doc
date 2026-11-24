@@ -2,7 +2,7 @@
 
 > Part of the [Telegram Bot API](../../api.md). Canonical location: [sendLocation](../../api.md#sendlocation).
 
-Use this method to send point on the map. On success, the sent [Message](../types/message.md) is returned.
+Use this method to send a point on the map. On success, the sent [Message](../types/message.md) is returned.
 
 |Parameter|Type|Required|Description|
 |-----------|

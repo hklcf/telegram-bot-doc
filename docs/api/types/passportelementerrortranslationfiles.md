@@ -2,7 +2,7 @@
 
 > Part of the [Telegram Bot API](../../api.md). Canonical location: [PassportElementErrorTranslationFiles](../../api.md#passportelementerrortranslationfiles).
 
-Represents an issue with the translated version of a document. The error is considered resolved when a file with the document translation change.
+Represents an issue with the translated version of a document. The error is considered resolved when a file with the document translation changes.
 
 |Field|Type|Description|
 |-----------|

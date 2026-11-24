@@ -208,7 +208,7 @@ Please note:
 * In media syntax, the optional title after the URL is used as the caption; for example, ![](https://core.telegram.org/bots/api/url "Photo caption") displays "Photo caption" under the media.
 * Table cells can contain only inline formatting.
 * Formula source is treated as raw LaTeX.
-* Markdown isn't parsed inside block HTML tags other than <details>, <tg-collage> and <tg-slideshow>, therefore only HTML tags can be used there.
+* Markdown isn't parsed inside block HTML tags other than <details>, <tg-collage> and <tg-slideshow>; therefore, only HTML tags can be used there.
 * See [date-time entity formatting](./formatting.md#date-time-entity-formatting) for more details about supported date-time formats.
 
 #### Rich HTML style
@@ -406,7 +406,7 @@ Methods and types defined in this section:
 - [RichBlockAnchor](./types/richblockanchor.md): A block with an anchor, corresponding to the HTML tag `<a>` with the attribute `name`.
 - [RichBlockList](./types/richblocklist.md): A list of blocks, corresponding to the HTML tag `<ul>` or `<ol>` with multiple nested tags `<li>`.
 - [RichBlockBlockQuotation](./types/richblockblockquotation.md): A block quotation, corresponding to the HTML tag `<blockquote>`.
-- [RichBlockExpandableBlockQuotation](./types/richblockexpandableblockquotation.md): A block quotation, corresponding to the HTML tag `<blockquote>` with custom attribute `"expandable"`.
+- [RichBlockExpandableBlockQuotation](./types/richblockexpandableblockquotation.md): A block quotation, corresponding to the HTML tag `<blockquote>` with the custom attribute `"expandable"`.
 - [RichBlockPullQuotation](./types/richblockpullquotation.md): A quotation with centered text, loosely corresponding to the HTML tag `<aside>`.
 - [RichBlockCollage](./types/richblockcollage.md): A collage, corresponding to the custom HTML tag `<tg-collage>`.
 - [RichBlockSlideshow](./types/richblockslideshow.md): A slideshow, corresponding to the custom HTML tag `<tg-slideshow>`.
@@ -432,7 +432,7 @@ Methods and types defined in this section:
 - [InputRichBlockAnchor](./types/inputrichblockanchor.md): A block with an anchor, corresponding to the HTML tag `<a>` with the attribute `name`.
 - [InputRichBlockList](./types/inputrichblocklist.md): A list of blocks, corresponding to the HTML tag `<ul>` or `<ol>` with multiple nested tags `<li>`.
 - [InputRichBlockBlockQuotation](./types/inputrichblockblockquotation.md): A block quotation, corresponding to the HTML tag `<blockquote>`.
-- [InputRichBlockExpandableBlockQuotation](./types/inputrichblockexpandableblockquotation.md): A block quotation, corresponding to the HTML tag `<blockquote>` with custom attribute `"expandable"`.
+- [InputRichBlockExpandableBlockQuotation](./types/inputrichblockexpandableblockquotation.md): A block quotation, corresponding to the HTML tag `<blockquote>` with the custom attribute `"expandable"`.
 - [InputRichBlockPullQuotation](./types/inputrichblockpullquotation.md): A quotation with centered text, loosely corresponding to the HTML tag `<aside>`.
 - [InputRichBlockCollage](./types/inputrichblockcollage.md): A collage, corresponding to the custom HTML tag `<tg-collage>`.
 - [InputRichBlockSlideshow](./types/inputrichblockslideshow.md): A slideshow, corresponding to the custom HTML tag `<tg-slideshow>`.

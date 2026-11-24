@@ -12,5 +12,5 @@ Use this method to edit the caption of an ephemeral message. Note that it is not
 |caption|String|Optional|New caption of the message, 0-1024 characters after entities parsing|
 |parse_mode|String|Optional|Mode for parsing entities in the message caption. See [formatting options](../formatting.md) for more details.|
 |caption_entities|Array of [MessageEntity](../types/messageentity.md)|Optional|A JSON-serialized list of special entities that appear in the caption, which can be specified instead of *parse_mode*|
-|show_caption_above_media|Boolean|Optional|Pass *True* if the caption must be shown above the message media. Supported only for animation, photo and video messages.|
+|show_caption_above_media|Boolean|Optional|Pass *True* if the caption must be shown above the message media. Supported only for animation, live photo, photo and video messages.|
 |reply_markup|[InlineKeyboardMarkup](../types/inlinekeyboardmarkup.md)|Optional|A JSON-serialized object for an [inline keyboard](../../features.md#inline-keyboards)|

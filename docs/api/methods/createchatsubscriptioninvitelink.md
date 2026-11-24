@@ -2,7 +2,7 @@
 
 > Part of the [Telegram Bot API](../../api.md). Canonical location: [createChatSubscriptionInviteLink](../../api.md#createchatsubscriptioninvitelink).
 
-Use this method to create a [subscription invite link](https://telegram.org/blog/superchannels-star-reactions-subscriptions#star-subscriptions) for a channel chat. The bot must have the *can_invite_users* administrator rights. The link can be edited using the method [editChatSubscriptionInviteLink](./editchatsubscriptioninvitelink.md) or revoked using the method [revokeChatInviteLink](./revokechatinvitelink.md). Returns the new invite link as a [ChatInviteLink](../types/chatinvitelink.md) object.
+Use this method to create a [subscription invite link](https://telegram.org/blog/superchannels-star-reactions-subscriptions#star-subscriptions) for a channel chat. The bot must have the *can_invite_users* administrator right. The link can be edited using the method [editChatSubscriptionInviteLink](./editchatsubscriptioninvitelink.md) or revoked using the method [revokeChatInviteLink](./revokechatinvitelink.md). Returns the new invite link as a [ChatInviteLink](../types/chatinvitelink.md) object.
 
 |Parameter|Type|Required|Description|
 |-----------|

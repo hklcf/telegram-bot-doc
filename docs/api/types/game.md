@@ -2,7 +2,7 @@
 
 > Part of the [Telegram Bot API](../../api.md). Canonical location: [Game](../../api.md#game).
 
-This object represents a game. Use BotFather to create and edit games, their short names will act as unique identifiers.
+This object represents a game. Use BotFather to create and edit games; their short names will act as unique identifiers.
 
 |Field|Type|Description|
 |-----------|

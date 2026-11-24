@@ -2,7 +2,7 @@
 
 > Part of the [Telegram Bot API](../../api.md). Canonical location: [KeyboardButtonPollType](../../api.md#keyboardbuttonpolltype).
 
-This object represents type of a poll, which is allowed to be created and sent when the corresponding button is pressed.
+This object represents the type of a poll, which is allowed to be created and sent when the corresponding button is pressed.
 
 |Field|Type|Description|
 |-----------|

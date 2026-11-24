@@ -7,4 +7,4 @@ This object contains information about the creation, token update, or owner upda
 |Field|Type|Description|
 |-----------|
 |user|[User](./user.md)|User that created the bot|
-|bot|[User](./user.md)|Information about the bot. Token of the bot can be fetched using the method [getManagedBotToken](../methods/getmanagedbottoken.md).|
+|bot|[User](./user.md)|Information about the bot. The token of the bot can be fetched using the method [getManagedBotToken](../methods/getmanagedbottoken.md).|

@@ -2,7 +2,7 @@
 
 > Part of the [Telegram Bot API](../../api.md). Canonical location: [PassportElementErrorReverseSide](../../api.md#passportelementerrorreverseside).
 
-Represents an issue with the reverse side of a document. The error is considered resolved when the file with reverse side of the document changes.
+Represents an issue with the reverse side of a document. The error is considered resolved when the file with the reverse side of the document changes.
 
 |Field|Type|Description|
 |-----------|

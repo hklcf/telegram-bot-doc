@@ -23,4 +23,4 @@ Represents a link to a page containing an embedded video player or a video file.
 |video_duration|Integer|*Optional*. Video duration in seconds|
 |description|String|*Optional*. Short description of the result|
 |reply_markup|[InlineKeyboardMarkup](./inlinekeyboardmarkup.md)|*Optional*. [Inline keyboard](../../features.md#inline-keyboards) attached to the message|
-|input_message_content|[InputMessageContent](./inputmessagecontent.md)|*Optional*. Content of the message to be sent instead of the video. This field is **required** if InlineQueryResultVideo is used to send an HTML-page as a result (e.g., a YouTube video).|
+|input_message_content|[InputMessageContent](./inputmessagecontent.md)|*Optional*. Content of the message to be sent instead of the video. This field is **required** if InlineQueryResultVideo is used to send an HTML page as a result (e.g., a YouTube video).|
